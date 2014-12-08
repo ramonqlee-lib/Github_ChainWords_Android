@@ -38,10 +38,13 @@
     <string name="setting_list_item_check_new_version">新版本检测</string>
     <string name="setting_list_item_recommend">推荐给好友</string>
     <string name="setting_list_item_set_player_name">设置昵称</string>
-
+    
     <!-- 词汇表选择界面 -->
     <string name="vocabulary_title_string">词汇表选择</string>
     <string name="vocabulary_default_item">Loading Data...</string>
+    <string name="vocabulary_selectable_category">可选词汇表</string>
+    <string name="vocabulary_downloadable_category">待下载词汇表</string>
+
 
     <!-- 排行榜界面 -->
     <string name="toplist_title_string">排行榜</string>

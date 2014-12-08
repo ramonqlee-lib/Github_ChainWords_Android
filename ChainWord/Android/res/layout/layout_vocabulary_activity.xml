@@ -4,9 +4,39 @@
     android:layout_height="match_parent"
     android:background="@color/listViewBg" >
 
+    <TextView
+        android:id="@+id/selectable_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CCCCCC"
+        android:gravity="center_horizontal"
+        android:text="@string/vocabulary_selectable_category"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/downloadable_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="#CCCCCC"
+        android:gravity="center_horizontal"
+        android:text="@string/vocabulary_downloadable_category"
+        android:textSize="20sp" />
+
     <ListView
         android:id="@+id/setting_listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/selectable_textview"
+        android:layout_above="@id/downloadable_textview"
+        android:stackFromBottom="false" />
+
+    <ListView
+        android:id="@+id/download_listview"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/downloadable_textview"
+        android:stackFromBottom="false"/>
 
 </RelativeLayout>

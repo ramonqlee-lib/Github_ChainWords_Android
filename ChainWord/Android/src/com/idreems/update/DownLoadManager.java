@@ -311,4 +311,7 @@ public class DownLoadManager {
 		void onDownloadError(String filePath);
 	}
     
+    public String getUrl() {
+		return url;
+	}
 }
