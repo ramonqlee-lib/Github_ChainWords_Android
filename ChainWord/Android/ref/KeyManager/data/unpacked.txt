@@ -1,0 +1,4 @@
+﻿{
+	"DebugUrl":"http://checknewversion.duapp.com",
+	"FormalUrl":"http://checknewversion.duapp.com"
+}

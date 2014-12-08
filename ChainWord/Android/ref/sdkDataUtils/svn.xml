@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project name="svn">
+	
+<target name="init">
+		<condition property="isWindows">
+			<os family="windows"/>
+		</condition>
+		<condition property="isLinux">
+			<os family="unix"/>
+		</condition>
+	</target>
+	
+	<target name="-pre-compile-windows" if="isWindows" depends="init">
+		 
+	 			<propertyfile file="./assets/revision.txt">
+  				<entry  key="revision" value="202"/>
+  			</propertyfile>
+
+</target>  
+
+<target name="-pre-compile-linux" if="isLinux" depends="init">
+				<exec executable="svnversion" outputproperty="repository.revision">
+        <arg value="-c" />
+        <redirector>
+            <outputfilterchain>
+                <tokenfilter>
+                    <replaceregex pattern="[0-9]+\:" replace="" />
+                    <replaceregex pattern="[M]" replace="" />
+                </tokenfilter>
+            </outputfilterchain>
+        </redirector>
+    </exec>
+        <echo message="Current revision is ${repository.revision}" />
+        
+	 			<propertyfile file="./assets/revision.txt">
+  				<entry  key="revision" value="${repository.revision}"/>
+  			</propertyfile>
+
+</target>   
+
+<target name="-pre-compile" depends="-pre-compile-windows, -pre-compile-linux"/>
+
+</project>

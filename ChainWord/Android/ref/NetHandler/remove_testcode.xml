@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project name="remove_testcode">
+	
+	<target name="-post-compile" if="${project.is.library}">
+    <echo>Post Compile: remove test code</echo>
+    <jar destfile="./bin/analytics.jar">
+    <zipfileset src="./bin/classes.jar" excludes="com/baidu/sdk/test/"/>
+		</jar>
+   </target>
+    
+</project>

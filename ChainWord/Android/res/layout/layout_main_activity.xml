@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/listViewBg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/topbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_bar"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/toplist_button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:onClick="topListOnClick"
+            android:text="@string/toplist_title_string"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="@string/points_string" />
+
+        <TextView
+            android:id="@+id/point_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:gravity="left" />
+
+        <Button
+            android:id="@+id/setting_button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:onClick="settingOnClick"
+            android:text="@string/setting_title_string"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_write_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/message_bar" >
+
+        <ImageView
+            android:id="@+id/ivPopUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:onClick="tipClick"
+            android:src="@drawable/chatting_setmode_voice_btn" />
+
+        <EditText
+            android:id="@+id/view_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:layout_weight="1.0"
+            android:background="@drawable/message_field"
+            android:hint="Your word"
+            android:padding="5sp"
+            android:textColor="@color/textFieldColor" />
+
+        <Button
+            android:id="@+id/send_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5sp"
+            android:background="@drawable/send_button"
+            android:onClick="sendMessage"
+            android:paddingBottom="5sp"
+            android:paddingLeft="15sp"
+            android:paddingRight="15sp"
+            android:paddingTop="5sp"
+            android:text="@string/pk_button_string"
+            android:textColor="#FFF" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottom_write_bar"
+        android:layout_below="@id/topbar_layout"
+        android:cacheColorHint="#00000000"
+        android:divider="#00000000"
+        android:listSelector="#00000000"
+        android:scrollbarStyle="outsideOverlay" >
+    </ListView>
+
+</RelativeLayout>
