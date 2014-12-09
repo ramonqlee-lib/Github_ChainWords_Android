@@ -108,7 +108,7 @@ public class DownLoadManager {
 				Logger.i(TAG, "本地文件生成的MD5值 : " + fileMD5);
 				Logger.i(TAG, "server端获取的MD5值 : " + md5Vaiue);
 				fileMD5 = TextUtils.isEmpty(fileMD5) ? "" : fileMD5;
-				if (TextUtils.isEmpty(md5Vaiue) || fileMD5.equals(md5Vaiue)) {
+				if (fileMD5.equals(md5Vaiue)) {
 					Logger.d(TAG, "MD5检验成功!");
 					if (downLoadResultListener != null) {
 						downLoadResultListener.onSuccess(apkFilePath);
@@ -151,7 +151,10 @@ public class DownLoadManager {
 		MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
 		String mimeString = mimeTypeMap.getMimeTypeFromExtension(MimeTypeMap
 				.getFileExtensionFromUrl(url));
-		request.setMimeType(mimeString);
+		if(!TextUtils.isEmpty(mimeString))
+		{
+			request.setMimeType(mimeString);
+		}
 		// 保存返回唯一的downloadId
 		putLong(context, apkDownloadId, downloadManager.enqueue(request));
 		Logger.d(TAG, "开始下载...");
@@ -181,7 +184,7 @@ public class DownLoadManager {
 					Logger.i(TAG, "本地文件生成的MD5值 : " + fileMD5);
 					Logger.i(TAG, "server端获取的MD5值 : " + md5Vaiue);
 					fileMD5 = TextUtils.isEmpty(fileMD5) ? "" : fileMD5;
-					if (TextUtils.isEmpty(md5Vaiue) || fileMD5.equals(md5Vaiue)) {
+					if (fileMD5.equals(md5Vaiue)) {
 						Logger.d(TAG, "MD5检验成功!");
 						if (downLoadResultListener != null) {
 							downLoadResultListener.onSuccess(apkFilePath);

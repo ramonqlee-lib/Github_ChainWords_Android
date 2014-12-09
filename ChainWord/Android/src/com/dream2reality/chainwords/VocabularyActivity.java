@@ -186,7 +186,7 @@ public class VocabularyActivity extends Activity {
 
 				// 开始下载文件
 				final DownLoadManager dowApkUpdateManager = new DownLoadManager(
-						getApplicationContext(), item.url, "",
+						getApplicationContext(), item.url, item.md5,
 						item.levelString, "数据下载中...");
 				dowApkUpdateManager
 						.setOnDownLoadResultListener(new OnDownLoadResultListener() {
