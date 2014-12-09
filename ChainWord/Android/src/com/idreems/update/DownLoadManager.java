@@ -2,6 +2,7 @@ package com.idreems.update;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 
 import android.app.DownloadManager;
 import android.app.DownloadManager.Request;
@@ -108,7 +109,7 @@ public class DownLoadManager {
 				Logger.i(TAG, "本地文件生成的MD5值 : " + fileMD5);
 				Logger.i(TAG, "server端获取的MD5值 : " + md5Vaiue);
 				fileMD5 = TextUtils.isEmpty(fileMD5) ? "" : fileMD5;
-				if (fileMD5.equals(md5Vaiue)) {
+				if (fileMD5.toLowerCase(Locale.ENGLISH).equals(md5Vaiue.toLowerCase(Locale.ENGLISH))) {
 					Logger.d(TAG, "MD5检验成功!");
 					if (downLoadResultListener != null) {
 						downLoadResultListener.onSuccess(apkFilePath);
@@ -184,7 +185,7 @@ public class DownLoadManager {
 					Logger.i(TAG, "本地文件生成的MD5值 : " + fileMD5);
 					Logger.i(TAG, "server端获取的MD5值 : " + md5Vaiue);
 					fileMD5 = TextUtils.isEmpty(fileMD5) ? "" : fileMD5;
-					if (fileMD5.equals(md5Vaiue)) {
+					if (fileMD5.toLowerCase(Locale.ENGLISH).equals(md5Vaiue.toLowerCase(Locale.ENGLISH))) {
 						Logger.d(TAG, "MD5检验成功!");
 						if (downLoadResultListener != null) {
 							downLoadResultListener.onSuccess(apkFilePath);

@@ -154,6 +154,7 @@ public class VocabularyActivity extends Activity {
 			selectableList.add(item.levelString);
 		}
 		if (selectableList.isEmpty()) {
+			populateDownloadableListView(new String[0]);
 			return;
 		}
 
@@ -182,7 +183,23 @@ public class VocabularyActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int position, long row) {
-				VocabItem item = vocabItemList.get(position);
+				String displayName = data[position];
+				VocabItem item = null;
+				for (int i = 0; i < vocabItemList.size(); i++) {
+					VocabItem tmp = vocabItemList.get(i);
+					if (null == tmp) {
+						continue;
+					}
+					if(TextUtils.equals(displayName, tmp.levelString))
+					{
+						item = tmp;
+						break;
+					}
+				}
+				
+				if (null == item) {
+					return;
+				}
 
 				// 开始下载文件
 				final DownLoadManager dowApkUpdateManager = new DownLoadManager(
@@ -224,7 +241,7 @@ public class VocabularyActivity extends Activity {
 							// md5校验失败
 							@Override
 							public void onFailed(String filePath) {
-
+								Utils.deleteFile(filePath);
 							}
 
 							// 下载失败

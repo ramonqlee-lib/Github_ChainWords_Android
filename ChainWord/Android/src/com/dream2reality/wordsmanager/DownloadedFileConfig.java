@@ -1,6 +1,5 @@
 package com.dream2reality.wordsmanager;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +27,7 @@ public class DownloadedFileConfig {
 	 */
 	public static void add(Context context, String url, String fileName,
 			String displayName) {
+		cleanJunk(context);
 		// 是否已经存在了
 		if (!TextUtils.isEmpty(getUrlFromDiplayName(context, displayName))) {
 			return;
@@ -51,6 +51,35 @@ public class DownloadedFileConfig {
 		}
 	}
 
+	public static void remove(Context context, String url) {
+		if (TextUtils.isEmpty(url)) {
+			return;
+		}
+		
+		JSONArray array = getFilesJsonArray(context);
+		if (null == array) {
+			array = new JSONArray();
+		}
+		try {
+			JSONArray retArray = new JSONArray();
+			for (int i = array.length()-1; i >= 0; i--) {
+				JSONObject obj = array.getJSONObject(i);
+				if (null == obj) {
+					continue;
+				}
+				if (TextUtils.equals(url,ProtocolUtils.getJsonString(obj, URL_KEY))) {
+					continue;
+				}
+				retArray.put(obj);
+			}
+			Config.sharedInstance(context).putString(
+					AppConstants.VOCABULARY_DOWNLOADED_ITEM_NAME_KEY,
+					retArray.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * 获取当前设定的文件名
 	 * 
@@ -59,7 +88,7 @@ public class DownloadedFileConfig {
 	 * @return
 	 */
 	public static String getFileNameFromUrl(Context context, String url) {
-
+		cleanJunk(context);
 		// 检查文件已经在下载的列表中，并且文件确实有效
 		JSONArray array = getFilesJsonArray(context);
 		if (TextUtils.isEmpty(url) || null == array) {
@@ -75,7 +104,7 @@ public class DownloadedFileConfig {
 
 				String fileName = ProtocolUtils.getJsonString(obj,
 						FILE_NAME_KEY);
-				if (fileExists(fileName)) {
+				if (Utils.fileExists(fileName)) {
 					return fileName;
 				}
 				return "";
@@ -84,14 +113,6 @@ public class DownloadedFileConfig {
 			e.printStackTrace();
 		}
 		return "";
-	}
-	
-	public static boolean fileExists(String fullPathName) {
-		if (TextUtils.isEmpty(fullPathName)) {
-			return false;
-		}
-		File file = new File(fullPathName);
-		return file.exists();
 	}
 
 	/**
@@ -123,6 +144,7 @@ public class DownloadedFileConfig {
 	 * @return
 	 */
 	public static String[] getDisplayableNameArray(Context context) {
+		cleanJunk(context);
 		JSONArray array = getFilesJsonArray(context);
 		if (null == array) {
 			return new String[0];
@@ -151,6 +173,31 @@ public class DownloadedFileConfig {
 			retArray[i] = ret.get(i);
 		}
 		return retArray;
+	}
+	
+	private static void cleanJunk(Context context)
+	{
+		JSONArray array = getFilesJsonArray(context);
+		if (null == array) {
+			return;
+		}
+		try {
+			for (int i = 0; i < array.length(); i++) {
+				JSONObject obj = array.getJSONObject(i);
+				if (null == obj) {
+					continue;
+				}
+				// 文件不存在了
+				String fileName = ProtocolUtils.getJsonString(obj,
+						FILE_NAME_KEY);
+				if (!Utils.fileExists(fileName)) {
+					remove(context,ProtocolUtils.getJsonString(obj, URL_KEY));
+					continue;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
