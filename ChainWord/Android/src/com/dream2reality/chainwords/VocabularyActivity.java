@@ -1,12 +1,9 @@
 package com.dream2reality.chainwords;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -19,11 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dream2reality.constants.AppConstants;
+import com.dream2reality.wordsmanager.DownloadedFileConfig;
 import com.idreems.sdk.common.runners.GetVocabularyRunner;
 import com.idreems.sdk.netmodel.GetVocabularyResp;
 import com.idreems.sdk.netmodel.ParsedTaskReponse;
 import com.idreems.sdk.netmodel.VocabItem;
-import com.idreems.sdk.protocols.ProtocolUtils;
 import com.idreems.update.DownLoadManager;
 import com.idreems.update.DownLoadManager.OnDownLoadResultListener;
 import com.yees.sdk.lightvolley.TaskListener;
@@ -53,9 +50,11 @@ public class VocabularyActivity extends Activity {
 		// 初始化数据
 		TextView tView = (TextView) findViewById(R.id.title_textview);
 		tView.setText(R.string.vocabulary_title_string);
-		String[] data = { getString(R.string.vocabulary_default_item) };
-		populateSelectableListView(data);
-		// TODO 显示下载列表
+		// String[] data = { getString(R.string.vocabulary_default_item) };
+		// populateDownloadableListView(data);
+		// 显示可选择设置的列表
+		populateSelectableListView(DownloadedFileConfig
+				.getDisplayableNameArray(getApplicationContext()));
 		// 同步服务器端数据,并进行数据设置
 		syncServer();
 	}
@@ -83,26 +82,7 @@ public class VocabularyActivity extends Activity {
 
 				GetVocabularyResp resp = (GetVocabularyResp) ret.parsedObject;
 				vocabItemList = resp.getItemList();
-				if (null == vocabItemList || vocabItemList.isEmpty()) {
-					return;
-				}
-				String[] data = new String[vocabItemList.size()];
-				for (int i = 0; i < vocabItemList.size(); ++i) {
-					VocabItem item = vocabItemList.get(i);
-					if (null == item || TextUtils.isEmpty(item.levelString)
-							|| TextUtils.isEmpty(item.url)) {
-						continue;
-					}
-
-					// 已经下载过了
-					if (!TextUtils.isEmpty(getDownloadedFile(
-							getApplicationContext(), item.url))) {
-						continue;
-					}
-
-					data[i] = item.levelString;
-				}
-				populateSelectableListView(data);
+				populateDownloadableListView(vocabItemList);
 			}
 
 			@Override
@@ -115,9 +95,14 @@ public class VocabularyActivity extends Activity {
 		runner.run();
 	}
 
-	private void populateDownloadedListView(final String[] data) {
+	/**
+	 * 填充可设置列表
+	 * 
+	 * @param data
+	 */
+	private void populateSelectableListView(final String[] data) {
 		// 初始化数据
-		ListView listView = (ListView) findViewById(R.id.download_listview);
+		ListView listView = (ListView) findViewById(R.id.selectable_listview);
 		listView.setItemsCanFocus(true);
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		// 构造一个数组对象，也就是数据
@@ -128,14 +113,65 @@ public class VocabularyActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int position, long row) {
-				// TODO 设定使用的词汇表
+				// 设定使用的词汇表
+				String displayName = data[position];
+				String url = DownloadedFileConfig.getUrlFromDiplayName(
+						getApplicationContext(), displayName);
+
+				Config.sharedInstance(getApplicationContext()).putString(
+						AppConstants.VOCABULARY_SELECTED_ITEM_URL_KEY, url);
+
+				Toast.makeText(getApplicationContext(), "选定 " + displayName,
+						Toast.LENGTH_SHORT).show();
+				Logger.d(AppConstants.LOG_TAG, "selected url: " + url);
 			}
 		});
 	}
 
-	private void populateSelectableListView(final String[] data) {
+	/**
+	 *  填充可下载列表
+	 * @param itemList
+	 */
+	private void populateDownloadableListView(final List<VocabItem> itemList) {
+
+		if (null == itemList || itemList.isEmpty()) {
+			return;
+		}
+		List<String> selectableList = new ArrayList<String>();
+		for (int i = 0; i < itemList.size(); ++i) {
+			VocabItem item = itemList.get(i);
+			if (null == item || TextUtils.isEmpty(item.levelString)
+					|| TextUtils.isEmpty(item.url)) {
+				continue;
+			}
+
+			// 已经下载过了
+			if (!TextUtils.isEmpty(DownloadedFileConfig.getFileNameFromUrl(
+					getApplicationContext(), item.url))) {
+				continue;
+			}
+
+			selectableList.add(item.levelString);
+		}
+		if (selectableList.isEmpty()) {
+			return;
+		}
+
+		String[] data = new String[selectableList.size()];
+		for (int i = 0; i < selectableList.size(); i++) {
+			data[i] = selectableList.get(i);
+		}
+		populateDownloadableListView(data);
+	}
+
+	/**
+	 * 填充可下载列表
+	 * 
+	 * @param data
+	 */
+	private void populateDownloadableListView(final String[] data) {
 		// 初始化数据
-		ListView listView = (ListView) findViewById(R.id.setting_listview);
+		ListView listView = (ListView) findViewById(R.id.downloadable_listview);
 		listView.setItemsCanFocus(true);
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		// 构造一个数组对象，也就是数据
@@ -147,16 +183,6 @@ public class VocabularyActivity extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int position, long row) {
 				VocabItem item = vocabItemList.get(position);
-				if (AppConstants.DEBUG_MODE) {
-					Toast.makeText(getApplicationContext(),
-							"选择了 " + item.levelString, Toast.LENGTH_SHORT)
-							.show();
-				}
-
-				// 保存词汇表的名字
-				Config.sharedInstance(getApplicationContext()).putString(
-						AppConstants.VOCABULARY_SELECTED_ITEM_NAME_KEY,
-						item.levelString);
 
 				// 开始下载文件
 				final DownLoadManager dowApkUpdateManager = new DownLoadManager(
@@ -167,14 +193,32 @@ public class VocabularyActivity extends Activity {
 
 							@Override
 							public void onSuccess(String filePath) {
-								// TODO 下载完毕，保存到已下载列表中，供选择使用(url 作为key)
+								//  下载完毕，保存到已下载列表中，供选择使用(url 作为key)
 								// 并且刷新已经下载的列表
 								Logger.d(AppConstants.LOG_TAG, filePath
 										+ " 下载完毕");
 								Logger.d(AppConstants.LOG_TAG, "Url "
 										+ dowApkUpdateManager.getUrl());
-								add2DownloadedConfig(getApplicationContext(),
-										dowApkUpdateManager.getUrl(), filePath);
+								for (int i = 0; i < vocabItemList.size(); i++) {
+									VocabItem item = vocabItemList.get(i);
+									if (null == item) {
+										continue;
+									}
+									if (TextUtils.equals(item.url,
+											dowApkUpdateManager.getUrl())) {
+										DownloadedFileConfig.add(
+												getApplicationContext(),
+												dowApkUpdateManager.getUrl(),
+												filePath, item.levelString);
+
+										// 刷新已经下载的列表
+										populateSelectableListView(DownloadedFileConfig
+												.getDisplayableNameArray(getApplicationContext()));
+										// 刷新待下载列表
+										populateDownloadableListView(vocabItemList);
+										return;
+									}
+								}
 							}
 
 							// md5校验失败
@@ -194,66 +238,6 @@ public class VocabularyActivity extends Activity {
 				dowApkUpdateManager.execute();
 			}
 		});
-	}
-
-	/**
-	 * 添加到已经下载列表
-	 * 
-	 * @param url
-	 * @param fileName
-	 */
-	private static void add2DownloadedConfig(Context context, String url,
-			String fileName) {
-		JSONArray array = getDownloaedFiles(context);
-		if (null == array) {
-			array = new JSONArray();
-		}
-		try {
-			JSONObject obj = new JSONObject();
-			obj.put(url, fileName);
-			array.put(obj);
-			Config.sharedInstance(context).putString(
-					AppConstants.VOCABULARY_DOWNLOADED_ITEM_NAME_KEY,
-					array.toString());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	private static String getDownloadedFile(Context context, String url) {
-		// 检查文件已经在下载的列表中，并且文件确实有效
-		JSONArray array = getDownloaedFiles(context);
-		if (TextUtils.isEmpty(url) || null == array) {
-			return "";
-		}
-		try {
-			for (int i = 0; i < array.length(); i++) {
-				JSONObject obj = array.getJSONObject(i);
-				String fileName = ProtocolUtils.getJsonString(obj, url);
-				if (!TextUtils.isEmpty(fileName) && Utils.fileExists(fileName)) {
-					return fileName;
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "";
-	}
-
-	private static JSONArray getDownloaedFiles(Context context) {
-		// TODO 文件下载的列表
-		String str = Config.sharedInstance(context).getString(
-				AppConstants.VOCABULARY_DOWNLOADED_ITEM_NAME_KEY);
-		if (TextUtils.isEmpty(str)) {
-			return null;
-		}
-		try {
-			JSONArray ret = new JSONArray(str);
-			return ret;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 }

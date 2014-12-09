@@ -24,7 +24,7 @@
         android:textSize="20sp" />
 
     <ListView
-        android:id="@+id/setting_listview"
+        android:id="@+id/selectable_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/selectable_textview"
@@ -32,7 +32,7 @@
         android:stackFromBottom="false" />
 
     <ListView
-        android:id="@+id/download_listview"
+        android:id="@+id/downloadable_listview"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
