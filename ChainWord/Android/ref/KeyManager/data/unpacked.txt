@@ -1,4 +1,5 @@
 ﻿{
 	"DebugUrl":"http://checknewversion.duapp.com",
-	"FormalUrl":"http://checknewversion.duapp.com"
+	"FormalUrl":"http://checknewversion.duapp.com",
+	"CheckNewVersionUrl":"http://checknewversion.duapp.com/chainwords/checknewversion.php"
 }

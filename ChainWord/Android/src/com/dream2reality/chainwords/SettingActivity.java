@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.dream2reality.constants.AppConstants;
+import com.idreems.update.UpdateManager;
 import com.yees.sdk.utils.Config;
 
 public class SettingActivity extends Activity {
@@ -68,6 +69,8 @@ public class SettingActivity extends Activity {
 					break;
 				case 2:
 					// TODO 新版本检测
+					// 检查新版本
+					UpdateManager.getIntance().checkNewVersion(SettingActivity.this,getString(R.string.newest_version_already));
 					break;
 				case 3:
 					// TODO 推荐给好友

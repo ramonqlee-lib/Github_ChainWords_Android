@@ -21,7 +21,6 @@ import com.yees.sdk.utils.Logger;
 import com.yees.sdk.utils.Utils;
 
 public class DownLoadManager {
-
 	public static final String TAG = "DownLoadManager";
 	private static final String DOWNLOAD_FOLDER_NAME = "ChainWords";
 	private static String PREFERENCE_NAME = "VersionUpdate";

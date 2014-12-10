@@ -30,6 +30,7 @@ import com.color.speechbubble.Utility;
 import com.dream2reality.constants.AppConstants;
 import com.idreems.sdk.common.runners.AddTopListRunner;
 import com.idreems.sdk.netmodel.ParsedTaskReponse;
+import com.idreems.update.UpdateManager;
 import com.yees.sdk.lightvolley.TaskListener;
 import com.yees.sdk.lightvolley.TaskResponse;
 import com.yees.sdk.utils.Config;
@@ -115,23 +116,23 @@ public class MainActivity extends ListActivity {
 			Message msg = new Message("expert", false);
 			msg.setTailSpan();
 			messages.add(msg);
-			
+
 			msg = new Message("terrific", true);
 			msg.setHeadSpan();
 			messages.add(msg);
-			
+
 			msg = new Message("can", false);
 			msg.setTailSpan();
 			messages.add(msg);
-			
+
 			msg = new Message("next", true);
 			msg.setHeadSpan();
 			messages.add(msg);
-			
+
 			msg = new Message("traffic", false);
 			msg.setHeadSpan();
 			messages.add(msg);
-			
+
 			messages.add(new Message(true, getString(R.string.your_turn)));
 		} else {
 			// 自动挑选一个单词作为单词接龙的第一个单词
@@ -160,13 +161,12 @@ public class MainActivity extends ListActivity {
 		startActivity(intent);
 	}
 
-	public void tipClick(View view)
-	{
+	public void tipClick(View view) {
 		// TODO 增加给出一个下一个单词的提示
 		Toast.makeText(getApplicationContext(), R.string.empty_pk_string,
 				Toast.LENGTH_SHORT).show();
 	}
-	
+
 	// 发送消息
 	public void sendMessage(View v) {
 		String newMessage = text.getText().toString().trim();
@@ -191,7 +191,8 @@ public class MainActivity extends ListActivity {
 		// FIXME 校验输入单词的合法性
 		// 1 确实和上次的单词符合接龙条件
 		if (!TextUtils.isEmpty(mRobolicWord)) {
-			char lastLetter = mRobolicWord.toLowerCase(Locale.ENGLISH).charAt(mRobolicWord.length() - 1);
+			char lastLetter = mRobolicWord.toLowerCase(Locale.ENGLISH).charAt(
+					mRobolicWord.length() - 1);
 			char firstLetter = newMessage.toLowerCase(Locale.ENGLISH).charAt(0);
 			if (lastLetter != firstLetter) {
 				Toast.makeText(getApplicationContext(),
@@ -391,7 +392,7 @@ public class MainActivity extends ListActivity {
 						messages.clear();
 						mRobolicWord = Utility
 								.getNewWord(getApplicationContext());
-						
+
 						// 自动挑选一个单词作为单词接龙的第一个单词
 						Message msg = new Message(mRobolicWord, false);
 						msg.setTailSpan();
@@ -411,24 +412,37 @@ public class MainActivity extends ListActivity {
 		}
 		return null;
 	}
-	
-	public void onBackPressed() { 
-        new AlertDialog.Builder(this).setTitle(R.string.confirm_to_quit_app) 
-            .setIcon(android.R.drawable.ic_dialog_info) 
-            .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() { 
-         
-                @Override 
-                public void onClick(DialogInterface dialog, int which) { 
-                // 点击“确认”后的操作 
-                    MainActivity.this.finish(); 
-                } 
-            }) 
-            .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() { 
-         
-                @Override 
-                public void onClick(DialogInterface dialog, int which) { 
-                // 点击“返回”后的操作,这里不设置没有任何操作 
-                } 
-            }).show(); 
-           }
+
+	public void onBackPressed() {
+		new AlertDialog.Builder(this)
+				.setTitle(R.string.confirm_to_quit_app)
+				.setIcon(android.R.drawable.ic_dialog_info)
+				.setPositiveButton(R.string.ok,
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// 点击“确认”后的操作
+								MainActivity.this.finish();
+							}
+						})
+				.setNegativeButton(R.string.cancel,
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// 点击“返回”后的操作,这里不设置没有任何操作
+							}
+						}).show();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		// 检查新版本
+		UpdateManager.getIntance().checkNewVersion(this,"");
+	}
 }

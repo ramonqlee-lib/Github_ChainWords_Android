@@ -436,7 +436,7 @@ public class ProtocolUtils {
 		Map<String,String> map = new HashMap<String, String>();
 		
 		//  增加mac，imei等公共参数
-		map.put("version", Utils.getAppVersion(context));
+		map.put("versionName", Utils.getAppVersion(context));
 		map.put("imei", Utils.getIMEI(context));
 		map.put("imsi", Utils.getIMSI(context));
 		

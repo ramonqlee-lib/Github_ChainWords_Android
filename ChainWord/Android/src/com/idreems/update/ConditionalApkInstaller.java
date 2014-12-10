@@ -1,11 +1,15 @@
 package com.idreems.update;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.text.TextUtils;
 
+import com.dream2reality.chainwords.R;
 import com.yees.sdk.utils.Constants;
 import com.yees.sdk.utils.Logger;
 
@@ -31,7 +35,7 @@ public class ConditionalApkInstaller {
 	public ConditionalApkInstaller(Context context,String apkFilePath)
 	{
 		this.apkPath = apkFilePath;
-		appContext = (null != context)?context.getApplicationContext():null;
+		appContext = (null != context)?context:null;
 	}
 	
 	/**
@@ -82,18 +86,15 @@ public class ConditionalApkInstaller {
 	
 	private void execInstall(final boolean killProcesss)
 	{
-		/*
-		DiaLogManager.getIntance().show("升级提示!", "新版本已准备好，点击确定安装!", "确定安装", "", false, new OnButtonListener() {
-			
+		new AlertDialog.Builder(appContext).setTitle(R.string.app_name)
+		.setMessage(R.string.found_new_version)
+		.setPositiveButton(R.string.ok, new OnClickListener() {
 			@Override
-			public void onClickLeft() {
+			public void onClick(DialogInterface dialog, int which) {
 				// 直接调用系统安装器，进行安装
 				DownLoadManager.install(appContext, apkPath);
 				android.os.Process.killProcess(android.os.Process.myPid());
 			}
-			@Override
-			public void onClickCancel() {
-			}
-		});*/
+		}).show();
 	}
 }
