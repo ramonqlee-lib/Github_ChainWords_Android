@@ -17,7 +17,6 @@ import com.idreems.sdk.protocols.ProtocolUtils;
  */
 public class UpdateProtocol implements Protocol {
 	private Context context;
-	private String padId;
 	private String urlString;
 	/**
 	 * 

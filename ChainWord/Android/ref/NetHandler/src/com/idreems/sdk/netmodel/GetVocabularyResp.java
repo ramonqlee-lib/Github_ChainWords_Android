@@ -6,6 +6,9 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.idreems.sdk.protocols.ProtocolConst;
+import com.yees.sdk.utils.Logger;
+
 public class GetVocabularyResp {
 	private List<VocabItem> itemList = new ArrayList<VocabItem>();
 	
@@ -17,7 +20,14 @@ public class GetVocabularyResp {
 		
 		//  解析单词表数据
 		try {
-			JSONObject obj = new JSONObject(new String(data));
+			String r = new String(data);
+			int pos = r.indexOf('{');
+			if (-1 != pos) {
+				Logger.d(ProtocolConst.NET_LOG_TAG, "json start from "+pos);
+				r = r.substring(pos, r.length());
+			}
+			
+			JSONObject obj = new JSONObject(r);
 			if (!obj.has("data")) {
 				return;
 			}

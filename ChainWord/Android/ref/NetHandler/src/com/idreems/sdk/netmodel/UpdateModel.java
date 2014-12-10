@@ -5,7 +5,9 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.idreems.sdk.protocols.ProtocolConst;
 import com.idreems.sdk.protocols.ProtocolUtils;
+import com.yees.sdk.utils.Logger;
 import com.yees.sdk.utils.Utils;
 
 /**
@@ -45,7 +47,14 @@ public class UpdateModel {
 			return;
 		}
 		try {
-			JSONObject obj = new JSONObject(new String(data));
+			String r = new String(data);
+			int pos = r.indexOf('{');
+			if (-1 != pos) {
+				Logger.d(ProtocolConst.NET_LOG_TAG, "json start from "+pos);
+				r = r.substring(pos, r.length());
+			}
+			
+			JSONObject obj = new JSONObject(r);
 			latestVersion = ProtocolUtils.getJsonString(obj, "latest_ver");
 //			updateTime = ProtocolUtils.getJsonLong(obj, "update_time");
 			fileMd5 = ProtocolUtils.getJsonString(obj, "app_key");
