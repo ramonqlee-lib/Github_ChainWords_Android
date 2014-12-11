@@ -24,6 +24,7 @@ import com.yees.sdk.utils.Utils;
  * 
  */
 public class WordsRepository {
+	private static final int MIN_WORD_LENGTH = 4;// 最短word的长度
 	private static WordsRepository sWordsRepository = new WordsRepository();
 
 //	private Context mContext;
@@ -98,13 +99,18 @@ public class WordsRepository {
 					new InputStreamReader(fis));
 			String line = null;
 			while ((line = input.readLine()) != null) {
-				String word = getWord(line);
-				// 忽略空的字符串或者仅仅有一个字母的字符串
-				if (TextUtils.isEmpty(word) || 1 == word.length()) {
+				List<String> wordList = getWords(line);
+				if (null == wordList || wordList.isEmpty()) {
 					continue;
 				}
-				Logger.d(AppConstants.LOG_TAG, word);
-				mOriginalWordsList.add(word);
+				for (String word: wordList) {
+					// 忽略空的字符串或者仅仅有一个字母的字符串
+					if (TextUtils.isEmpty(word) || word.length() < MIN_WORD_LENGTH) {
+						continue;
+					}
+					Logger.d(AppConstants.LOG_TAG, word);
+					mOriginalWordsList.add(word);
+				}
 			}
 //			fis.close();
 			input.close();
@@ -114,30 +120,35 @@ public class WordsRepository {
 			e.printStackTrace();
 		}
 	}
+	
 	//找出单词
 	// 以字母开始，非字母结束时停止
-	private static String getWord(String value)
+	private static List<String> getWords(String value)
 	{
+		List<String> ret = new ArrayList<String>();
 		if (TextUtils.isEmpty(value)) {
-			return "";
+			return ret;
 		}
+		
 		value = value.toLowerCase(Locale.ENGLISH);
-		StringBuilder ret = new StringBuilder();
+		StringBuilder word = new StringBuilder();
 		for (int i = 0; i < value.length(); i++) {
 			char ch = value.charAt(i);
 			
 			// 找到单词开始字母:没添加过任何内容，并且当前为字母
 			// 找到单词结束:添加过内容，并且当前不是字母了
 			if (ch>='a' && ch <='z') {
-				ret.append(ch);
+				word.append(ch);
 			}
 			else {
-				if (ret.length() > 0) {
-					break;
+				if (word.length() > 0) {
+					ret.add(word.toString());
+					word = new StringBuilder();//reset
+					continue;
 				}
 			}
 		}
 		
-		return ret.toString();
+		return ret;
 	}
 }

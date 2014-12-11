@@ -52,7 +52,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/mystyle" >
+        android:theme="@style/mystyle" android:debuggable="true">
         <activity
             android:name="com.dream2reality.chainwords.MainActivity"
             android:label="@string/app_name"
