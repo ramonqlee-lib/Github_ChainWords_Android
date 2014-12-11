@@ -15,8 +15,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.color.speechbubble.Utility;
 import com.dream2reality.constants.AppConstants;
 import com.dream2reality.wordsmanager.DownloadedFileConfig;
+import com.dream2reality.wordsmanager.WordsRepository;
 import com.idreems.sdk.common.runners.GetVocabularyRunner;
 import com.idreems.sdk.netmodel.GetVocabularyResp;
 import com.idreems.sdk.netmodel.ParsedTaskReponse;
@@ -102,12 +104,33 @@ public class VocabularyActivity extends Activity {
 	 */
 	private void populateSelectableListView(final String[] data) {
 		// 初始化数据
-		ListView listView = (ListView) findViewById(R.id.selectable_listview);
+		final ListView listView = (ListView) findViewById(R.id.selectable_listview);
 		listView.setItemsCanFocus(true);
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 		// 构造一个数组对象，也就是数据
 		listView.setAdapter(new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_single_choice, data));
+
+		// 确认当前使用的项目
+		runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				String currentSelectedFileUrl = Config.sharedInstance(
+						getApplicationContext()).getString(
+								AppConstants.VOCABULARY_SELECTED_ITEM_URL_KEY);
+				if (!TextUtils.isEmpty(currentSelectedFileUrl)) {
+					String displayName = DownloadedFileConfig.getDisplayNameFromUrl(
+							getApplicationContext(), currentSelectedFileUrl);
+					for (int i = 0; i < data.length; i++) {
+						if (TextUtils.equals(data[i], displayName)) {
+							listView.setItemChecked(i, true);
+							break;
+						}
+					}
+				}
+			}
+		});
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -115,11 +138,26 @@ public class VocabularyActivity extends Activity {
 					int position, long row) {
 				// 设定使用的词汇表
 				String displayName = data[position];
-				String url = DownloadedFileConfig.getUrlFromDiplayName(
+				final String url = DownloadedFileConfig.getUrlFromDiplayName(
 						getApplicationContext(), displayName);
-
 				Config.sharedInstance(getApplicationContext()).putString(
 						AppConstants.VOCABULARY_SELECTED_ITEM_URL_KEY, url);
+
+				new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						String fileName = DownloadedFileConfig
+								.getFileNameFromUrl(getApplicationContext(),
+										url);
+						Config.sharedInstance(getApplicationContext())
+								.putString(Utility.FILE_NAME_KEY, fileName);
+						// 更新词汇表
+						WordsRepository.sharedInstance(getApplicationContext(),
+								fileName);
+						Logger.d(AppConstants.LOG_TAG, "select and update with fileName: " + fileName);
+					}
+				}).start();
 
 				Toast.makeText(getApplicationContext(), "选定 " + displayName,
 						Toast.LENGTH_SHORT).show();
@@ -129,7 +167,8 @@ public class VocabularyActivity extends Activity {
 	}
 
 	/**
-	 *  填充可下载列表
+	 * 填充可下载列表
+	 * 
 	 * @param itemList
 	 */
 	private void populateDownloadableListView(final List<VocabItem> itemList) {
@@ -190,13 +229,12 @@ public class VocabularyActivity extends Activity {
 					if (null == tmp) {
 						continue;
 					}
-					if(TextUtils.equals(displayName, tmp.levelString))
-					{
+					if (TextUtils.equals(displayName, tmp.levelString)) {
 						item = tmp;
 						break;
 					}
 				}
-				
+
 				if (null == item) {
 					return;
 				}
@@ -210,7 +248,7 @@ public class VocabularyActivity extends Activity {
 
 							@Override
 							public void onSuccess(String filePath) {
-								//  下载完毕，保存到已下载列表中，供选择使用(url 作为key)
+								// 下载完毕，保存到已下载列表中，供选择使用(url 作为key)
 								// 并且刷新已经下载的列表
 								Logger.d(AppConstants.LOG_TAG, filePath
 										+ " 下载完毕");

@@ -27,7 +27,7 @@ public class WordsRepository {
 	private static final int MIN_WORD_LENGTH = 4;// 最短word的长度
 	private static WordsRepository sWordsRepository = new WordsRepository();
 
-//	private Context mContext;
+	// private Context mContext;
 	private String mFileName;
 
 	private Classifier mCurrentClassifier;
@@ -40,12 +40,28 @@ public class WordsRepository {
 
 	public static WordsRepository sharedInstance(Context context,
 			String fileName) {
-//		sWordsRepository.mContext = context;
-		if (!TextUtils.equals(sWordsRepository.mFileName, fileName)) {
-			sWordsRepository.mFileName = fileName;
-			sWordsRepository.loadRep(fileName);
-		}
+		// sWordsRepository.mContext = context;
+		sWordsRepository.changeFileName(fileName);
 		return sWordsRepository;
+	}
+
+	/**
+	 * 切换使用的文件
+	 * 
+	 * @param fileName
+	 */
+	public void changeFileName(String fileName) {
+		if (TextUtils.equals(sWordsRepository.mFileName, fileName)) {
+			return;
+		}
+
+		sWordsRepository.mFileName = fileName;
+		sWordsRepository.loadRep(fileName);
+
+		// 对单词进行分类
+		if (null != mCurrentClassifier) {
+			mClassifiedWordsMap = mCurrentClassifier.run(mOriginalWordsList);
+		}
 	}
 
 	/**
@@ -54,7 +70,7 @@ public class WordsRepository {
 	 * @param classifier
 	 */
 	public void applyClassifier(Classifier classifier) {
-		if (null == classifier || classifier == mCurrentClassifier ) {
+		if (null == classifier || classifier == mCurrentClassifier) {
 			return;
 		}
 		mCurrentClassifier = classifier;
@@ -76,22 +92,22 @@ public class WordsRepository {
 		return mCurrentClassifier.matchNext(current, ignoreNextTime,
 				mClassifiedWordsMap);
 	}
-	
-	public String getRandom(boolean ignoreNextTime)
-	{
+
+	public String getRandom(boolean ignoreNextTime) {
 		if (null == mCurrentClassifier) {
 			return "";
 		}
-		return mCurrentClassifier.getRandom(ignoreNextTime,
-				mClassifiedWordsMap);
+		return mCurrentClassifier
+				.getRandom(ignoreNextTime, mClassifiedWordsMap);
 	}
 
-	//  将单词加载进数组中 mOriginalWordsList
+	// 将单词加载进数组中 mOriginalWordsList
 	private void loadRep(String fileName) {
 		// 按照行，将单词读取进来
 		if (TextUtils.isEmpty(fileName) || !Utils.fileExists(fileName)) {
 			return;
 		}
+		mOriginalWordsList = new ArrayList<String>();// reset word list
 		try {
 			File file = new File(fileName);
 			FileInputStream fis = new FileInputStream(file);
@@ -103,52 +119,53 @@ public class WordsRepository {
 				if (null == wordList || wordList.isEmpty()) {
 					continue;
 				}
-				for (String word: wordList) {
+				for (String word : wordList) {
 					// 忽略空的字符串或者仅仅有一个字母的字符串
-					if (TextUtils.isEmpty(word) || word.length() < MIN_WORD_LENGTH) {
+					if (TextUtils.isEmpty(word)
+							|| word.length() < MIN_WORD_LENGTH) {
 						continue;
 					}
-					Logger.d(AppConstants.LOG_TAG, word);
+					// Logger.d(AppConstants.LOG_TAG, word);
 					mOriginalWordsList.add(word);
 				}
 			}
-//			fis.close();
+			// fis.close();
 			input.close();
-			
-			Logger.d(AppConstants.LOG_TAG, "word count: "+mOriginalWordsList.size());
+
+			Logger.d(AppConstants.LOG_TAG, "word file name: " + fileName);
+			Logger.d(AppConstants.LOG_TAG,
+					"word count: " + mOriginalWordsList.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	//找出单词
+
+	// 找出单词
 	// 以字母开始，非字母结束时停止
-	private static List<String> getWords(String value)
-	{
+	private static List<String> getWords(String value) {
 		List<String> ret = new ArrayList<String>();
 		if (TextUtils.isEmpty(value)) {
 			return ret;
 		}
-		
+
 		value = value.toLowerCase(Locale.ENGLISH);
 		StringBuilder word = new StringBuilder();
 		for (int i = 0; i < value.length(); i++) {
 			char ch = value.charAt(i);
-			
+
 			// 找到单词开始字母:没添加过任何内容，并且当前为字母
 			// 找到单词结束:添加过内容，并且当前不是字母了
-			if (ch>='a' && ch <='z') {
+			if (ch >= 'a' && ch <= 'z') {
 				word.append(ch);
-			}
-			else {
+			} else {
 				if (word.length() > 0) {
 					ret.add(word.toString());
-					word = new StringBuilder();//reset
+					word = new StringBuilder();// reset
 					continue;
 				}
 			}
 		}
-		
+
 		return ret;
 	}
 }

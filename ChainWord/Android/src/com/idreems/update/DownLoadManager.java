@@ -2,6 +2,8 @@ package com.idreems.update;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Locale;
 
 import android.app.DownloadManager;
@@ -77,9 +79,10 @@ public class DownLoadManager {
 		/** register download success broadcast **/
 		context.registerReceiver(completeReceiver, new IntentFilter(
 				DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-		apkFilePath = new StringBuilder(Environment.getExternalStorageDirectory().getAbsolutePath())
-    	.append(File.separator).append(DOWNLOAD_FOLDER_NAME).append(File.separator)
-    	.append(fileName).toString();
+		apkFilePath = new StringBuilder(Environment
+				.getExternalStorageDirectory().getAbsolutePath())
+				.append(File.separator).append(DOWNLOAD_FOLDER_NAME)
+				.append(File.separator).append(fileName).toString();
 	}
 
 	public void execute() {
@@ -108,7 +111,8 @@ public class DownLoadManager {
 				Logger.i(TAG, "本地文件生成的MD5值 : " + fileMD5);
 				Logger.i(TAG, "server端获取的MD5值 : " + md5Vaiue);
 				fileMD5 = TextUtils.isEmpty(fileMD5) ? "" : fileMD5;
-				if (fileMD5.toLowerCase(Locale.ENGLISH).equals(md5Vaiue.toLowerCase(Locale.ENGLISH))) {
+				if (fileMD5.toLowerCase(Locale.ENGLISH).equals(
+						md5Vaiue.toLowerCase(Locale.ENGLISH))) {
 					Logger.d(TAG, "MD5检验成功!");
 					if (downLoadResultListener != null) {
 						downLoadResultListener.onSuccess(apkFilePath);
@@ -128,7 +132,7 @@ public class DownLoadManager {
 			removeSharedPreferenceByKey(context, apkDownloadId);
 		}
 
-		request = new Request(Uri.parse(url));
+		request = new Request(Uri.parse(encodeUrlWithGB(url)));
 		// 设置Notification中显示的文字
 		request.setTitle(notificationTitle);
 		request.setDescription(notificationDescription);
@@ -151,10 +155,12 @@ public class DownLoadManager {
 		MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
 		String mimeString = mimeTypeMap.getMimeTypeFromExtension(MimeTypeMap
 				.getFileExtensionFromUrl(url));
-		if(!TextUtils.isEmpty(mimeString))
-		{
-			request.setMimeType(mimeString);
+		if (TextUtils.isEmpty(mimeString)) {
+			mimeString = "text/plain";
 		}
+
+		request.setMimeType(mimeString);
+		Logger.d(TAG, "mimeString: " + mimeString);
 		// 保存返回唯一的downloadId
 		putLong(context, apkDownloadId, downloadManager.enqueue(request));
 		Logger.d(TAG, "开始下载...");
@@ -184,7 +190,8 @@ public class DownLoadManager {
 					Logger.i(TAG, "本地文件生成的MD5值 : " + fileMD5);
 					Logger.i(TAG, "server端获取的MD5值 : " + md5Vaiue);
 					fileMD5 = TextUtils.isEmpty(fileMD5) ? "" : fileMD5;
-					if (fileMD5.toLowerCase(Locale.ENGLISH).equals(md5Vaiue.toLowerCase(Locale.ENGLISH))) {
+					if (fileMD5.toLowerCase(Locale.ENGLISH).equals(
+							md5Vaiue.toLowerCase(Locale.ENGLISH))) {
 						Logger.d(TAG, "MD5检验成功!");
 						if (downLoadResultListener != null) {
 							downLoadResultListener.onSuccess(apkFilePath);
@@ -338,5 +345,29 @@ public class DownLoadManager {
 
 	public String getUrl() {
 		return url;
+	}
+
+	/**
+	 * 如果服务器不支持中文路径的情况下需要转换url的编码。
+	 * 
+	 * @param string
+	 * @return
+	 */
+	public static String encodeUrlWithGB(String url) {
+		if (TextUtils.isEmpty(url)) {
+			return url;
+		}
+		// 转换中文编码
+		String split[] = url.split("/");
+		for (int i = 1; i < split.length; i++) {
+			try {
+				split[i] = URLEncoder.encode(split[i], "GB2312");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			split[0] = split[0] + "/" + split[i];
+		}
+		split[0] = split[0].replaceAll("\\+", "%20");// 处理空格
+		return split[0];
 	}
 }

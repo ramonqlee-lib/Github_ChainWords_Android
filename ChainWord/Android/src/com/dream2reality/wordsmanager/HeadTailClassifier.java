@@ -25,6 +25,7 @@ public class HeadTailClassifier implements Classifier {
 
 	@Override
 	public Map<String, List<String>> run(List<String> data) {
+		Logger.d(AppConstants.LOG_TAG, "run HeadTailClassifier");
 		Map<String, List<String>> retMap = new HashMap<String, List<String>>();
 		// 按照字母进行归类
 		// 遍历每个单词，按照首字母，将其归类到相应的map中.map采用字母做key，值是一个单词的列表

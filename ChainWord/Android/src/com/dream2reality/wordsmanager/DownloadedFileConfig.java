@@ -55,19 +55,20 @@ public class DownloadedFileConfig {
 		if (TextUtils.isEmpty(url)) {
 			return;
 		}
-		
+
 		JSONArray array = getFilesJsonArray(context);
 		if (null == array) {
 			array = new JSONArray();
 		}
 		try {
 			JSONArray retArray = new JSONArray();
-			for (int i = array.length()-1; i >= 0; i--) {
+			for (int i = array.length() - 1; i >= 0; i--) {
 				JSONObject obj = array.getJSONObject(i);
 				if (null == obj) {
 					continue;
 				}
-				if (TextUtils.equals(url,ProtocolUtils.getJsonString(obj, URL_KEY))) {
+				if (TextUtils.equals(url,
+						ProtocolUtils.getJsonString(obj, URL_KEY))) {
 					continue;
 				}
 				retArray.put(obj);
@@ -78,6 +79,41 @@ public class DownloadedFileConfig {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * 获取当前设定的可显示名称
+	 * 
+	 * @param context
+	 * @param url
+	 * @return
+	 */
+	public static String getDisplayNameFromUrl(Context context, String url) {
+		cleanJunk(context);
+		// 检查文件已经在下载的列表中，并且文件确实有效
+		JSONArray array = getFilesJsonArray(context);
+		if (TextUtils.isEmpty(url) || null == array) {
+			return "";
+		}
+		try {
+			for (int i = 0; i < array.length(); i++) {
+				JSONObject obj = array.getJSONObject(i);
+				if (!TextUtils.equals(url,
+						ProtocolUtils.getJsonString(obj, URL_KEY))) {
+					continue;
+				}
+
+				String fileName = ProtocolUtils.getJsonString(obj,
+						FILE_NAME_KEY);
+				if (Utils.fileExists(fileName)) {
+					return ProtocolUtils.getJsonString(obj, DISPLAY_NAME_KEY);
+				}
+				return "";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 
 	/**
@@ -174,9 +210,8 @@ public class DownloadedFileConfig {
 		}
 		return retArray;
 	}
-	
-	private static void cleanJunk(Context context)
-	{
+
+	private static void cleanJunk(Context context) {
 		JSONArray array = getFilesJsonArray(context);
 		if (null == array) {
 			return;
@@ -191,7 +226,7 @@ public class DownloadedFileConfig {
 				String fileName = ProtocolUtils.getJsonString(obj,
 						FILE_NAME_KEY);
 				if (!Utils.fileExists(fileName)) {
-					remove(context,ProtocolUtils.getJsonString(obj, URL_KEY));
+					remove(context, ProtocolUtils.getJsonString(obj, URL_KEY));
 					continue;
 				}
 			}
