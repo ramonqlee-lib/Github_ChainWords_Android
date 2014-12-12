@@ -157,12 +157,19 @@ public class WordsRepository {
 			// 找到单词结束:添加过内容，并且当前不是字母了
 			if (ch >= 'a' && ch <= 'z') {
 				word.append(ch);
-			} else {
+			} else {//包含不止一个单词
 				if (word.length() > 0) {
 					ret.add(word.toString());
 					word = new StringBuilder();// reset
 					continue;
 				}
+			}
+		}
+		
+		// 是否最后一个还没有添加
+		if (word.length()>0) {
+			if (ret.isEmpty() || !TextUtils.equals(ret.get(ret.size()-1), word.toString())) {
+				ret.add(word.toString());
 			}
 		}
 
