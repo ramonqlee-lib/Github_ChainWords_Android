@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.color.speechbubble.Utility;
-import com.dream2reality.constants.AppConstants;
+import com.dream2reality.utils.AppConstants;
 import com.dream2reality.wordsmanager.DownloadedFileConfig;
 import com.dream2reality.wordsmanager.WordsRepository;
 import com.idreems.sdk.common.runners.GetVocabularyRunner;

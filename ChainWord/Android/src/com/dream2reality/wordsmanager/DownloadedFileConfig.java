@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.dream2reality.constants.AppConstants;
+import com.dream2reality.utils.AppConstants;
 import com.idreems.sdk.protocols.ProtocolUtils;
 import com.yees.sdk.utils.Config;
 import com.yees.sdk.utils.Utils;

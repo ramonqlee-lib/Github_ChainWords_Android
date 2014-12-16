@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.dream2reality.chainwords.R;
-import com.dream2reality.constants.AppConstants;
+import com.dream2reality.utils.AppConstants;
 import com.idreems.sdk.common.runners.CheckUpdateRunner;
 import com.idreems.sdk.netmodel.ParsedTaskReponse;
 import com.idreems.sdk.netmodel.UpdateModel;

@@ -1,4 +1,4 @@
-package com.dream2reality.constants;
+package com.dream2reality.utils;
 
 public interface AppConstants {
 	public static final boolean DEBUG_MODE = true;

@@ -10,7 +10,7 @@ import java.util.Random;
 
 import android.text.TextUtils;
 
-import com.dream2reality.constants.AppConstants;
+import com.dream2reality.utils.AppConstants;
 import com.yees.sdk.utils.Logger;
 
 public class HeadTailClassifier implements Classifier {

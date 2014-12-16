@@ -16,6 +16,9 @@
     <string name ="no">否</string>
     <string name ="found_new_version">新版本已准备好，点击确定安装!</string>
     
+    <!-- 闪屏界面 -->
+    <string name="skip">跳过</string>
+    
     <!-- 单词接龙主界面 -->
     <string name="your_turn">NOW, IT IS YOUR TURN!</string>
     <string name="game_over">CONGRATULATION! YOU WIN!</string>

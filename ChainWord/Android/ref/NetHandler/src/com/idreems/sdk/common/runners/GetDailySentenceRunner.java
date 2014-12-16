@@ -4,10 +4,10 @@ import android.content.Context;
 
 import com.idreems.sdk.NetHandler.AnalyticsAgent;
 import com.idreems.sdk.NetHandler.AnalyticsAgentImp;
-import com.idreems.sdk.netmodel.GetToplistResp;
+import com.idreems.sdk.netmodel.GetDailySentenceResp;
 import com.idreems.sdk.netmodel.ParsedTaskReponse;
 import com.idreems.sdk.protocols.ProtocolConst;
-import com.idreems.sdk.protocols.imp.GetTopListProtocol;
+import com.idreems.sdk.protocols.imp.GetDailySentenceProtocol;
 import com.yees.sdk.lightvolley.HttpTaskResponse;
 import com.yees.sdk.lightvolley.TaskListener;
 import com.yees.sdk.lightvolley.TaskResponse;
@@ -19,12 +19,12 @@ import com.yees.sdk.utils.Logger;
  * @author ramonqlee
  * 
  */
-public class GetTopListRunner implements Runnable {
+public class GetDailySentenceRunner implements Runnable {
 	Context context;
 	private TaskListener listener;
 	private String versionString;
 
-	public GetTopListRunner(Context context, String version) {
+	public GetDailySentenceRunner(Context context, String version) {
 		this.context = context;
 		versionString = version;
 	}
@@ -35,7 +35,7 @@ public class GetTopListRunner implements Runnable {
 
 	@Override
 	public void run() {
-		final GetTopListProtocol protocol = new GetTopListProtocol(
+		final GetDailySentenceProtocol protocol = new GetDailySentenceProtocol(
 				context, versionString);
 
 		AnalyticsAgent agent = AnalyticsAgentImp.sharedInstance(context,
@@ -55,7 +55,7 @@ public class GetTopListRunner implements Runnable {
 						String log = "result: " + r;
 						Logger.d(ProtocolConst.NET_LOG_TAG, log);
 					}
-					GetToplistResp ret = (GetToplistResp) protocol
+					GetDailySentenceResp ret = (GetDailySentenceResp) protocol
 							.handleResponse(responseBytes);
 					if (null != listener) {
 						listener.onSuccess(new ParsedTaskReponse(ret));

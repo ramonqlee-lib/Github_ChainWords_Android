@@ -13,7 +13,7 @@ import java.util.Map;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.dream2reality.constants.AppConstants;
+import com.dream2reality.utils.AppConstants;
 import com.yees.sdk.utils.Logger;
 import com.yees.sdk.utils.Utils;
 

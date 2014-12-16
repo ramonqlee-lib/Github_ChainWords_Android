@@ -27,7 +27,7 @@ import com.baidu.navisdk.comapi.tts.BNTTSPlayer;
 import com.color.speechbubble.AwesomeAdapter;
 import com.color.speechbubble.Message;
 import com.color.speechbubble.Utility;
-import com.dream2reality.constants.AppConstants;
+import com.dream2reality.utils.AppConstants;
 import com.idreems.sdk.common.runners.AddTopListRunner;
 import com.idreems.sdk.netmodel.ParsedTaskReponse;
 import com.idreems.update.UpdateManager;
