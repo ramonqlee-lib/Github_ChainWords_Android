@@ -21,5 +21,17 @@
         android:layout_alignParentRight="true"
         android:onClick="jumpToNextActivity" >
     </Button>
+    
+    <Button
+        android:layout_width="wrap_content"
+        android:background="@drawable/click_selector"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/speak"
+        android:textSize="15sp"
+        android:textColor="#ffffff"
+        android:layout_alignParentLeft="true"
+        android:onClick="speak" >
+    </Button>
 
 </RelativeLayout>

@@ -3,11 +3,9 @@ package com.dream2reality.chainwords;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -37,32 +35,22 @@ import com.yees.sdk.utils.Utils;
  *  2. 同步完成后，单选设置
  */
 
-public class VocabularyActivity extends Activity {
+public class VocabularyActivity extends CustomTitleActivity {
 	List<VocabItem> vocabItemList;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-		setContentView(R.layout.layout_vocabulary_activity);
-
-		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
-				R.layout.layout_custom_titlebar);
+		setContentViewWithCustomTitle(R.layout.layout_vocabulary_activity);
 
 		// 初始化数据
 		TextView tView = (TextView) findViewById(R.id.title_textview);
 		tView.setText(R.string.vocabulary_title_string);
-		// String[] data = { getString(R.string.vocabulary_default_item) };
-		// populateDownloadableListView(data);
 		// 显示可选择设置的列表
 		populateSelectableListView(DownloadedFileConfig
 				.getDisplayableNameArray(getApplicationContext()));
 		// 同步服务器端数据,并进行数据设置
 		syncServer();
-	}
-
-	public void onBack(View view) {
-		onBackPressed();
 	}
 
 	private void syncServer() {

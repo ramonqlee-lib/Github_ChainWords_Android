@@ -1,6 +1,5 @@
 package com.dream2reality.chainwords;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -21,20 +19,14 @@ import com.dream2reality.utils.AppConstants;
 import com.idreems.update.UpdateManager;
 import com.yees.sdk.utils.Config;
 
-public class SettingActivity extends Activity {
+public class SettingActivity extends CustomTitleActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-		setContentView(R.layout.layout_setting_activity);
-		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
-				R.layout.layout_custom_titlebar);
+		setContentViewWithCustomTitle(R.layout.layout_setting_activity);
 		populateViews();
 	}
 
-	public void onBack(View view) {
-		onBackPressed();
-	}
 
 	private void populateViews() {
 		// 初始化数据

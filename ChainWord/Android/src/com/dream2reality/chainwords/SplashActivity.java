@@ -5,11 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.dream2reality.utils.ChainWordsApp;
+import com.dream2reality.utils.TTSPlayer;
 import com.idreems.sdk.common.runners.GetDailySentenceRunner;
 import com.idreems.sdk.netmodel.GetDailySentenceResp;
 import com.idreems.sdk.netmodel.ParsedTaskReponse;
@@ -24,7 +23,8 @@ import com.yees.sdk.utils.Utils;
  * 
  */
 public class SplashActivity extends Activity {
-	
+	private GetDailySentenceResp mGetDailySentenceResp;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,12 +49,12 @@ public class SplashActivity extends Activity {
 				if (!(ret.parsedObject instanceof GetDailySentenceResp)) {
 					return;
 				}
-				GetDailySentenceResp resp = (GetDailySentenceResp) ret.parsedObject;
-				if (!TextUtils.isEmpty(resp.shareImageUrl)) {
+				mGetDailySentenceResp = (GetDailySentenceResp) ret.parsedObject;
+				if (!TextUtils.isEmpty(mGetDailySentenceResp.shareImageUrl)) {
 					// 显示图片
 					NetworkImageView networkImageView = (NetworkImageView) findViewById(R.id.share_imageview);
 					networkImageView.setImageUrl(
-							resp.shareImageUrl,
+							mGetDailySentenceResp.shareImageUrl,
 							ChainWordsApp.sharedInstance().getImageLoader(
 									getApplicationContext()));
 				}
@@ -72,5 +72,12 @@ public class SplashActivity extends Activity {
 		finish();
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
+	}
+
+	public void speak(View v) {
+		if (null == mGetDailySentenceResp) {
+			return;
+		}
+		TTSPlayer.sharedInstance(this).speak(mGetDailySentenceResp.content);
 	}
 }

@@ -21,8 +21,6 @@ import com.dream2reality.chainwords.R;
 public class AwesomeAdapter extends BaseAdapter{
 	private Context mContext;
 	private ArrayList<Message> mMessages;
-
-
 	public AwesomeAdapter(Context context, ArrayList<Message> messages) {
 		super();
 		this.mContext = context;
@@ -90,5 +88,5 @@ public class AwesomeAdapter extends BaseAdapter{
 		//Unimplemented, because we aren't using Sqlite.
 		return position;
 	}
-
+	
 }

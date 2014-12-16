@@ -12,23 +12,22 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.navisdk.BNaviEngineManager.NaviEngineInitListener;
-import com.baidu.navisdk.BaiduNaviManager;
-import com.baidu.navisdk.comapi.tts.BNTTSPlayer;
 import com.color.speechbubble.AwesomeAdapter;
 import com.color.speechbubble.Message;
 import com.color.speechbubble.Utility;
 import com.dream2reality.utils.AppConstants;
+import com.dream2reality.utils.TTSPlayer;
 import com.idreems.sdk.common.runners.AddTopListRunner;
 import com.idreems.sdk.netmodel.ParsedTaskReponse;
 import com.idreems.update.UpdateManager;
@@ -36,7 +35,6 @@ import com.yees.sdk.lightvolley.TaskListener;
 import com.yees.sdk.lightvolley.TaskResponse;
 import com.yees.sdk.utils.Config;
 import com.yees.sdk.utils.Constants;
-import com.yees.sdk.utils.Logger;
 import com.yees.sdk.utils.Utils;
 
 /**
@@ -54,7 +52,6 @@ public class MainActivity extends ListActivity {
 	private static String sender;
 	private boolean robolicsRunning;
 	private String mRobolicWord;
-	private boolean mIsEngineInitSuccess = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -66,12 +63,6 @@ public class MainActivity extends ListActivity {
 	private void populateViews() {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-		// 初始化导航引擎
-		BaiduNaviManager.getInstance().initEngine(this, getSdcardDir(),
-				mNaviEngineInitListener, "RqUEl4HtPM7NMbPdNtLdxGHK", null);
-
-		// 初始化TTS
-		BNTTSPlayer.initPlayer();
 		// 启动activity时不自动弹出软键盘
 		getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -124,6 +115,23 @@ public class MainActivity extends ListActivity {
 
 		adapter = new AwesomeAdapter(this, messages);
 		setListAdapter(adapter);
+		getListView().setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				
+				Message msg = (Message)adapter.getItem(position);
+				if(null == msg || msg.isStatusMessage())
+				{
+					return;
+				}
+				// TODO 携带单词到新界面
+				Intent intent = new Intent(MainActivity.this,WordActivity.class);
+				intent.putExtra(WordActivity.EXTRA_KEY, msg.getMessage());
+				startActivity(intent);
+			}
+		});
 
 		// FIXME 测试
 		// confirmGameOver(this);
@@ -272,7 +280,7 @@ public class MainActivity extends ListActivity {
 	// 弹出游戏结束提示，并给出是否上传战绩选项
 	private void confirmGameOver(final Context context) {
 		// 测试语音播报
-		BNTTSPlayer.playTTSText(getString(R.string.you_win_tts_string), -1);
+		TTSPlayer.sharedInstance(this).speak(getString(R.string.you_win_tts_string));
 
 		LayoutInflater factory = LayoutInflater.from(this);
 		final View textEntryView = factory.inflate(
@@ -384,14 +392,6 @@ public class MainActivity extends ListActivity {
 
 	}
 
-	private String getSdcardDir() {
-		if (Environment.getExternalStorageState().equalsIgnoreCase(
-				Environment.MEDIA_MOUNTED)) {
-			return Environment.getExternalStorageDirectory().toString();
-		}
-		return null;
-	}
-
 	public void onBackPressed() {
 		new AlertDialog.Builder(this)
 				.setTitle(R.string.confirm_to_quit_app)
@@ -424,20 +424,6 @@ public class MainActivity extends ListActivity {
 		// 检查新版本
 		UpdateManager.getIntance().checkNewVersion(this, "");
 	}
-
-	private NaviEngineInitListener mNaviEngineInitListener = new NaviEngineInitListener() {
-		public void engineInitSuccess() {
-			// 导航初始化是异步的，需要一小段时间，以这个标志来识别引擎是否初始化成功，为true时候才能发起导航
-			mIsEngineInitSuccess = true;
-			Logger.i(AppConstants.LOG_TAG, "engineInitSuccess");
-		}
-
-		public void engineInitStart() {
-		}
-
-		public void engineInitFail() {
-		}
-	};
 
 	private void saveAndUpdatePointsView(int increasedPoints) {
 		int points = Config.sharedInstance(getApplicationContext()).getInt(

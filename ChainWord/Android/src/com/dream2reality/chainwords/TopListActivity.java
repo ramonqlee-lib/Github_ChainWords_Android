@@ -5,11 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -31,23 +29,16 @@ import com.yees.sdk.utils.Utils;
  * @author ramonqlee
  * 
  */
-public class TopListActivity extends Activity {
+public class TopListActivity extends CustomTitleActivity {
 	List<TopListItem> mTopListItemList;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-		setContentView(R.layout.layout_toplist_activity);
-		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
-				R.layout.layout_custom_titlebar);
+		setContentViewWithCustomTitle(R.layout.layout_toplist_activity);
 
 		// 同步服务器端数据，并进行设置
 		syncServer();
-	}
-
-	public void onBack(View view) {
-		onBackPressed();
 	}
 
 	private void syncServer() {

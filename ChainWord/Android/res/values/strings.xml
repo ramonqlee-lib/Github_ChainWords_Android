@@ -18,6 +18,7 @@
     
     <!-- 闪屏界面 -->
     <string name="skip">跳过</string>
+    <string name="speak">朗读</string>
     
     <!-- 单词接龙主界面 -->
     <string name="your_turn">NOW, IT IS YOUR TURN!</string>
