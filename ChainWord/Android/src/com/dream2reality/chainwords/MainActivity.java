@@ -16,6 +16,7 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -45,47 +46,25 @@ import com.yees.sdk.utils.Utils;
  * 
  */
 public class MainActivity extends ListActivity {
-	/** Called when the activity is first created. */
-	ArrayList<Message> messages;
-	AwesomeAdapter adapter;
-	EditText text;
-	TextView pointView;
-	static Random rand = new Random();
-	static String sender;
+	private ArrayList<Message> messages;
+	private AwesomeAdapter adapter;
+	private EditText text;
+	private TextView pointView;
+	private static Random rand = new Random();
+	private static String sender;
 	private boolean robolicsRunning;
 	private String mRobolicWord;
-
 	private boolean mIsEngineInitSuccess = false;
-	private NaviEngineInitListener mNaviEngineInitListener = new NaviEngineInitListener() {
-		public void engineInitSuccess() {
-			// 导航初始化是异步的，需要一小段时间，以这个标志来识别引擎是否初始化成功，为true时候才能发起导航
-			mIsEngineInitSuccess = true;
-			Logger.i(AppConstants.LOG_TAG, "engineInitSuccess");
-		}
-
-		public void engineInitStart() {
-		}
-
-		public void engineInitFail() {
-		}
-	};
-
-	private void saveAndUpdatePointsView(int increasedPoints) {
-		int points = Config.sharedInstance(getApplicationContext()).getInt(
-				AppConstants.POINTS_KEY);
-		if (points < 0) {
-			points = 0;
-		}
-		points += increasedPoints;
-		Config.sharedInstance(getApplicationContext()).putInt(
-				AppConstants.POINTS_KEY, points);
-
-		pointView.setText(String.valueOf(points));
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		populateViews();
+	}
+
+	private void populateViews() {
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		// 初始化导航引擎
 		BaiduNaviManager.getInstance().initEngine(this, getSdcardDir(),
@@ -443,6 +422,33 @@ public class MainActivity extends ListActivity {
 		super.onResume();
 
 		// 检查新版本
-		UpdateManager.getIntance().checkNewVersion(this,"");
+		UpdateManager.getIntance().checkNewVersion(this, "");
+	}
+
+	private NaviEngineInitListener mNaviEngineInitListener = new NaviEngineInitListener() {
+		public void engineInitSuccess() {
+			// 导航初始化是异步的，需要一小段时间，以这个标志来识别引擎是否初始化成功，为true时候才能发起导航
+			mIsEngineInitSuccess = true;
+			Logger.i(AppConstants.LOG_TAG, "engineInitSuccess");
+		}
+
+		public void engineInitStart() {
+		}
+
+		public void engineInitFail() {
+		}
+	};
+
+	private void saveAndUpdatePointsView(int increasedPoints) {
+		int points = Config.sharedInstance(getApplicationContext()).getInt(
+				AppConstants.POINTS_KEY);
+		if (points < 0) {
+			points = 0;
+		}
+		points += increasedPoints;
+		Config.sharedInstance(getApplicationContext()).putInt(
+				AppConstants.POINTS_KEY, points);
+
+		pointView.setText(String.valueOf(points));
 	}
 }

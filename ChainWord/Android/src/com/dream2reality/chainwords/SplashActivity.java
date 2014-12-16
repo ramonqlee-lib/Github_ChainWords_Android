@@ -24,7 +24,7 @@ import com.yees.sdk.utils.Utils;
  * 
  */
 public class SplashActivity extends Activity {
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
