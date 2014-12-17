@@ -12,7 +12,8 @@ import com.idreems.sdk.protocols.Protocol;
  * 
  */
 public class GetWordPicsProtocol implements Protocol {
-	private static final String PROTOCOL_URL = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&start=0&q=";//&q=horse
+//	private static final String PROTOCOL_URL = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&start=0&q=";//&q=horse
+	private static final String PROTOCOL_URL = "http://image.baidu.com/i?tn=baiduimagejson&ie=utf-8&ic=0&rn=20&pn=0&word=";
 	private Context context;
 	private String versionString;
 	private String word;

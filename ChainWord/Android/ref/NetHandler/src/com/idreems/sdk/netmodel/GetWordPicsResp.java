@@ -11,7 +11,7 @@ import android.text.TextUtils;
 import com.idreems.sdk.protocols.ProtocolUtils;
 
 public class GetWordPicsResp {
-	List<String> urls = new ArrayList<String>();
+	public List<String> urls = new ArrayList<String>();
 	
 	public GetWordPicsResp(byte[] data)
 	{
@@ -22,18 +22,13 @@ public class GetWordPicsResp {
 		//  解析数据
 		try {
 			JSONObject obj = new JSONObject(new String(data));
-			obj = ProtocolUtils.getJsonObject(obj, "responseData");
-			if(null == obj)
-			{
-				return;
-			}
-			JSONArray array = obj.getJSONArray("results");
+			JSONArray array = obj.getJSONArray("data");
 			if (null == array) {
 				return;
 			}
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject tmp = array.getJSONObject(i);
-				String url = ProtocolUtils.getJsonString(tmp, "url");
+				String url = ProtocolUtils.getJsonString(tmp, "objURL");
 				if(TextUtils.isEmpty(url))
 				{
 					continue;
