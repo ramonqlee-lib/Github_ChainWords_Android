@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
 import com.dream2reality.utils.ChainWordsApp;
+import com.idreems.sdk.common.runners.GetWordMeaningRunner;
 import com.idreems.sdk.common.runners.GetWordPicsRunner;
+import com.idreems.sdk.netmodel.GetWordMeaningResp;
 import com.idreems.sdk.netmodel.GetWordPicsResp;
 import com.idreems.sdk.netmodel.ParsedTaskReponse;
 import com.yees.sdk.lightvolley.TaskListener;
@@ -43,6 +45,39 @@ public class WordActivity extends CustomTitleActivity {
 			wordView.setText(mWord.toString());
 		}
 
+		// 获取配图
+		populateImages();
+		populateWordMeaning();
+	}
+
+	private void populateWordMeaning() {
+		// 获取单词meaning
+		GetWordMeaningRunner runner = new GetWordMeaningRunner(
+				getApplicationContext(),
+				Utils.getAppVersion(getApplicationContext()), mWord.toString());
+		runner.setTaskListener(new TaskListener() {
+
+			@Override
+			public void onSuccess(TaskResponse response) {
+				if (!(response instanceof ParsedTaskReponse)) {
+					return;
+				}
+				ParsedTaskReponse ret = (ParsedTaskReponse) response;
+				if (!(ret.parsedObject instanceof GetWordMeaningResp)) {
+					return;
+				}
+				GetWordMeaningResp resp = (GetWordMeaningResp) ret.parsedObject;
+			}
+
+			@Override
+			public void onFailure(int arg0, String arg1) {
+
+			}
+		});
+		runner.run();
+	}
+
+	private void populateImages() {
 		GetWordPicsRunner runner = new GetWordPicsRunner(
 				getApplicationContext(),
 				Utils.getAppVersion(getApplicationContext()), mWord.toString());
@@ -58,14 +93,13 @@ public class WordActivity extends CustomTitleActivity {
 					return;
 				}
 				GetWordPicsResp resp = (GetWordPicsResp) ret.parsedObject;
-				if(null == resp)
-				{
+				if (null == resp) {
 					return;
 				}
 				List<String> urls = resp.urls;
 				if (null != urls && !urls.isEmpty()) {
 					String imageUrl = urls.get(0);
-					NetworkImageView networkImageView = (NetworkImageView)findViewById(R.id.share_imageview);
+					NetworkImageView networkImageView = (NetworkImageView) findViewById(R.id.share_imageview);
 					networkImageView.setImageUrl(
 							imageUrl,
 							ChainWordsApp.sharedInstance().getImageLoader(
@@ -79,6 +113,5 @@ public class WordActivity extends CustomTitleActivity {
 			}
 		});
 		runner.run();
-
 	}
 }
