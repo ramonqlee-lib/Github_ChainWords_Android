@@ -27,7 +27,6 @@ public class SettingActivity extends CustomTitleActivity {
 		populateViews();
 	}
 
-
 	private void populateViews() {
 		// 初始化数据
 		TextView tView = (TextView) findViewById(R.id.title_textview);
@@ -50,11 +49,12 @@ public class SettingActivity extends CustomTitleActivity {
 					int position, long row) {
 				// TODO 事件处理
 				switch (position) {
-				case 0:
+				case 0: {
 					// TODO 词汇表选择
 					Intent intent = new Intent(SettingActivity.this,
 							VocabularyActivity.class);
 					startActivity(intent);
+				}
 					break;
 				case 1:
 					// TODO 版本说明
@@ -62,10 +62,16 @@ public class SettingActivity extends CustomTitleActivity {
 				case 2:
 					// TODO 新版本检测
 					// 检查新版本
-					UpdateManager.getIntance().checkNewVersion(SettingActivity.this,getString(R.string.newest_version_already));
+					UpdateManager.getIntance().checkNewVersion(
+							SettingActivity.this,
+							getString(R.string.newest_version_already));
 					break;
-				case 3:
+				case 3: {
 					// TODO 推荐给好友
+					Intent intent = new Intent(SettingActivity.this,
+							SplashActivity.class);
+					startActivity(intent);
+				}
 					break;
 				case 4:
 					// 设置昵称
@@ -87,8 +93,9 @@ public class SettingActivity extends CustomTitleActivity {
 		final EditText nameEdit = (EditText) textEntryView
 				.findViewById(R.id.playerName_edittext);
 		nameEdit.setText(playerName);
-		
-		new AlertDialog.Builder(context).setTitle(R.string.setting_list_item_set_player_name)
+
+		new AlertDialog.Builder(context)
+				.setTitle(R.string.setting_list_item_set_player_name)
 				.setView(textEntryView)
 				.setPositiveButton(R.string.ok, new OnClickListener() {
 					@Override

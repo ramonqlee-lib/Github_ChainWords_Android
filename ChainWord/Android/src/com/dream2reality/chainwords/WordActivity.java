@@ -43,7 +43,11 @@ public class WordActivity extends CustomTitleActivity {
 		if (!TextUtils.isEmpty(mWord)) {
 			TextView wordView = (TextView) findViewById(R.id.word_textview);
 			wordView.setText(mWord.toString());
+			
+			wordView = (TextView) findViewById(R.id.title_textview);
+			wordView.setText(mWord.toString());
 		}
+		
 
 		// 获取配图
 		populateImages();
@@ -67,6 +71,18 @@ public class WordActivity extends CustomTitleActivity {
 					return;
 				}
 				GetWordMeaningResp resp = (GetWordMeaningResp) ret.parsedObject;
+				
+				StringBuilder sBuilder = new StringBuilder();
+//				sBuilder.append(resp.wordString);
+//				sBuilder.append('\n');
+				sBuilder.append(resp.acceptation);
+				for (int i = 0; i < resp.sentenceList.size(); i++) {
+					sBuilder.append(resp.sentenceList.get(i).origString);
+					sBuilder.append(resp.sentenceList.get(i).transString);
+				}
+				
+				TextView explanationTextView = (TextView)findViewById(R.id.explanation_textview);
+				explanationTextView.setText(sBuilder);
 			}
 
 			@Override
