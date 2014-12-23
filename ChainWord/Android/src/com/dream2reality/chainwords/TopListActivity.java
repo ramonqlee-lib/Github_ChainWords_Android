@@ -29,7 +29,7 @@ import com.yees.sdk.utils.Utils;
  * @author ramonqlee
  * 
  */
-public class TopListActivity extends CustomTitleActivity {
+public class TopListActivity extends CustomBaseActivity {
 	List<TopListItem> mTopListItemList;
 
 	@Override

@@ -19,7 +19,7 @@ import com.dream2reality.utils.AppConstants;
 import com.idreems.update.UpdateManager;
 import com.yees.sdk.utils.Config;
 
-public class SettingActivity extends CustomTitleActivity {
+public class SettingActivity extends CustomBaseActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,7 +36,7 @@ public class SettingActivity extends CustomTitleActivity {
 		String[] data = { getString(R.string.setting_list_item_vocabulary),
 				getString(R.string.setting_list_item_version),
 				getString(R.string.setting_list_item_check_new_version),
-				getString(R.string.setting_list_item_recommend),
+				getString(R.string.setting_list_item_daily_sentence),
 				getString(R.string.setting_list_item_set_player_name) };
 
 		// 构造一个数组对象，也就是数据
@@ -47,10 +47,8 @@ public class SettingActivity extends CustomTitleActivity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int position, long row) {
-				// TODO 事件处理
 				switch (position) {
 				case 0: {
-					// TODO 词汇表选择
 					Intent intent = new Intent(SettingActivity.this,
 							VocabularyActivity.class);
 					startActivity(intent);
@@ -60,16 +58,15 @@ public class SettingActivity extends CustomTitleActivity {
 					// TODO 版本说明
 					break;
 				case 2:
-					// TODO 新版本检测
 					// 检查新版本
 					UpdateManager.getIntance().checkNewVersion(
 							SettingActivity.this,
 							getString(R.string.newest_version_already));
 					break;
 				case 3: {
-					// TODO 推荐给好友
 					Intent intent = new Intent(SettingActivity.this,
 							SplashActivity.class);
+					intent.putExtra(SplashActivity.HIDE_SKIP_BUTTON_KEY, true);
 					startActivity(intent);
 				}
 					break;

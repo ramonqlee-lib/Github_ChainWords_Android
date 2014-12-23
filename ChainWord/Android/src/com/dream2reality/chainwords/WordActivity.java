@@ -24,7 +24,7 @@ import com.yees.sdk.utils.Utils;
  * @author ramonqlee
  * 
  */
-public class WordActivity extends CustomTitleActivity {
+public class WordActivity extends CustomBaseActivity {
 	public static final String EXTRA_KEY = "WordActivity_EXTRA_KEY";
 	private CharSequence mWord;
 

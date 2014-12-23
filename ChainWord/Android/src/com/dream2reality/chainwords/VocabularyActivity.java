@@ -35,7 +35,7 @@ import com.yees.sdk.utils.Utils;
  *  2. 同步完成后，单选设置
  */
 
-public class VocabularyActivity extends CustomTitleActivity {
+public class VocabularyActivity extends CustomBaseActivity {
 	List<VocabItem> vocabItemList;
 
 	@Override

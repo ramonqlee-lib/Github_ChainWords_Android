@@ -18,7 +18,9 @@ import android.net.Uri;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.webkit.MimeTypeMap;
+import android.widget.Toast;
 
+import com.dream2reality.chainwords.R;
 import com.yees.sdk.utils.Logger;
 import com.yees.sdk.utils.Utils;
 
@@ -147,7 +149,11 @@ public class DownLoadManager {
 		File folder = Environment
 				.getExternalStoragePublicDirectory(DOWNLOAD_FOLDER_NAME);
 		if (!folder.exists() || !folder.isDirectory()) {
-			folder.mkdirs();
+			if(!folder.mkdirs())
+			{
+				Toast.makeText(context, context.getString(R.string.no_external_storage_card), Toast.LENGTH_LONG).show();
+				return;
+			}
 		}
 		request.setDestinationInExternalPublicDir(DOWNLOAD_FOLDER_NAME,
 				fileName);

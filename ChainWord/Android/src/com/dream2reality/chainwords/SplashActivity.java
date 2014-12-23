@@ -23,16 +23,27 @@ import com.yees.sdk.utils.Utils;
  * 
  */
 public class SplashActivity extends Activity {
+	public static final String HIDE_SKIP_BUTTON_KEY = "HIDE_SKIP_BUTTON_KEY";
+	
 	private GetDailySentenceResp mGetDailySentenceResp;
-
+	private boolean hideSkipButton;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_splash_activity);
+		// 是否隐藏skip button
+		Intent intent = getIntent();
+		if(null != intent)
+		{
+			hideSkipButton = intent.getBooleanExtra(HIDE_SKIP_BUTTON_KEY, false);
+		}
 		populateViews();
 	}
 
 	private void populateViews() {
+		hideSkipButton();
+		
 		// 获取金山词霸的每日一句，并展现
 		// 目前展现是的分享图片，后续考虑加入自定义展现
 		GetDailySentenceRunner runner = new GetDailySentenceRunner(
@@ -80,4 +91,15 @@ public class SplashActivity extends Activity {
 		}
 		TTSPlayer.sharedInstance(this).speak(mGetDailySentenceResp.content);
 	}
+	
+	private void hideSkipButton()
+	{
+		if (hideSkipButton) {
+			View view = findViewById(R.id.skip_button);
+			if (null != view) {
+				view.setVisibility(View.GONE);
+			}
+		}
+	}
+	
 }

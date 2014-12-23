@@ -17,7 +17,7 @@
     <string name ="found_new_version">新版本已准备好，点击确定安装!</string>
     
     <!-- 闪屏界面 -->
-    <string name="skip">跳过</string>
+    <string name="skip">进入</string>
     <string name="speak">朗读</string>
     
     <!-- 单词接龙主界面 -->
@@ -41,11 +41,12 @@
     <string name="setting_list_item_vocabulary">词汇表选择</string>
     <string name="setting_list_item_version">版本</string>
     <string name="setting_list_item_check_new_version">新版本检测</string>
-    <string name="setting_list_item_recommend">推荐给好友</string>
+    <string name="setting_list_item_daily_sentence">每日一句</string>
     <string name="setting_list_item_set_player_name">设置昵称</string>
     <string name="newest_version_already">已经是最新版本！</string>
     
     <!-- 词汇表选择界面 -->
+    <string name="no_external_storage_card">没有外置存储卡，暂时不能下载数据</string>
     <string name="vocabulary_title_string">词汇表选择</string>
     <string name="vocabulary_default_item">Loading Data...</string>
     <string name="vocabulary_selectable_category">可选词汇表</string>
