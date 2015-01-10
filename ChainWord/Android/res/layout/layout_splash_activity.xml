@@ -42,4 +42,18 @@
         </Button>
     </LinearLayout>
 
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/NetworkImageView01"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/NetworkImageView02"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
 </RelativeLayout>

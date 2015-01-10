@@ -27,7 +27,7 @@
     <string name="upload_record">赶快上传到排行榜吗？</string>
     <string name="robolics_running">我还没想到呢，稍等一下？</string>
     <string name="renew_game">再来一局?</string>
-    <string name="pk_button_string">PK</string>
+    <string name="pk_button_string">接力</string>
     <string name="empty_pk_string">也太任性了吧？</string>
     <string name="you_win_tts_string">好棒，你赢啦！</string>
     <string name="confirm_to_quit_app">确认退出吗？</string>
@@ -55,4 +55,9 @@
 
     <!-- 排行榜界面 -->
     <string name="toplist_title_string">排行榜</string>
+    
+    <!-- 关于界面 -->
+    <string name="about">版本</string>
+    <string name="version">WordChain 1.0.0</string>
+    <string name="copyright">Copyright 2014-2015 iDreems.\nAll Rights Reserved </string>
 </resources>

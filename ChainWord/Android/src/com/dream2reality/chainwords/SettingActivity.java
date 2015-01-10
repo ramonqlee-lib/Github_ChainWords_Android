@@ -55,7 +55,12 @@ public class SettingActivity extends CustomBaseActivity {
 				}
 					break;
 				case 1:
-					// TODO 版本说明
+				// TODO 版本说明
+				{
+					Intent intent = new Intent(SettingActivity.this,
+							AboutActivity.class);
+					startActivity(intent);
+				}
 					break;
 				case 2:
 					// 检查新版本

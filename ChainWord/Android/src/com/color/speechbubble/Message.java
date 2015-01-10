@@ -11,7 +11,7 @@ import android.text.style.ForegroundColorSpan;
  * Message is a Custom Object to encapsulate message information/fields
  * 
  * @author Adil Soomro
- *
+ * 
  */
 public class Message {
 	/**
@@ -23,11 +23,12 @@ public class Message {
 	 */
 	boolean isMine;
 	/**
-	 * boolean to determine, whether the message is a status message or not.
-	 * it reflects the changes/updates about the sender is writing, have entered text etc
+	 * boolean to determine, whether the message is a status message or not. it
+	 * reflects the changes/updates about the sender is writing, have entered
+	 * text etc
 	 */
 	public boolean isStatusMessage;
-	
+
 	/**
 	 * Constructor to make a Message object
 	 */
@@ -37,10 +38,11 @@ public class Message {
 		this.isMine = isMine;
 		this.isStatusMessage = false;
 	}
+
 	/**
-	 * Constructor to make a status Message object
-	 * consider the parameters are swaped from default Message constructor,
-	 *  not a good approach but have to go with it.
+	 * Constructor to make a status Message object consider the parameters are
+	 * swaped from default Message constructor, not a good approach but have to
+	 * go with it.
 	 */
 	public Message(boolean status, CharSequence message) {
 		super();
@@ -48,51 +50,65 @@ public class Message {
 		this.isMine = false;
 		this.isStatusMessage = status;
 	}
+
 	public CharSequence getMessage() {
 		return message;
 	}
+
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
 	public boolean isMine() {
 		return isMine;
 	}
+
 	public void setMine(boolean isMine) {
 		this.isMine = isMine;
 	}
+
 	public boolean isStatusMessage() {
 		return isStatusMessage;
 	}
+
 	public void setStatusMessage(boolean isStatusMessage) {
 		this.isStatusMessage = isStatusMessage;
 	}
-	
-	public void setHeadSpan()
-	{
+
+	public void setHeadSpan() {
 		setSpan(true, false);
 	}
-	
-	public void setTailSpan()
-	{
+
+	public void setTailSpan() {
 		setSpan(false, true);
 	}
-	
+
 	// 设置span属性:目前主要是上色功能
-	private void setSpan(boolean start,boolean end)
-	{
+	private void setSpan(boolean start, boolean end) {
 		if (TextUtils.isEmpty(message)) {
 			return;
 		}
+		final int DEFAULT_TEXT_COLOR = Color.argb(255, 0x35, 0x35, 0x35);
+		final int HILIGHTED_TEXT_COLOR = Color.RED;
 		
-		SpannableStringBuilder style=new SpannableStringBuilder(message);
-		final ForegroundColorSpan span = new ForegroundColorSpan(Color.BLUE);
+		SpannableStringBuilder style = new SpannableStringBuilder(message);
+		ForegroundColorSpan span = new ForegroundColorSpan(HILIGHTED_TEXT_COLOR);
 		if (start) {
-			style.setSpan(span,0,1,Spannable.SPAN_INCLUSIVE_EXCLUSIVE);             
+			style.setSpan(span, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+			// 其他设置为黑色
+			span = new ForegroundColorSpan(DEFAULT_TEXT_COLOR);
+			style.setSpan(span, 1, message.length(),
+					Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
 		}
 		if (end) {
-			style.setSpan(span,message.length()-1,message.length(),Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+			style.setSpan(span, message.length() - 1, message.length(),
+					Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+			// 其他设置为黑色
+			span = new ForegroundColorSpan(DEFAULT_TEXT_COLOR);
+			style.setSpan(span, 0, message.length()-1,
+					Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
 		}
 		message = style;
 	}
-	
+
 }

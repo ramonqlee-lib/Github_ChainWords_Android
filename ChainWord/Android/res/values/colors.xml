@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<color name="textColor">#FFF</color>
+	<color name="textColor">#353535</color>
 	<color name="textFieldColor">#000</color>
 	<color name="textShadow">#FFF</color>
 	<color name="listViewBg">#DADFEE</color>
 
-	<color name="sendLightColor">#8897BF</color>
-	<color name="sendMeduimColor">#5D6CA5</color>
-	<color name="sendDarkColor">#515F9F</color>
+	<color name="sendLightColor">#45c01a</color>
+	<color name="sendMeduimColor">#45c01a</color>
+	<color name="sendDarkColor">#45001a</color>
 
 	<color name="barDarkColor">#CECECE</color>
 	<color name="barMeduimColor">#DFDEE0</color>
