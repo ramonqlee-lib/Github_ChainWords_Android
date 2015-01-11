@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.dream2reality.utils.AppConstants;
 import com.idreems.update.UpdateManager;
+import com.umeng.fb.FeedbackAgent;
 import com.yees.sdk.utils.Config;
 
 public class SettingActivity extends CustomBaseActivity {
@@ -37,7 +38,8 @@ public class SettingActivity extends CustomBaseActivity {
 				getString(R.string.setting_list_item_version),
 				getString(R.string.setting_list_item_check_new_version),
 				getString(R.string.setting_list_item_daily_sentence),
-				getString(R.string.setting_list_item_set_player_name) };
+				getString(R.string.setting_list_item_set_player_name),
+				getString(R.string.setting_list_item_feed_back)};
 
 		// 构造一个数组对象，也就是数据
 		listView.setAdapter(new ArrayAdapter<String>(this,
@@ -78,6 +80,11 @@ public class SettingActivity extends CustomBaseActivity {
 				case 4:
 					// 设置昵称
 					popSetPlayerNameDialog(SettingActivity.this);
+					break;
+				case 5:
+					// 用户反馈
+					new FeedbackAgent(SettingActivity.this).startFeedbackActivity();
+					break;
 				default:
 					break;
 				}

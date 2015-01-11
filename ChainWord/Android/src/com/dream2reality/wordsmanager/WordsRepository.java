@@ -125,8 +125,12 @@ public class WordsRepository {
 							|| word.length() < MIN_WORD_LENGTH) {
 						continue;
 					}
+					// prevent duplicates
 					// Logger.d(AppConstants.LOG_TAG, word);
-					mOriginalWordsList.add(word);
+					if(-1 == mOriginalWordsList.indexOf(word))
+					{
+						mOriginalWordsList.add(word);
+					}
 				}
 			}
 			// fis.close();

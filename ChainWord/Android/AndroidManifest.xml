@@ -92,6 +92,17 @@
         <service
             android:name="com.baidu.navi.location.f"
             android:enabled="true" />
+        
+        <activity
+        android:name="com.umeng.fb.ConversationActivity"
+        android:screenOrientation="portrait"/>
+        
+        <meta-data
+        android:value="54b1bcc2fd98c5d953000295"
+        android:name="UMENG_APPKEY"/>
+        <meta-data
+        android:value="Main"
+        android:name="UMENG_CHANNEL"/>
     </application>
 
 </manifest>

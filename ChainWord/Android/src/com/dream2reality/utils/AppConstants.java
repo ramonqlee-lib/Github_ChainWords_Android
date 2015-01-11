@@ -11,4 +11,6 @@ public interface AppConstants {
 	
 	public static final String APK_FILE_NAME= "APK_FILE_NAME"; // 升级apk
 	public static final String CHECK_NEW_VERSION_URL_KEY = "CheckNewVersionUrl";
+	
+	public static final String UMENG_KEY = "54b1bcc2fd98c5d953000295";
 }

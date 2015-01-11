@@ -43,6 +43,7 @@
     <string name="setting_list_item_check_new_version">新版本检测</string>
     <string name="setting_list_item_daily_sentence">每日一句</string>
     <string name="setting_list_item_set_player_name">设置昵称</string>
+    <string name="setting_list_item_feed_back">反馈建议</string>
     <string name="newest_version_already">已经是最新版本！</string>
     
     <!-- 词汇表选择界面 -->
@@ -60,4 +61,5 @@
     <string name="about">版本</string>
     <string name="version">WordChain 1.0.0</string>
     <string name="copyright">Copyright 2014-2015 iDreems.\nAll Rights Reserved </string>
+    
 </resources>

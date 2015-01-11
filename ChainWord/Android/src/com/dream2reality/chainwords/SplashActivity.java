@@ -12,6 +12,8 @@ import com.dream2reality.utils.TTSPlayer;
 import com.idreems.sdk.common.runners.GetDailySentenceRunner;
 import com.idreems.sdk.netmodel.GetDailySentenceResp;
 import com.idreems.sdk.netmodel.ParsedTaskReponse;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.fb.FeedbackAgent;
 import com.yees.sdk.lightvolley.TaskListener;
 import com.yees.sdk.lightvolley.TaskResponse;
 import com.yees.sdk.utils.Utils;
@@ -39,6 +41,11 @@ public class SplashActivity extends Activity {
 			hideSkipButton = intent.getBooleanExtra(HIDE_SKIP_BUTTON_KEY, false);
 		}
 		populateViews();
+		
+		// umeng用户反馈同步
+		FeedbackAgent agent = new FeedbackAgent(this);
+		agent.sync();
+		MobclickAgent.updateOnlineConfig( this );
 	}
 
 	private void populateViews() {

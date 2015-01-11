@@ -59,19 +59,19 @@ public class TTSPlayer {
 	private void setParams() {
 		speechSynthesizer.setParam(SpeechSynthesizer.PARAM_SPEAKER, "0");
 		speechSynthesizer.setParam(SpeechSynthesizer.PARAM_VOLUME, "5");
-		speechSynthesizer.setParam(SpeechSynthesizer.PARAM_SPEED, "5");
-		speechSynthesizer.setParam(SpeechSynthesizer.PARAM_PITCH, "5");
+		speechSynthesizer.setParam(SpeechSynthesizer.PARAM_SPEED, "6");
+		speechSynthesizer.setParam(SpeechSynthesizer.PARAM_PITCH, "4");
 		speechSynthesizer.setParam(SpeechSynthesizer.PARAM_AUDIO_ENCODE,
 				SpeechSynthesizer.AUDIO_ENCODE_AMR);
 		speechSynthesizer.setParam(SpeechSynthesizer.PARAM_AUDIO_RATE,
 				SpeechSynthesizer.AUDIO_BITRATE_AMR_15K85);
 		// speechSynthesizer.setParam(SpeechSynthesizer.PARAM_LANGUAGE,
 		// SpeechSynthesizer.LANGUAGE_ZH);
-		// speechSynthesizer.setParam(SpeechSynthesizer.PARAM_NUM_PRON, "0");
-		// speechSynthesizer.setParam(SpeechSynthesizer.PARAM_ENG_PRON, "0");
-		// speechSynthesizer.setParam(SpeechSynthesizer.PARAM_PUNC, "0");
+//		 speechSynthesizer.setParam(SpeechSynthesizer.PARAM_NUM_PRON, "0");
+//		 speechSynthesizer.setParam(SpeechSynthesizer.PARAM_ENG_PRON, "0");
+//		 speechSynthesizer.setParam(SpeechSynthesizer.PARAM_PUNC, "1");
 		// speechSynthesizer.setParam(SpeechSynthesizer.PARAM_BACKGROUND, "0");
-		// speechSynthesizer.setParam(SpeechSynthesizer.PARAM_STYLE, "0");
+//		 speechSynthesizer.setParam(SpeechSynthesizer.PARAM_STYLE, "0");
 		// speechSynthesizer.setParam(SpeechSynthesizer.PARAM_TERRITORY, "0");
 	}
 

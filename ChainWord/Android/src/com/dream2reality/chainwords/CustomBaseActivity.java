@@ -1,14 +1,14 @@
 package com.dream2reality.chainwords;
 
-import com.dream2reality.utils.AppConstants;
-import com.yees.sdk.utils.Logger;
-
 import android.app.Activity;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.Window;
+
+import com.dream2reality.utils.AppConstants;
+import com.umeng.analytics.MobclickAgent;
+import com.yees.sdk.utils.Logger;
 
 /**
  * 自定义标题栏的activity
@@ -31,6 +31,16 @@ public class CustomBaseActivity extends Activity {
 
 	// 用于计算手指滑动的速度。
 	private VelocityTracker mVelocityTracker;
+
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
 
 	protected void setContentViewWithCustomTitle(int contentId) {
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
@@ -58,10 +68,10 @@ public class CustomBaseActivity extends Activity {
 			// 获取顺时速度
 			int xSpeed = getScrollVelocity();
 			// 当滑动的距离大于我们设定的最小距离且滑动的瞬间速度大于我们设定的速度时，返回到上一个activity
-			Logger.d(AppConstants.LOG_TAG, "distanceX = "+distanceX);
-			Logger.d(AppConstants.LOG_TAG, "XDISTANCE_MIN = "+XDISTANCE_MIN);
-			Logger.d(AppConstants.LOG_TAG, "xSpeed = "+xSpeed);
-			Logger.d(AppConstants.LOG_TAG, "XSPEED_MIN = "+XSPEED_MIN);
+			Logger.d(AppConstants.LOG_TAG, "distanceX = " + distanceX);
+			Logger.d(AppConstants.LOG_TAG, "XDISTANCE_MIN = " + XDISTANCE_MIN);
+			Logger.d(AppConstants.LOG_TAG, "xSpeed = " + xSpeed);
+			Logger.d(AppConstants.LOG_TAG, "XSPEED_MIN = " + XSPEED_MIN);
 			if (distanceX > XDISTANCE_MIN && xSpeed > XSPEED_MIN) {
 				finish();
 			}
