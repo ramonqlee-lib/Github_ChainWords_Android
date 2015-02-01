@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>F9474BDF-466B-47AE-B1D4-2D31CEDCFDEB</string>
+	<key>IDESourceControlProjectName</key>
+	<string>FXRecordArc</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>CC0C0DA0081A7125E275A6D3895E3B0773A95D2F</key>
+		<string>https://github.com/ramonqlee-lib/Github_ChainWords_Android.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>NewsEnglish/FXRecordArcView-master/FXRecordArc.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>CC0C0DA0081A7125E275A6D3895E3B0773A95D2F</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ramonqlee-lib/Github_ChainWords_Android.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>CC0C0DA0081A7125E275A6D3895E3B0773A95D2F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CC0C0DA0081A7125E275A6D3895E3B0773A95D2F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Github</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -20,7 +20,7 @@
         android:orientation="horizontal" >
 
         <Button
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/click_selector"
             android:onClick="speak"
@@ -31,7 +31,7 @@
 
         <Button
             android:id="@+id/skip_button"
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:background="@drawable/click_selector"
