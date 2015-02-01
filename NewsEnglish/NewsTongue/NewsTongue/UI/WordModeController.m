@@ -8,6 +8,8 @@
 
 #import "WordModeController.h"
 #import "WordManager.h"
+#import "AFSoundManager.h"
+#import "AFURLSessionManager.h"
 
 static const CGFloat kLineSpacing = 5.0f;// 行间距
 static const CGFloat kMinFontSize = 18.0f;// 字体缩放的最小值
@@ -18,8 +20,10 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     UITextGranularity mGranuality;
     NSString* mBodyText;
     CGFloat fontSize;
+    NSString* word;
     NSString* fromLang;
     NSString* toLang;
+    NSArray* prons;// 单词发音
 }
 @end
 
@@ -85,7 +89,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 -(void)_handleTap:(UITapGestureRecognizer*)tap{
     // hide
     _fontChangeSlider.hidden = YES;
-    
+    word = @"";
     if(tap.state == UIGestureRecognizerStateRecognized){
         
         CGPoint tappedPoint = [tap locationInView:_textView];
@@ -109,15 +113,16 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
         // change selected font
         font = [UIFont fontWithName:font.fontName size:font.pointSize*1.2];
         [_textView setFont:range value:font clearPrevious:NO];
-        [self updateTranslatedText:[_textView.text substringWithRange:range]];
+        word = [[_textView.text substringWithRange:range]lowercaseString];
+        [self updateTranslatedText:word];
     }
-    
 }
 
 -(void)updateTranslatedText:(NSString*)originText
 {
-    // TODO 翻译单词
-    [[WordManager sharedInstance]query:originText from:fromLang to:toLang response:self];
+    _translatedTextView.text = @"";
+    //  翻译单词
+    [[WordManager sharedInstance]query:[originText lowercaseString] from:fromLang to:toLang response:self];
     
 }
 #pragma mark WordQueryResult protocol
@@ -126,12 +131,12 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 {
     // 单词意义
     _translatedTextView.text = [WordManager getReadableMeaning:result];
-
+    
     // 读音
-//    [WordManager getProns:result];
-
+    prons = [WordManager getProns:result];
+    
     // 使用举例
-//    [WordManager getExamples:result];
+    //    [WordManager getExamples:result];
 }
 
 /*
@@ -171,17 +176,98 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
         _slider.value = _textView.font.pointSize;
     }
 }
++(NSURL*)getRecordFilePath:(NSString*)fileName
+{
+    NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+    return [documentsDirectoryURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.caf",fileName]];
+}
++(NSURL*)getAudioFilePath:(NSString*)fileName
+{
+    NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+    return [documentsDirectoryURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp3",fileName]];
+}
 
 -(IBAction)speakWord:(id)sender
 {
+    if (!prons || !prons.count) {
+        return;
+    }
+    
+    // 文件存在了,直接播放
+    NSURL* audioFileUrl = [WordModeController getAudioFilePath:word];
+    if ([[NSFileManager defaultManager]fileExistsAtPath:[audioFileUrl path]]) {
+        [[AFSoundManager sharedManager]startPlayingLocalFileWithFilePath:[audioFileUrl path] andBlock:^(int percentage, CGFloat elapsedTime, CGFloat timeRemaining, NSError *error, BOOL finished) {
+            
+            if (!error) {
+            } else {
+                
+                NSLog(@"There has been an error playing the remote file: %@", [error description]);
+            }
+            
+        }];
+        return;
+    }
+    
+    // TODO 先下载音频文件，然后再播放
+    //start
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSURL *URL = [NSURL URLWithString:[prons objectAtIndex:0]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        return [WordModeController getAudioFilePath:word];
+    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        NSLog(@"File downloaded to: %@", filePath);
+        [[AFSoundManager sharedManager]startPlayingLocalFileWithFilePath:[filePath path] andBlock:^(int percentage, CGFloat elapsedTime, CGFloat timeRemaining, NSError *error, BOOL finished) {
+            
+            if (!error) {
+            } else {
+                
+                NSLog(@"There has been an error playing the remote file: %@", [error description]);
+            }
+            
+        }];
+    }];
+    [downloadTask resume];
     
 }
+
 -(IBAction)recordWord:(id)sender
 {
-    
+    // TODO 1.判断是否在录制中，如果在录制中，则停止并保存；否则开始录制
+    NSString* recordedFileName = [[WordModeController getRecordFilePath:[NSString stringWithFormat:@"%@_recording",word]]path];
+    AFSoundManager* sm = [AFSoundManager sharedManager];
+    if ([sm isRecording]) {
+        NSLog(@"stopAndSaveRecording: %@",recordedFileName);
+        [sm stopAndSaveRecording];
+        return;
+    }
+    [sm startRecordingAudioWithFilepath:recordedFileName shouldStopAtSecond:0];
+    NSLog(@"startRecordingAudioWithFileName: %@",recordedFileName);
 }
+
 -(IBAction)replayWord:(id)sender
 {
+    if(!word)
+    {
+        return;
+    }
     
+    NSString* recordedFileName = [[WordModeController getRecordFilePath:[NSString stringWithFormat:@"%@_recording",word]]path];
+    if (![[NSFileManager defaultManager]fileExistsAtPath:recordedFileName]) {
+        return;
+    }
+    AFSoundManager* sm = [AFSoundManager sharedManager];
+    [sm startPlayingLocalFileWithFilePath:recordedFileName andBlock:^(int percentage, CGFloat elapsedTime, CGFloat timeRemaining, NSError *error, BOOL finished) {
+        
+        if (!error) {
+        } else {
+            NSLog(@"There has been an error playing the remote file: %@", [error description]);
+        }
+        
+    }];
+    NSLog(@"replay: %@",recordedFileName);
 }
 @end

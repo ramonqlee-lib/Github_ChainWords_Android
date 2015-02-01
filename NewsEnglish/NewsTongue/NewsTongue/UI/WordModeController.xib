@@ -96,7 +96,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="speakOrigin:" destination="-1" eventType="touchUpInside" id="dhi-3b-gKO"/>
+                                <action selector="speakWord:" destination="-1" eventType="touchUpInside" id="xB6-uN-5aa"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYw-ee-bUA">
@@ -104,12 +104,12 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="61" id="ZJH-kv-gan"/>
                             </constraints>
-                            <state key="normal" title="play">
+                            <state key="normal" title="replay">
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="playback:" destination="-1" eventType="touchUpInside" id="x60-Sh-Iwx"/>
+                                <action selector="replayWord:" destination="-1" eventType="touchUpInside" id="JDn-fa-KMv"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ljx-41-Di9">
@@ -119,7 +119,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="recordOrigin:" destination="-1" eventType="touchUpInside" id="G9E-Dg-TWS"/>
+                                <action selector="recordWord:" destination="-1" eventType="touchUpInside" id="53a-Xa-vkE"/>
                             </connections>
                         </button>
                     </subviews>
@@ -212,21 +212,21 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rfl-aA-HIN" userLabel="bottom_part">
                     <rect key="frame" x="10" y="390" width="580" height="150"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EKV-ra-NGB">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EKV-ra-NGB">
                             <rect key="frame" x="17" y="0.0" width="61" height="36"/>
                             <state key="normal" title="speaker">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0E-x9-WRl">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0E-x9-WRl">
                             <rect key="frame" x="368" y="0.0" width="61" height="36"/>
                             <state key="normal" title="record">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1jy-J9-hUj">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1jy-J9-hUj">
                             <rect key="frame" x="442" y="0.0" width="61" height="36"/>
                             <state key="normal" title="play">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

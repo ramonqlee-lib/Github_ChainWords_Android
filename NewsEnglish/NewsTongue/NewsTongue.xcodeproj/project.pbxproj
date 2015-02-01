@@ -41,6 +41,13 @@
 		30C171CD1A7DA62C001CD87A /* SQLiteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C171CC1A7DA62C001CD87A /* SQLiteManager.m */; };
 		30C171CF1A7DB4DF001CD87A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C171CE1A7DB4DF001CD87A /* libsqlite3.dylib */; };
 		30C8B6871A7DB8AB009CB114 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C8B6861A7DB8AB009CB114 /* Base64.m */; };
+		30C8B68D1A7E2E75009CB114 /* AFAudioRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C8B68A1A7E2E75009CB114 /* AFAudioRouter.m */; };
+		30C8B68E1A7E2E75009CB114 /* AFSoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C8B68C1A7E2E75009CB114 /* AFSoundManager.m */; };
+		30C8B6901A7E2FA8009CB114 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C8B68F1A7E2FA8009CB114 /* AVFoundation.framework */; };
+		30C8B6921A7E2FAD009CB114 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C8B6911A7E2FAD009CB114 /* AudioToolbox.framework */; };
+		30C8B6941A7E2FB9009CB114 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C8B6931A7E2FB9009CB114 /* CoreGraphics.framework */; };
+		30C8B6961A7E2FBE009CB114 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C8B6951A7E2FBE009CB114 /* UIKit.framework */; };
+		30C8B6981A7E2FC5009CB114 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C8B6971A7E2FC5009CB114 /* Foundation.framework */; };
 		30EC871C1A7C474600BC7363 /* WordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EC871B1A7C474600BC7363 /* WordManager.m */; };
 /* End PBXBuildFile section */
 
@@ -120,6 +127,15 @@
 		30C171CE1A7DB4DF001CD87A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		30C8B6851A7DB8AB009CB114 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		30C8B6861A7DB8AB009CB114 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		30C8B6891A7E2E75009CB114 /* AFAudioRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAudioRouter.h; sourceTree = "<group>"; };
+		30C8B68A1A7E2E75009CB114 /* AFAudioRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAudioRouter.m; sourceTree = "<group>"; };
+		30C8B68B1A7E2E75009CB114 /* AFSoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSoundManager.h; sourceTree = "<group>"; };
+		30C8B68C1A7E2E75009CB114 /* AFSoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSoundManager.m; sourceTree = "<group>"; };
+		30C8B68F1A7E2FA8009CB114 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		30C8B6911A7E2FAD009CB114 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		30C8B6931A7E2FB9009CB114 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		30C8B6951A7E2FBE009CB114 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		30C8B6971A7E2FC5009CB114 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		30EC871A1A7C474600BC7363 /* WordManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordManager.h; sourceTree = "<group>"; };
 		30EC871B1A7C474600BC7363 /* WordManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,6 +145,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30C8B6981A7E2FC5009CB114 /* Foundation.framework in Frameworks */,
+				30C8B6961A7E2FBE009CB114 /* UIKit.framework in Frameworks */,
+				30C8B6941A7E2FB9009CB114 /* CoreGraphics.framework in Frameworks */,
+				30C8B6921A7E2FAD009CB114 /* AudioToolbox.framework in Frameworks */,
+				30C8B6901A7E2FA8009CB114 /* AVFoundation.framework in Frameworks */,
 				30C171CF1A7DB4DF001CD87A /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,7 +167,7 @@
 		3010AF091A71B27B009CDECF = {
 			isa = PBXGroup;
 			children = (
-				30C171CE1A7DB4DF001CD87A /* libsqlite3.dylib */,
+				30C8B6991A7E2FFB009CB114 /* Frameworks */,
 				3010AF141A71B27B009CDECF /* NewsTongue */,
 				3010AF2E1A71B27B009CDECF /* NewsTongueTests */,
 				3010AF131A71B27B009CDECF /* Products */,
@@ -268,6 +289,7 @@
 		30ADC9D91A770E5700339771 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				30C8B6881A7E2E75009CB114 /* AFSoundManager */,
 				30C8B6841A7DB8AB009CB114 /* Base64 */,
 				30C171CA1A7DA62C001CD87A /* SQLiteManager */,
 				303381921A7C79FF0074604E /* AFNetworking */,
@@ -317,6 +339,30 @@
 				30C8B6861A7DB8AB009CB114 /* Base64.m */,
 			);
 			path = Base64;
+			sourceTree = "<group>";
+		};
+		30C8B6881A7E2E75009CB114 /* AFSoundManager */ = {
+			isa = PBXGroup;
+			children = (
+				30C8B6891A7E2E75009CB114 /* AFAudioRouter.h */,
+				30C8B68A1A7E2E75009CB114 /* AFAudioRouter.m */,
+				30C8B68B1A7E2E75009CB114 /* AFSoundManager.h */,
+				30C8B68C1A7E2E75009CB114 /* AFSoundManager.m */,
+			);
+			path = AFSoundManager;
+			sourceTree = "<group>";
+		};
+		30C8B6991A7E2FFB009CB114 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				30C8B6971A7E2FC5009CB114 /* Foundation.framework */,
+				30C8B6951A7E2FBE009CB114 /* UIKit.framework */,
+				30C8B6931A7E2FB9009CB114 /* CoreGraphics.framework */,
+				30C8B6911A7E2FAD009CB114 /* AudioToolbox.framework */,
+				30C8B68F1A7E2FA8009CB114 /* AVFoundation.framework */,
+				30C171CE1A7DB4DF001CD87A /* libsqlite3.dylib */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		30C9AFAE1A7AEE25002DC1B0 /* Model */ = {
@@ -445,6 +491,7 @@
 				3010AF1B1A71B27B009CDECF /* AppDelegate.m in Sources */,
 				30C171CD1A7DA62C001CD87A /* SQLiteManager.m in Sources */,
 				303381C61A7C79FF0074604E /* UIImageView+AFNetworking.m in Sources */,
+				30C8B68E1A7E2E75009CB114 /* AFSoundManager.m in Sources */,
 				303381BB1A7C79FF0074604E /* AFHTTPSessionManager.m in Sources */,
 				303381C31A7C79FF0074604E /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				303381C21A7C79FF0074604E /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -455,6 +502,7 @@
 				3010AF181A71B27B009CDECF /* main.m in Sources */,
 				303381BF1A7C79FF0074604E /* AFURLRequestSerialization.m in Sources */,
 				303381BC1A7C79FF0074604E /* AFNetworkReachabilityManager.m in Sources */,
+				30C8B68D1A7E2E75009CB114 /* AFAudioRouter.m in Sources */,
 				303381C91A7C79FF0074604E /* UIWebView+AFNetworking.m in Sources */,
 				303381C01A7C79FF0074604E /* AFURLResponseSerialization.m in Sources */,
 				30EC871C1A7C474600BC7363 /* WordManager.m in Sources */,
