@@ -8,16 +8,24 @@
 
 #import "SentenceModeController.h"
 #import "WordModeController.h"
+#import "AFSoundManager.h"
+#import "NSString+HTML.h"
+#import "AFURLSessionManager.h"
+#import "SentenceManager.h"
 
 static const CGFloat kLineSpacing = 5.0f;// 行间距
 static const CGFloat kMinFontSize = 18.0f;// 字体缩放的最小值
 static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
-@interface SentenceModeController ()<UITextViewDelegate>
+@interface SentenceModeController ()<UITextViewDelegate,SentenceQueryResult>
 {
     UITextGranularity mGranuality;
     NSString* mBodyText;
     CGFloat fontSize;
+    NSString* sentence;
+    
+    NSString* fromLang;
+    NSString* toLang;
 }
 @end
 
@@ -26,7 +34,8 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    fromLang = @"en";
+    toLang = @"zh";
     
     if(nil != mBodyText && mBodyText.length > 0)
     {
@@ -81,6 +90,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 -(void)_handleTap:(UITapGestureRecognizer*)tap{
     // hide
     _fontChangeSlider.hidden = YES;
+    sentence = @"";
     
     if(tap.state == UIGestureRecognizerStateRecognized){
         
@@ -105,17 +115,26 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
         // change selected font
         font = [UIFont fontWithName:font.fontName size:font.pointSize*1.2];
         [_textView setFont:range value:font clearPrevious:NO];
+        sentence = [_textView.text substringWithRange:range];
         
-        [self updateTranslatedText:[_textView.text substringWithRange:range]];
+        [self updateTranslatedText:sentence];
     }
 }
 
 -(void)updateTranslatedText:(NSString*)originText
 {
-    _translatedTextView.text = originText;
-    // TODO 翻译文本
+    _translatedTextView.text = @"";
+    //  翻译
+    [[SentenceManager sharedInstance]query:[originText lowercaseString] from:fromLang to:toLang response:self];
+    
 }
+#pragma mark WordQueryResult protocol
 
+-(void)handleResponse:(NSDictionary*)result
+{
+    // TODO 待展示翻译结果
+//    _translatedTextView.text = ;
+}
 /*
  #pragma mark - Navigation
  
@@ -189,17 +208,94 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 -(IBAction)speakOrigin:(id)sender// 原句阅读
 {
-    // TODO 英文原句阅读：从服务器端拉取音频文件，阅读
-    // code4app：音频流在线播放（增加缓存支持）
+    [[AFSoundManager sharedManager]changeVolumeToValue:1.0];
+    [[AFSoundManager sharedManager]stop];
+    
+    NSString* fileName = [sentence md5];
+    // 文件存在了,直接播放
+    NSURL* audioFileUrl = [WordModeController getAudioFilePath:fileName];
+    
+    if ([[NSFileManager defaultManager]fileExistsAtPath:[audioFileUrl path]]) {
+        [[AFSoundManager sharedManager]startPlayingLocalFileWithFilePath:[audioFileUrl path] andBlock:^(int percentage, CGFloat elapsedTime, CGFloat timeRemaining, NSError *error, BOOL finished) {
+            
+            if (!error) {
+            } else {
+                
+                NSLog(@"There has been an error playing the remote file: %@", [error description]);
+            }
+            
+        }];
+        return;
+    }
+    
+    // 先下载音频文件，然后再播放
+    //start
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    // TODO 补充音频url
+    NSString* audioOnlineUrl = [NSString stringWithFormat:@"http://tts-api.com/tts.mp3?q=%@",[sentence stringByURLEncodingStringParameter]];
+    NSURL *URL = [NSURL URLWithString:audioOnlineUrl];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        return [WordModeController getAudioFilePath:fileName];
+    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        NSLog(@"File downloaded to: %@", filePath);
+        [[AFSoundManager sharedManager]startPlayingLocalFileWithFilePath:[filePath path] andBlock:^(int percentage, CGFloat elapsedTime, CGFloat timeRemaining, NSError *error, BOOL finished) {
+            
+            if (!error) {
+            } else {
+                
+                NSLog(@"There has been an error playing the remote file: %@", [error description]);
+            }
+            
+        }];
+    }];
+    [downloadTask resume];
+    
 }
 -(IBAction)recordOrigin:(id)sender// 原句跟读
 {
-    // TODO 录制音频，并进行缓存
+    // 1.判断是否在录制中，如果在录制中，则停止并保存；否则开始录制
+    // TODO 文件名待根据句子生成,比如md5值
+    NSString* fileName = [sentence md5];
     
+    NSString* recordedFileName = [[WordModeController getRecordFilePath:[NSString stringWithFormat:@"%@_recording",fileName]]path];
+    AFSoundManager* sm = [AFSoundManager sharedManager];
+    if ([sm isRecording]) {
+        NSLog(@"stopAndSaveRecording: %@",recordedFileName);
+        [sm stopAndSaveRecording];
+        return;
+    }
+    [sm startRecordingAudioWithFilepath:recordedFileName shouldStopAtSecond:0];
+    NSLog(@"startRecordingAudioWithFileName: %@",recordedFileName);
 }
 -(IBAction)playback:(id)sender// 跟读回放
 {
-    // TODO 播放录制的音频
+    if(!sentence)
+    {
+        return;
+    }
+    
+    // TODO 文件名待根据句子生成,比如md5值
+    NSString* fileName = [sentence md5];
+    
+    NSString* recordedFileName = [[WordModeController getRecordFilePath:[NSString stringWithFormat:@"%@_recording",fileName]]path];
+    if (![[NSFileManager defaultManager]fileExistsAtPath:recordedFileName]) {
+        return;
+    }
+    
+    AFSoundManager* sm = [AFSoundManager sharedManager];
+    [sm startPlayingLocalFileWithFilePath:recordedFileName andBlock:^(int percentage, CGFloat elapsedTime, CGFloat timeRemaining, NSError *error, BOOL finished) {
+        
+        if (!error) {
+        } else {
+            NSLog(@"There has been an error playing the remote file: %@", [error description]);
+        }
+        
+    }];
+    NSLog(@"replay: %@",recordedFileName);
 }
 
 

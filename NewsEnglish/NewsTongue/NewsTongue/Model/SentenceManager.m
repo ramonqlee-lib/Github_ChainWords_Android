@@ -1,23 +1,23 @@
 //
-//  WordManager.m
+//  SentenceManager.m
 //  NewsTongue
 //
-//  Created by ramonqlee on 1/31/15.
+//  Created by ramonqlee on 2/2/15.
 //  Copyright (c) 2015 iDreems. All rights reserved.
 //
 
-#import "WordManager.h"
+#import "SentenceManager.h"
 #import "AFNetworking.h"
 #import "SQLiteManager.h"
 #import "Base64.h"
 
 /**
- 词典api
+ 翻译api
  --------------------------------
  
  调用方式：
  
- http://checknewversion.duapp.com/queryword.php?from=xx&to=xx&w=xx
+ http://checknewversion.duapp.com/trans.php?from=xx&to=xx&w=xx
  参数：
  w: 待查单词
  from: 当前单词语言
@@ -27,7 +27,7 @@
  
  返回结果:
  --------------------------------
-
+ 
  {
  "@attributes": {
  "num": "219",
@@ -83,22 +83,22 @@
  */
 
 
-static NSString* SENTENCES_DB_NAME = @"wordrepo.sqlite";
-const static NSString* SENTENCES_TABLE_NAME = @"wordTable";
-const static NSString* SENTENCE_MD5_KEY = @"word";
+static NSString* SENTENCES_DB_NAME = @"sentenceRepo.sqlite";
+const static NSString* SENTENCES_TABLE_NAME = @"sentenceTable";
+const static NSString* SENTENCE_MD5_KEY = @"md5";
 const static NSString* FROM_LANG_KEY = @"fromLang";
 const static NSString* TO_LANG_KEY = @"toLang";
 static NSString* DATA_KEY = @"data";
 
-static WordManager* sWordManager;
+static SentenceManager* sSentenceManager;
 
-@interface WordManager()
+@interface SentenceManager()
 {
-    id<WordQueryResult> wordQueryCallback;
+    id<SentenceQueryResult> sentenceQueryCallback;
 }
 @end
 
-@implementation WordManager
+@implementation SentenceManager
 
 +(id)sharedInstance
 {
@@ -106,35 +106,35 @@ static WordManager* sWordManager;
     {
         return sSentenceManager;
     }
-    sSentenceManager = [[WordManager alloc]init];
+    sSentenceManager = [[SentenceManager alloc]init];
     return sSentenceManager;
 }
 
--(BOOL)query:(NSString*)word from:(NSString*)fromLang to:(NSString*)toLang response:(id<WordQueryResult>)callback
+-(BOOL)query:(NSString*)sent from:(NSString*)fromLang to:(NSString*)toLang response:(id<SentenceQueryResult>)callback
 {
     // querying,just return
-    if (nil != wordQueryCallback) {
+    if (nil != sentenceQueryCallback) {
         return NO;
     }
     
-    wordQueryCallback = callback;
+    sentenceQueryCallback = callback;
     //  翻译单词
     // 1. 首先尝试从本地DB缓存中提取
     // 2. 然后尝试从网络获取
     //http://dict-co.iciba.com/api/dictionary.php?key=FF0C453A324EC924681AF23BCAF64521&type=json&w=help
     // 2.1 缓存到本地文件DB
-    NSDictionary* queriedResult = [self getFromLocal:word from:fromLang to:toLang];
-
-    if (nil != queriedResult && nil != wordQueryCallback) {
-        [wordQueryCallback handleResponse:queriedResult];
-        wordQueryCallback = nil;
-        NSLog(@"find cached word: %@",word);
+    NSDictionary* queriedResult = [self getFromLocal:sent from:fromLang to:toLang];
+    
+    if (nil != queriedResult && nil != sentenceQueryCallback) {
+        [sentenceQueryCallback handleResponse:queriedResult];
+        sentenceQueryCallback = nil;
+        NSLog(@"find cached word: %@",sent);
         return YES;
     }
-
+    
     // 转移到服务器端，封装一个自己的词典api
     // 输入参数见如下，输出为一段文本即可
-    NSString *string = [NSString stringWithFormat:@"http://checknewversion.duapp.com/queryword.php?from=%@&to=%@&w=%@", fromLang,toLang,word];
+    NSString *string = [NSString stringWithFormat:@"http://checknewversion.duapp.com/trans.php?from=%@&to=%@&q=%@", fromLang,toLang,sent];
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
@@ -145,17 +145,17 @@ static WordManager* sWordManager;
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSDictionary* dict = (NSDictionary *)responseObject;
-//        NSLog(@"%@",dict);
+        //        NSLog(@"%@",dict);
         // 保存到本地
-        [self setAsLocal:word result:dict from:fromLang to:toLang];
+        [self setAsLocal:sent result:dict from:fromLang to:toLang];
         
-        if (nil != wordQueryCallback) {
+        if (nil != sentenceQueryCallback) {
             // 在主线程中更新
-            [wordQueryCallback handleResponse:dict];
-            wordQueryCallback = nil;
+            [sentenceQueryCallback handleResponse:dict];
+            sentenceQueryCallback = nil;
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        wordQueryCallback = nil;
+        sentenceQueryCallback = nil;
         // 4
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Word"
                                                             message:[error localizedDescription]
@@ -171,119 +171,6 @@ static WordManager* sWordManager;
     return YES;
 }
 
-#pragma mark utils methods
-
-+(NSString*)getReadableMeaning:(NSDictionary*)value// 获取单词的意义
-{
-    if (!value) {
-        return @"";
-    }
-    
-    id pos = [value valueForKey:@"pos"];
-    id acceptation = [value valueForKey:@"acceptation"];
-    // 组合下吧
-    if ([pos isKindOfClass:[NSString class]] && [acceptation isKindOfClass:[NSString class]]) {
-        return [NSString stringWithFormat:@"%@ %@",pos,acceptation];
-    }
-    
-    NSMutableString* ret = [[NSMutableString alloc]initWithCapacity:256];
-    if ([pos isKindOfClass:[NSArray class]] && [acceptation isKindOfClass:[NSArray class]])
-    {
-        NSArray* posArr = (NSArray*)pos;
-        NSArray* acceptationArr = (NSArray*)acceptation;
-        if (posArr.count != acceptationArr.count)
-        {
-            // 仅仅提取意义吧
-            for (NSString* item in acceptationArr) {
-                [ret appendString:item];
-                //no return,add one
-                if ([item hasSuffix:@"\n"]) {
-                    continue;
-                }
-                [ret appendString:@"\n"];
-            }
-        }
-        else
-        {
-            // 将pos和acceptation组合下
-            for (NSInteger i = 0; i < posArr.count; ++i) {
-                NSString* posItem = [posArr objectAtIndex:i];
-                NSString* acceptationItem = [acceptation objectAtIndex:i];
-                
-                [ret appendString:[NSString stringWithFormat:@"%@ %@",posItem,acceptationItem]];
-                //no return,add one
-                if ([acceptationItem hasSuffix:@"\n"]) {
-                    continue;
-                }
-                [ret appendString:@"\n"];
-            }
-        }
-    }
-    
-    return ret;
-}
-
-+(NSArray*)getProns:(NSDictionary*)value// 获取读音url
-{
-    if (!value) {
-        return nil;
-    }
-    
-    id prons = [value valueForKey:@"pron"];
-    
-    if ([prons isKindOfClass:[NSString class]])
-    {
-        return [NSArray arrayWithObject:prons];
-    }
-    
-    if ([prons isKindOfClass:[NSArray class]])
-    {
-        return (NSArray*)prons;
-    }
-    
-    return nil;
-}
-
-+(NSArray*)getExamples:(NSDictionary*)value// 获取使用举例
-{
-    if (!value) {
-        return nil;
-    }
-    
-    id sents = [value valueForKey:@"sent"];
-    
-    if ([sents isKindOfClass:[NSDictionary class]])
-    {
-        NSDictionary* item = (NSDictionary*)sents;
-        NSString* org = [item objectForKey:@"orig"];
-        NSString* trans = [item objectForKey:@"trans"];
-        NSMutableString* compound = [[NSMutableString alloc]initWithString:org];
-        if (![org hasSuffix:@"\n"]) {
-            [compound appendString:@"\n"];
-        }
-        [compound appendString:trans];
-        return [NSArray arrayWithObject:compound];
-    }
-    
-    if ([sents isKindOfClass:[NSArray class]])
-    {
-        NSMutableArray* r = [[NSMutableArray alloc]init];
-        NSArray* arr = (NSArray*)sents;
-        for (NSDictionary* item in arr) {
-            NSString* org = [item objectForKey:@"orig"];
-            NSString* trans = [item objectForKey:@"trans"];
-            NSMutableString* compound = [[NSMutableString alloc]initWithString:org];
-            if (![org hasSuffix:@"\n"]) {
-                [compound appendString:@"\n"];
-            }
-            [compound appendString:trans];
-            
-            [r addObject:compound];
-        }
-        return r;
-    }
-    return nil;
-}
 
 #pragma mark 本地缓存接口
 
@@ -303,7 +190,7 @@ static WordManager* sWordManager;
     NSString* obj = [[items objectAtIndex:0]valueForKey:DATA_KEY];
     // TODO string to json
     obj = [obj base64DecodedString];
-    return [WordManager jsonWithData:obj];
+    return [SentenceManager jsonWithData:obj];
 }
 
 
@@ -311,15 +198,15 @@ static WordManager* sWordManager;
 -(void)setAsLocal:(NSString*)word result:(NSDictionary*)dict from:(NSString*)fromLang to:(NSString*)toLang
 {
     // 首先做base64处理
-    [WordManager makeSureDBExist];
-    [WordManager removeWord:word];
+    [SentenceManager makeSureDBExist];
+    [SentenceManager removeRecord:word];
     SQLiteManager* dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:SENTENCES_DB_NAME];
     
     // TODO json to string
-    NSData* data = [WordManager toJSONData:dict];
+    NSData* data = [SentenceManager toJSONData:dict];
     NSString* json = [[NSString alloc] initWithData:data  encoding:NSUTF8StringEncoding];
     json = [json base64EncodedString];
-//    NSLog(@"toJson :%d",json.length);
+    //    NSLog(@"toJson :%d",json.length);
     NSString *sql = [NSString stringWithFormat:
                      @"INSERT INTO '%@' ('%@', '%@', '%@', '%@') VALUES ('%@', '%@', '%@', '%@')",
                      SENTENCES_TABLE_NAME, SENTENCE_MD5_KEY, FROM_LANG_KEY, TO_LANG_KEY,DATA_KEY,word,fromLang,toLang,json];
@@ -327,10 +214,10 @@ static WordManager* sWordManager;
     
     NSLog(@"save as local for %@ and error:%@",word,error);
 }
-+(void)removeWord:(NSString*)word
++(void)removeRecord:(NSString*)key
 {
     SQLiteManager* dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:SENTENCES_DB_NAME];
-    NSString *sql = [NSString stringWithFormat:@"delete from %@ where %@ = '%@'",SENTENCES_TABLE_NAME,SENTENCE_MD5_KEY,word];
+    NSString *sql = [NSString stringWithFormat:@"delete from %@ where %@ = '%@'",SENTENCES_TABLE_NAME,SENTENCE_MD5_KEY,key];
     [dbManager doQuery:sql];
 }
 
@@ -379,5 +266,4 @@ static WordManager* sWordManager;
     }
     return responseObject;
 }
-
 @end

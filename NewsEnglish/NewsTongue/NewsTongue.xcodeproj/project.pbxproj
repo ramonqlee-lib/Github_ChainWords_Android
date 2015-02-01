@@ -31,6 +31,10 @@
 		303381C71A7C79FF0074604E /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 303381B41A7C79FF0074604E /* UIProgressView+AFNetworking.m */; };
 		303381C81A7C79FF0074604E /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 303381B61A7C79FF0074604E /* UIRefreshControl+AFNetworking.m */; };
 		303381C91A7C79FF0074604E /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 303381B81A7C79FF0074604E /* UIWebView+AFNetworking.m */; };
+		3068FD731A7EDED800E257A9 /* readme.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3068FD721A7EDED800E257A9 /* readme.rtf */; };
+		3068FD791A7EE24100E257A9 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 3068FD761A7EE24100E257A9 /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3068FD7A1A7EE24100E257A9 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 3068FD781A7EE24100E257A9 /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3068FD7D1A7EEAA400E257A9 /* SentenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3068FD7C1A7EEAA400E257A9 /* SentenceManager.m */; };
 		30ADC9DD1A770E5700339771 /* UITextView+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 30ADC9DC1A770E5700339771 /* UITextView+Extras.m */; };
 		30B64C4D1A784F3C001467A6 /* ReadModeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B64C451A784F3C001467A6 /* ReadModeController.m */; };
 		30B64C4E1A784F3C001467A6 /* ReadModeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30B64C461A784F3C001467A6 /* ReadModeController.xib */; };
@@ -111,6 +115,13 @@
 		303381B61A7C79FF0074604E /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		303381B71A7C79FF0074604E /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		303381B81A7C79FF0074604E /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		3068FD721A7EDED800E257A9 /* readme.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = readme.rtf; sourceTree = "<group>"; };
+		3068FD751A7EE24100E257A9 /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		3068FD761A7EE24100E257A9 /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
+		3068FD771A7EE24100E257A9 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
+		3068FD781A7EE24100E257A9 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
+		3068FD7B1A7EEAA400E257A9 /* SentenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SentenceManager.h; sourceTree = "<group>"; };
+		3068FD7C1A7EEAA400E257A9 /* SentenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SentenceManager.m; sourceTree = "<group>"; };
 		30ADC9DB1A770E5700339771 /* UITextView+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Extras.h"; sourceTree = "<group>"; };
 		30ADC9DC1A770E5700339771 /* UITextView+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Extras.m"; sourceTree = "<group>"; };
 		30B64C441A784F3C001467A6 /* ReadModeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadModeController.h; sourceTree = "<group>"; };
@@ -206,6 +217,7 @@
 			children = (
 				3010AF161A71B27B009CDECF /* Info.plist */,
 				3010AF171A71B27B009CDECF /* main.m */,
+				3068FD721A7EDED800E257A9 /* readme.rtf */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -286,9 +298,21 @@
 			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
+		3068FD741A7EE24100E257A9 /* NSString-HTML */ = {
+			isa = PBXGroup;
+			children = (
+				3068FD751A7EE24100E257A9 /* GTMNSString+HTML.h */,
+				3068FD761A7EE24100E257A9 /* GTMNSString+HTML.m */,
+				3068FD771A7EE24100E257A9 /* NSString+HTML.h */,
+				3068FD781A7EE24100E257A9 /* NSString+HTML.m */,
+			);
+			path = "NSString-HTML";
+			sourceTree = "<group>";
+		};
 		30ADC9D91A770E5700339771 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				3068FD741A7EE24100E257A9 /* NSString-HTML */,
 				30C8B6881A7E2E75009CB114 /* AFSoundManager */,
 				30C8B6841A7DB8AB009CB114 /* Base64 */,
 				30C171CA1A7DA62C001CD87A /* SQLiteManager */,
@@ -370,6 +394,8 @@
 			children = (
 				30EC871A1A7C474600BC7363 /* WordManager.h */,
 				30EC871B1A7C474600BC7363 /* WordManager.m */,
+				3068FD7B1A7EEAA400E257A9 /* SentenceManager.h */,
+				3068FD7C1A7EEAA400E257A9 /* SentenceManager.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -458,6 +484,7 @@
 				30B64C4E1A784F3C001467A6 /* ReadModeController.xib in Resources */,
 				3010AF211A71B27B009CDECF /* Main.storyboard in Resources */,
 				3010AF261A71B27B009CDECF /* LaunchScreen.xib in Resources */,
+				3068FD731A7EDED800E257A9 /* readme.rtf in Resources */,
 				30B64C521A784F3C001467A6 /* WordModeController.xib in Resources */,
 				3010AF231A71B27B009CDECF /* Images.xcassets in Resources */,
 			);
@@ -488,12 +515,14 @@
 				303381C41A7C79FF0074604E /* UIAlertView+AFNetworking.m in Sources */,
 				303381BA1A7C79FF0074604E /* AFHTTPRequestOperationManager.m in Sources */,
 				3010AF1E1A71B27B009CDECF /* ViewController.m in Sources */,
+				3068FD7A1A7EE24100E257A9 /* NSString+HTML.m in Sources */,
 				3010AF1B1A71B27B009CDECF /* AppDelegate.m in Sources */,
 				30C171CD1A7DA62C001CD87A /* SQLiteManager.m in Sources */,
 				303381C61A7C79FF0074604E /* UIImageView+AFNetworking.m in Sources */,
 				30C8B68E1A7E2E75009CB114 /* AFSoundManager.m in Sources */,
 				303381BB1A7C79FF0074604E /* AFHTTPSessionManager.m in Sources */,
 				303381C31A7C79FF0074604E /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				3068FD791A7EE24100E257A9 /* GTMNSString+HTML.m in Sources */,
 				303381C21A7C79FF0074604E /* AFNetworkActivityIndicatorManager.m in Sources */,
 				30ADC9DD1A770E5700339771 /* UITextView+Extras.m in Sources */,
 				30B64C4F1A784F3C001467A6 /* SentenceModeController.m in Sources */,
@@ -503,6 +532,7 @@
 				303381BF1A7C79FF0074604E /* AFURLRequestSerialization.m in Sources */,
 				303381BC1A7C79FF0074604E /* AFNetworkReachabilityManager.m in Sources */,
 				30C8B68D1A7E2E75009CB114 /* AFAudioRouter.m in Sources */,
+				3068FD7D1A7EEAA400E257A9 /* SentenceManager.m in Sources */,
 				303381C91A7C79FF0074604E /* UIWebView+AFNetworking.m in Sources */,
 				303381C01A7C79FF0074604E /* AFURLResponseSerialization.m in Sources */,
 				30EC871C1A7C474600BC7363 /* WordManager.m in Sources */,

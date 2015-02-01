@@ -28,4 +28,8 @@
 @property(nonatomic,readwrite,assign)IBOutlet UISlider* slider;
 @property(nonatomic,readwrite,assign)IBOutlet UIView* fontChangeSlider;
 @property(nonatomic,readwrite,assign)IBOutlet UITextView* translatedTextView;
+
+
++(NSURL*)getRecordFilePath:(NSString*)fileName;
++(NSURL*)getAudioFilePath:(NSString*)fileName;
 @end
