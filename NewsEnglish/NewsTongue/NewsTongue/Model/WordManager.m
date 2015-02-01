@@ -246,6 +246,42 @@ static WordManager* sWordManager;
 
 +(NSArray*)getExamples:(NSDictionary*)value// 获取使用举例
 {
+    if (!value) {
+        return nil;
+    }
+    
+    id sents = [value valueForKey:@"sent"];
+    
+    if ([sents isKindOfClass:[NSDictionary class]])
+    {
+        NSDictionary* item = (NSDictionary*)sents;
+        NSString* org = [item objectForKey:@"orig"];
+        NSString* trans = [item objectForKey:@"trans"];
+        NSMutableString* compound = [[NSMutableString alloc]initWithString:org];
+        if (![org hasSuffix:@"\n"]) {
+            [compound appendString:@"\n"];
+        }
+        [compound appendString:trans];
+        return [NSArray arrayWithObject:compound];
+    }
+    
+    if ([sents isKindOfClass:[NSArray class]])
+    {
+        NSMutableArray* r = [[NSMutableArray alloc]init];
+        NSArray* arr = (NSArray*)sents;
+        for (NSDictionary* item in arr) {
+            NSString* org = [item objectForKey:@"orig"];
+            NSString* trans = [item objectForKey:@"trans"];
+            NSMutableString* compound = [[NSMutableString alloc]initWithString:org];
+            if (![org hasSuffix:@"\n"]) {
+                [compound appendString:@"\n"];
+            }
+            [compound appendString:trans];
+            
+            [r addObject:compound];
+        }
+        return r;
+    }
     return nil;
 }
 

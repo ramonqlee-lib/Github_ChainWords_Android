@@ -23,7 +23,9 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     NSString* word;
     NSString* fromLang;
     NSString* toLang;
-    NSArray* prons;// 单词发音
+    NSDictionary* wordDict;
+    
+    BOOL shortMeaning;
 }
 @end
 
@@ -34,6 +36,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     // Do any additional setup after loading the view from its nib.
     fromLang = @"en";
     toLang = @"zh";
+    shortMeaning = NO;
     
     if(nil != mBodyText && mBodyText.length > 0)
     {
@@ -90,6 +93,8 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     // hide
     _fontChangeSlider.hidden = YES;
     word = @"";
+    wordDict = nil;
+    
     if(tap.state == UIGestureRecognizerStateRecognized){
         
         CGPoint tappedPoint = [tap locationInView:_textView];
@@ -129,11 +134,12 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 -(void)handleResponse:(NSDictionary*)result
 {
+    wordDict = result;
     // 单词意义
-    _translatedTextView.text = [WordManager getReadableMeaning:result];
+    _translatedTextView.text = [WordManager getReadableMeaning:wordDict];
     
     // 读音
-    prons = [WordManager getProns:result];
+//    prons = [WordManager getProns:wordDict];
     
     // 使用举例
     //    [WordManager getExamples:result];
@@ -189,9 +195,12 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 -(IBAction)speakWord:(id)sender
 {
+    NSArray* prons = [WordManager getProns:wordDict];
     if (!prons || !prons.count) {
         return;
     }
+    
+    [[AFSoundManager sharedManager]changeVolumeToValue:1.0];
     
     // 文件存在了,直接播放
     NSURL* audioFileUrl = [WordModeController getAudioFilePath:word];
@@ -259,6 +268,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     if (![[NSFileManager defaultManager]fileExistsAtPath:recordedFileName]) {
         return;
     }
+    
     AFSoundManager* sm = [AFSoundManager sharedManager];
     [sm startPlayingLocalFileWithFilePath:recordedFileName andBlock:^(int percentage, CGFloat elapsedTime, CGFloat timeRemaining, NSError *error, BOOL finished) {
         
@@ -269,5 +279,30 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
         
     }];
     NSLog(@"replay: %@",recordedFileName);
+}
+#pragma mark bottom part
+
+-(IBAction)extendWordDetail:(id)sender
+{
+    NSMutableString* detail = [[NSMutableString alloc]init];
+    [detail appendString:[WordManager getReadableMeaning:wordDict]];
+    [detail appendString:@"\n"];
+    if (shortMeaning) {
+        shortMeaning = !shortMeaning;
+        _translatedTextView.text = detail;
+        return;
+    }
+    
+    shortMeaning = !shortMeaning;
+    NSArray* examples = [WordManager getExamples:wordDict];
+    for (NSString* item in examples) {
+        [detail appendString:item];
+        if ([item hasSuffix:@"\n"]) {
+            continue;
+        }
+        [detail appendString:@"\n"];
+    }
+    
+    _translatedTextView.text = detail;
 }
 @end
