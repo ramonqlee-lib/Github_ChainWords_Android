@@ -31,7 +31,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="return2ParentAction:" destination="-1" eventType="touchUpInside" id="Qnc-1j-k2T"/>
+                                <action selector="return2ParentAction:" destination="-1" eventType="touchUpInside" id="ObO-9z-BbW"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0On-bG-H6K" userLabel="字体大小">
@@ -51,7 +51,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="switch2WordMode:" destination="-1" eventType="touchUpInside" id="2Dk-qO-ufM"/>
+                                <action selector="return2ParentAction:" destination="-1" eventType="touchUpInside" id="2NS-GF-6cW"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEF-6q-ztw" userLabel="目标语言">

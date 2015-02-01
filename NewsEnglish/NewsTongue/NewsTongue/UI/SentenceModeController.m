@@ -186,6 +186,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     [controller setText:_textView.text];
     [self presentViewController:controller animated:NO completion:nil];
 }
+
 -(IBAction)speakOrigin:(id)sender// 原句阅读
 {
     // TODO 英文原句阅读：从服务器端拉取音频文件，阅读
