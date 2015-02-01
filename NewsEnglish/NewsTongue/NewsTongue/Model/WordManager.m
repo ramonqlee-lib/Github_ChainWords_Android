@@ -8,6 +8,9 @@
 
 #import "WordManager.h"
 #import "AFNetworking.h"
+#import "SQLiteManager.h"
+#import "Base64.h"
+
 /**
  词典api
  --------------------------------
@@ -80,6 +83,13 @@
  */
 
 
+static NSString* WORDS_DB_NAME = @"wordrepo.sqlite";
+const static NSString* WORDS_TABLE_NAME = @"wordTable";
+const static NSString* WORD_KEY = @"word";
+const static NSString* FROM_LANG_KEY = @"fromLang";
+const static NSString* TO_LANG_KEY = @"toLang";
+static NSString* DATA_KEY = @"data";
+
 static WordManager* sWordManager;
 
 @interface WordManager()
@@ -118,9 +128,11 @@ static WordManager* sWordManager;
     if (nil != queriedResult && nil != wordQueryCallback) {
         [wordQueryCallback handleResponse:queriedResult];
         wordQueryCallback = nil;
+        NSLog(@"find cached word: %@",word);
+        return YES;
     }
 
-    // TODO 转移到服务器端，封装一个自己的词典api
+    // 转移到服务器端，封装一个自己的词典api
     // 输入参数见如下，输出为一段文本即可
     NSString *string = [NSString stringWithFormat:@"http://checknewversion.duapp.com/queryword.php?from=%@&to=%@&w=%@", fromLang,toLang,word];
     NSURL *url = [NSURL URLWithString:string];
@@ -133,7 +145,7 @@ static WordManager* sWordManager;
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSDictionary* dict = (NSDictionary *)responseObject;
-        NSLog(@"%@",dict);
+//        NSLog(@"%@",dict);
         // 保存到本地
         [self setAsLocal:word result:dict from:fromLang to:toLang];
         
@@ -239,17 +251,97 @@ static WordManager* sWordManager;
 
 #pragma mark 本地缓存接口
 
-// TODO 返回本地缓存的数据
+//  返回本地缓存的数据
 -(NSDictionary*)getFromLocal:(NSString*)word from:(NSString*)fromLang to:(NSString*)toLang
 {
     // 获取，并作base64解码
-    return nil;
+    SQLiteManager* dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:WORDS_DB_NAME];
+    NSString* query = [NSString stringWithFormat:@"SELECT * FROM %@ where %@ = '%@' AND %@ = '%@' AND %@ = '%@'",WORDS_TABLE_NAME,WORD_KEY,word,FROM_LANG_KEY,fromLang,TO_LANG_KEY,toLang];
+    
+    NSLog(@"query:%@",query);
+    
+    NSArray* items =  [dbManager getRowsForQuery:query];
+    if (nil == items || 0 == items.count) {
+        return nil;
+    }
+    NSString* obj = [[items objectAtIndex:0]valueForKey:DATA_KEY];
+    // TODO string to json
+    obj = [obj base64DecodedString];
+    return [WordManager jsonWithData:obj];
 }
 
-// TODO 保存到本地
+
+//  保存到本地
 -(void)setAsLocal:(NSString*)word result:(NSDictionary*)dict from:(NSString*)fromLang to:(NSString*)toLang
 {
     // 首先做base64处理
+    [WordManager makeSureDBExist];
+    [WordManager removeWord:word];
+    SQLiteManager* dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:WORDS_DB_NAME];
+    
+    // TODO json to string
+    NSData* data = [WordManager toJSONData:dict];
+    NSString* json = [[NSString alloc] initWithData:data  encoding:NSUTF8StringEncoding];
+    json = [json base64EncodedString];
+//    NSLog(@"toJson :%d",json.length);
+    NSString *sql = [NSString stringWithFormat:
+                     @"INSERT INTO '%@' ('%@', '%@', '%@', '%@') VALUES ('%@', '%@', '%@', '%@')",
+                     WORDS_TABLE_NAME, WORD_KEY, FROM_LANG_KEY, TO_LANG_KEY,DATA_KEY,word,fromLang,toLang,json];
+    NSError * error = [dbManager doQuery:sql];
+    
+    NSLog(@"save as local for %@ and error:%@",word,error);
+}
++(void)removeWord:(NSString*)word
+{
+    SQLiteManager* dbManager = [[SQLiteManager alloc] initWithDatabaseNamed:WORDS_DB_NAME];
+    NSString *sql = [NSString stringWithFormat:@"delete from %@ where %@ = '%@'",WORDS_TABLE_NAME,WORD_KEY,word];
+    [dbManager doQuery:sql];
+}
+
+// db utils
++(void)makeSureDBExist
+{
+    SQLiteManager* dbManager = [[SQLiteManager alloc]initWithDatabaseNamed:WORDS_DB_NAME];
+    if (![dbManager openDatabase]) {
+        //create table
+        
+        NSString *sqlCreateTable = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT)",WORDS_TABLE_NAME, WORD_KEY,FROM_LANG_KEY, TO_LANG_KEY,DATA_KEY];
+        [dbManager doQuery:sqlCreateTable];
+        
+        [dbManager closeDatabase];
+    }
+}
+
+#pragma mark json utils
+// 将字典或者数组转化为JSON串
++ (NSData *)toJSONData:(id)theData{
+    
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:theData
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&error];
+    
+    if ([jsonData length] > 0 && error == nil){
+        return jsonData;
+    }else{
+        return nil;
+    }
+}
+
++(NSDictionary*)jsonWithData:(NSString*)data
+{
+    NSDictionary* responseObject = nil;
+    if (data && ![data isEqualToString:@" "]) {
+        // Workaround for a bug in NSJSONSerialization when Unicode character escape codes are used instead of the actual character
+        // See http://stackoverflow.com/a/12843465/157142
+        
+        if (data) {
+            if ([data length] > 0) {
+                responseObject = [NSJSONSerialization JSONObjectWithData:[data dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:nil];
+            }
+        }
+    }
+    return responseObject;
 }
 
 @end
