@@ -102,12 +102,12 @@ static WordManager* sWordManager;
 
 +(id)sharedInstance
 {
-    if(nil != sSentenceManager)
+    if(nil != sWordManager)
     {
-        return sSentenceManager;
+        return sWordManager;
     }
-    sSentenceManager = [[WordManager alloc]init];
-    return sSentenceManager;
+    sWordManager = [[WordManager alloc]init];
+    return sWordManager;
 }
 
 -(BOOL)query:(NSString*)word from:(NSString*)fromLang to:(NSString*)toLang response:(id<WordQueryResult>)callback

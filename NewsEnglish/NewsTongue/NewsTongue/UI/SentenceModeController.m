@@ -132,8 +132,8 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 -(void)handleResponse:(NSDictionary*)result
 {
-    // TODO 待展示翻译结果
-//    _translatedTextView.text = ;
+    //  待展示翻译结果
+    _translatedTextView.text = [SentenceManager getTranslate:result];
 }
 /*
  #pragma mark - Navigation

@@ -20,4 +20,5 @@
 
 -(BOOL)query:(NSString*)sent from:(NSString*)fromLang to:(NSString*)toLang response:(id<SentenceQueryResult>)result;
 
++(NSString*)getTranslate:(NSDictionary*)val;
 @end
