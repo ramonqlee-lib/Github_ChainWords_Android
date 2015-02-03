@@ -12,12 +12,15 @@
 #import "NSString+HTML.h"
 #import "AFURLSessionManager.h"
 #import "SentenceManager.h"
+#import "AFHTTPRequestOperationManager.h"
+
+#define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)//用来获取手机的系统，判断系统是多少
 
 static const CGFloat kLineSpacing = 5.0f;// 行间距
 static const CGFloat kMinFontSize = 18.0f;// 字体缩放的最小值
 static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
-@interface SentenceModeController ()<UITextViewDelegate,SentenceQueryResult>
+@interface SentenceModeController ()<UITextViewDelegate,SentenceQueryResult,UIAlertViewDelegate>
 {
     UITextGranularity mGranuality;
     NSString* mBodyText;
@@ -26,6 +29,8 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     
     NSString* fromLang;
     NSString* toLang;
+    
+    UITextView *textViewInAlertView;
 }
 @end
 
@@ -175,12 +180,30 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 -(IBAction)startTranslation:(id)sender
 {
-    // TODO 翻译的textview背景变为白色
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+                                                        message:sentence
+                                                       delegate:self
+                                              cancelButtonTitle:@"关闭"
+                                              otherButtonTitles:@"提交建议", nil];
+    textViewInAlertView = [UITextView new];
+    textViewInAlertView.text = _translatedTextView.text;
+    if (SYSTEM_VERSION_LESS_THAN(@"7.0"))//For Backward compatibility
+    {
+        [alertView addSubview: textViewInAlertView];
+    }
+    else
+    {
+        [alertView setValue:textViewInAlertView forKey:@"accessoryView"];
+    }
+    [textViewInAlertView becomeFirstResponder];
+    [alertView show];
+    
+    // 翻译的textview背景变为白色
     // 显示 提供建议和关闭按钮
-    _translatedTextView.backgroundColor = [UIColor whiteColor];
-    _translatedTextView.editable = YES;
-    _submitButton.hidden = NO;
-    _closeButton.hidden = NO;
+//    _translatedTextView.backgroundColor = [UIColor whiteColor];
+//    _translatedTextView.editable = YES;
+//    _submitButton.hidden = NO;
+//    _closeButton.hidden = NO;
 }
 
 -(IBAction)finishTranslation:(id)sender
@@ -196,6 +219,17 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 -(IBAction)submitTranslate:(id)sender
 {
     // TODO 将矫正后的翻译文本，提交到服务器端
+    NSString* text = _translatedTextView.text;
+
+    NSString *idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    //post数据
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *parameters = @{@"src": sentence,@"trans": text,@"uid":[NSString stringWithFormat:@"%@_%@",idfv,[sentence md5]]};
+    [manager POST:@"http://checknewversion.duapp.com/uploadTrans.php" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
 }
 
 -(IBAction)switch2WordMode:(id)sender
@@ -298,6 +332,30 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     NSLog(@"replay: %@",recordedFileName);
 }
 
+#pragma mark UIAlertViewDelegate
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        NSString* text = textViewInAlertView.text;
+        NSString *idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        //post数据
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSDictionary *parameters = @{@"src": sentence,@"trans": text,@"uid":[NSString stringWithFormat:@"%@_%@",idfv,[sentence md5]]};
+        [manager POST:@"http://checknewversion.duapp.com/uploadTrans.php" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"JSON: %@", responseObject);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
+
+    }
+}
+#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
+#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+- (void)willPresentAlertView:(UIAlertView *)alertView {
+    NSLog(@"width:%f",SCREEN_WIDTH);
+    alertView.frame = CGRectMake( 0, 190, SCREEN_WIDTH, 100 );
+}
 
 @end
