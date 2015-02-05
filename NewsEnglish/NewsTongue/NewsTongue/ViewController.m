@@ -11,6 +11,10 @@
 #import "WordModeController.h"
 #import "SentenceModeController.h"
 
+#import "AFNetworking.h"
+#import "Base64.h"
+#import "NSString+HTML.h"
+
 @interface ViewController ()
 
 @end
@@ -36,10 +40,64 @@
     
     [controller setTapGranality:UITextGranularityWord];
 #endif
-    ReadModeController* controller = [[ReadModeController alloc]init];
-    [controller setTapGranality:UITextGranularityParagraph];
-    [controller setText:@"Swift is a new programming language for iOS and OS X app development. Nonetheless, many parts of Swift will be familiar from your experience of developing in C and Objective-C.\n Swift provides its own versions of all fundamental C and Objective-C types, including Int for integers, Double and Float for floating-point values, Bool for Boolean values, and String for textual data. Swift also provides powerful versions of the two primary collection types, Array and Dictionary, as described in Collection Types.\nLike C, Swift uses variables to store and refer to values by an identifying name. Swift also makes extensive use of variables whose values cannot be changed. These are known as constants, and are much more powerful than constants in C. Constants are used throughout Swift to make code safer and clearer in intent when you work with values that do not need to change.\nIn addition to familiar types, Swift introduces advanced types not found in Objective-C, such as tuples. Tuples enable you to create and pass around groupings of values. You can use a tuple to return multiple values from a function as a single compound value."];
-    [self presentViewController:controller animated:NO completion:nil];
+    
+    // 从服务器端获取新闻列表，并进行展示
+    // TODO 1. 本地列表
+    // 2. 点击进入阅读视图
+    [self requestNewsList:^(NSArray* responseObjects)
+     {
+         // 获取第一个，测试下阅读模式
+         if (!responseObjects || !responseObjects.count) {
+             return;
+         }
+         NSDictionary* item = [responseObjects objectAtIndex:0];
+         NSString* contentStr = [item valueForKey:@"content"];
+         contentStr = [contentStr base64DecodedString];
+         contentStr = [contentStr stringByConvertingHTMLToPlainText];
+         
+         ReadModeController* controller = [[ReadModeController alloc]init];
+         [controller setTapGranality:UITextGranularityParagraph];
+         [controller setText:contentStr];
+         [self presentViewController:controller animated:NO completion:nil];
+     }
+    failure:^(NSError *error)
+     {
+         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Request News"
+                                                             message:[error localizedDescription]
+                                                            delegate:nil
+                                                   cancelButtonTitle:@"Ok"
+                                                   otherButtonTitles:nil];
+         [alertView show];
+     }];
+    
+    
+}
+// TODO 后续考虑增加缓存
+-(void)requestNewsList:(void (^)(NSArray* responseObject))success failure:(void (^)(NSError *error))failure
+{
+    NSString *string = @"http://checknewversion.duapp.com/listnews.php";
+    NSURL *url = [NSURL URLWithString:string];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray* dict = (NSArray *)responseObject;
+        //        NSLog(@"%@",dict);
+        // TODO 保存到本地
+        if (success) {
+            // 在主线程中更新
+            success(dict);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+    
+    // 5
+    [operation start];
 }
 
 @end

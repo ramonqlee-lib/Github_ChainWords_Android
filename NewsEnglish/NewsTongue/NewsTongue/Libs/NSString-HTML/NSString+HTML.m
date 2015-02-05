@@ -92,6 +92,11 @@
 												   [tagName isEqualToString:@"acronym"] ||
 												   [tagName isEqualToString:@"label"]);
 					}
+                    // add new line
+                    if ([tagName isEqualToString:@"div"] ||
+                         [tagName isEqualToString:@"p"]) {
+                             [result appendString:@"\r\n\r\n"];
+                    }
                     
 					// Replace tag with string unless it was an inline
 					if (!dontReplaceTagWithSpace && result.length > 0 && ![scanner isAtEnd]) [result appendString:@" "];
