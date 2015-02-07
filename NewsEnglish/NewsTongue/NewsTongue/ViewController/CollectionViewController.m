@@ -39,7 +39,7 @@
 {
     [super viewDidLoad];
     
-    collectionView = [[PullPsCollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    collectionView = [[PullPsCollectionView alloc] initWithFrame:CGRectMake(0, 24, self.view.frame.size.width, self.view.frame.size.height)];
     [self.view addSubview:collectionView];
     
     collectionView.collectionViewDelegate = self;
@@ -142,19 +142,23 @@
     if (item) {
         URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://imgur.com/%@%@", [item objectForKey:@"hash"], [item objectForKey:@"ext"]]];
     }
+    
     v.textView.text = [[item valueForKey:@"title"]objectForKey:@"0"];
+    v.textView.backgroundColor = [UIColor blackColor];
+    v.textView.textColor = [UIColor whiteColor];
+    v.textView.font = [UIFont systemFontOfSize:15.0f];
+    
     NSLog(@"%@",v.textView.text);
     [v.picView  setImageWithURL:URL placeholderImage:[UIImage imageNamed:@"placeholder"]];
     return v;
 }
 
 - (CGFloat)heightForViewAtIndex:(NSInteger)index {
-    // TODO 待计算高度
     return 120;
-    NSDictionary *item = [self.items objectAtIndex:index];
-    
-    // You should probably subclass PSCollectionViewCell
-    return [PSCollectionViewCell heightForViewWithObject:item inColumnWidth:self.collectionView.colWidth];
+//    NSDictionary *item = [self.items objectAtIndex:index];
+//    
+//    // You should probably subclass PSCollectionViewCell
+//    return [PSCollectionViewCell heightForViewWithObject:item inColumnWidth:self.collectionView.colWidth];
 }
 
 - (void)collectionView:(PSCollectionView *)collectionView didSelectView:(PSCollectionViewCell *)view atIndex:(NSInteger)index {

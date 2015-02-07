@@ -28,11 +28,13 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    
     if(nil != mBodyText && mBodyText.length > 0)
     {
         _textView.attributedText = [[NSAttributedString alloc]initWithString:mBodyText];
     }
+    
+    [_textView scrollRangeToVisible:NSMakeRange(0, 0)];
+    
     _textView.editable = NO;
     _textView.delegate = self;
     fontSize = kMinFontSize;
@@ -69,6 +71,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
         mBodyText = value;
         return;
     }
+
     _textView.attributedText = [[NSAttributedString alloc]initWithString:value];
 }
 
@@ -118,6 +121,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 -(void)_handleTap:(UITapGestureRecognizer*)tap{
     // hide
     _fontChangeSlider.hidden = YES;
+    _textView.layoutManager.allowsNonContiguousLayout = NO;
     
     if(tap.state == UIGestureRecognizerStateRecognized){
         
@@ -126,6 +130,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
         UITextGranularity granularity = mGranuality;
         
         NSString* tappedString = [_textView substringWithGranularity:granularity atPoint:tappedPoint];
+
         if (nil == tappedString || tappedString.length == 0) {
             return;
         }
