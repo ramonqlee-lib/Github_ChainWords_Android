@@ -25,6 +25,8 @@
 
 @class PSCollectionViewCell;
 
+#define kMargin 8.0
+
 @protocol PSCollectionViewDelegate, PSCollectionViewDataSource;
 
 @interface PSCollectionView : UIScrollView

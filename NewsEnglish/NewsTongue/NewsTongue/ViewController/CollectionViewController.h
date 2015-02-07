@@ -11,10 +11,10 @@
 #import "PullPsCollectionView.h"
 
 @interface CollectionViewController : UIViewController<PSCollectionViewDelegate,PSCollectionViewDataSource,UIScrollViewDelegate,PullPsCollectionViewDelegate>
+
 @property(nonatomic,retain) PullPsCollectionView *collectionView;
 @property(nonatomic,retain)NSArray *items;
 -(void)loadDataSource;
 
--(IBAction)enterDetailPage:(id)sender;
 @end
 

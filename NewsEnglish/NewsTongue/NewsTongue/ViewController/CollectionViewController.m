@@ -48,7 +48,11 @@
     collectionView.backgroundColor = [UIColor grayColor];
     collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
-    collectionView.numColsPortrait = 2;
+    // 动态计算行数
+    NSInteger CELL_WIDTH = 100;
+    CGFloat screenWidth = [[UIScreen mainScreen]bounds].size.width;
+    collectionView.numColsPortrait = screenWidth/CELL_WIDTH;
+    
     collectionView.numColsLandscape = 3;
     
     collectionView.pullArrowImage = [UIImage imageNamed:@"blackArrow"];
@@ -140,7 +144,7 @@
     //    [v fillViewWithObject:item];
     NSURL *URL = nil;
     if (item) {
-        URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://imgur.com/%@%@", [item objectForKey:@"hash"], [item objectForKey:@"ext"]]];
+        URL = [NSURL URLWithString:[item valueForKey:@"thumbnail"]];
     }
     
     v.textView.text = [[item valueForKey:@"title"]objectForKey:@"0"];
@@ -154,11 +158,7 @@
 }
 
 - (CGFloat)heightForViewAtIndex:(NSInteger)index {
-    return 120;
-//    NSDictionary *item = [self.items objectAtIndex:index];
-//    
-//    // You should probably subclass PSCollectionViewCell
-//    return [PSCollectionViewCell heightForViewWithObject:item inColumnWidth:self.collectionView.colWidth];
+    return 150;
 }
 
 - (void)collectionView:(PSCollectionView *)collectionView didSelectView:(PSCollectionViewCell *)view atIndex:(NSInteger)index {
@@ -167,6 +167,10 @@
     NSString* contentStr = [item valueForKey:@"content"];
     contentStr = [contentStr base64DecodedString];
     contentStr = [contentStr stringByConvertingHTMLToPlainText];
+    
+    // remove multiple new lines
+    contentStr = [contentStr stringByReplacingOccurrencesOfString:@"\r\n\r\n" withString:@"\r\n"];
+    NSLog(@"%@",contentStr);
     
     ReadModeController* controller = [[ReadModeController alloc]init];
     [controller setTapGranality:UITextGranularityParagraph];
@@ -212,47 +216,6 @@
     return ( (arc4random() % (max-min+1)) + min );
 }
 
--(IBAction)enterDetailPage:(id)sender
-{
-#if 0
-    WordModeController* controller = [[WordModeController alloc]init];
-    SentenceModeController* controller = [[SentenceModeController alloc]init];
-    [controller setTapGranality:UITextGranularitySentence];
-    
-    [controller setTapGranality:UITextGranularityWord];
-#endif
-    
-    // 从服务器端获取新闻列表，并进行展示
-    // TODO 1. 本地列表
-    // 2. 点击进入阅读视图
-    [self requestNewsList:^(NSArray* responseObjects)
-     {
-         // 获取第一个，测试下阅读模式
-         if (!responseObjects || !responseObjects.count) {
-             return;
-         }
-         NSDictionary* item = [responseObjects objectAtIndex:0];
-         NSString* contentStr = [item valueForKey:@"content"];
-         contentStr = [contentStr base64DecodedString];
-         contentStr = [contentStr stringByConvertingHTMLToPlainText];
-         
-         ReadModeController* controller = [[ReadModeController alloc]init];
-         [controller setTapGranality:UITextGranularityParagraph];
-         [controller setText:contentStr];
-         [self presentViewController:controller animated:NO completion:nil];
-     }
-    failure:^(NSError *error)
-     {
-         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Request News"
-                                                             message:[error localizedDescription]
-                                                            delegate:nil
-                                                   cancelButtonTitle:@"Ok"
-                                                   otherButtonTitles:nil];
-         [alertView show];
-     }];
-    
-    
-}
 // TODO 后续考虑增加缓存
 -(void)requestNewsList:(void (^)(NSArray* responseObject))success failure:(void (^)(NSError *error))failure
 {

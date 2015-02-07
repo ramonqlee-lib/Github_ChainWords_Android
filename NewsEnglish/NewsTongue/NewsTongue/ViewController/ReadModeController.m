@@ -40,6 +40,11 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     fontSize = kMinFontSize;
     _textView.font = [UIFont fontWithName:_textView.font.fontName size:fontSize];
     [_textView setLineSpacing:kLineSpacing clearPrevious:NO];
+    CGFloat val = (CGFloat)0x40/256;
+    _textView.textColor = [UIColor colorWithRed:val green:val blue:val alpha:1];
+    
+    val = (CGFloat)0xf0/256;
+    _textView.backgroundColor = [UIColor colorWithRed:val green:val blue:val alpha:1];
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(_handleTap:)];
     

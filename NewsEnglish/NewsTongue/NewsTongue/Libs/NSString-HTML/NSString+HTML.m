@@ -95,7 +95,7 @@
                     // add new line
                     if ([tagName isEqualToString:@"div"] ||
                          [tagName isEqualToString:@"p"]) {
-                             [result appendString:@"\r\n\r\n"];
+                             [result appendString:@"\r\n"];
                     }
                     
 					// Replace tag with string unless it was an inline

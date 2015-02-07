@@ -54,11 +54,17 @@
                         <constraint firstItem="m6t-qG-c5P" firstAttribute="top" secondItem="nzC-Ga-RCz" secondAttribute="top" constant="7" id="0Lk-hi-paN"/>
                         <constraint firstItem="vgk-Mu-de7" firstAttribute="top" secondItem="nzC-Ga-RCz" secondAttribute="top" constant="7" id="2U1-mh-Jkt"/>
                         <constraint firstItem="vgk-Mu-de7" firstAttribute="leading" secondItem="nzC-Ga-RCz" secondAttribute="leading" constant="20" id="9fn-6u-fi0"/>
+                        <constraint firstAttribute="trailing" secondItem="0On-bG-H6K" secondAttribute="trailing" constant="20" id="CRF-U4-MTV"/>
                         <constraint firstAttribute="trailing" secondItem="m6t-qG-c5P" secondAttribute="trailing" constant="20" id="LiX-PK-G8Q"/>
                         <constraint firstItem="0On-bG-H6K" firstAttribute="top" secondItem="nzC-Ga-RCz" secondAttribute="top" constant="7" id="QE2-eV-cGr"/>
                         <constraint firstItem="m6t-qG-c5P" firstAttribute="leading" secondItem="0On-bG-H6K" secondAttribute="trailing" constant="32" id="XSI-H4-Bis"/>
                         <constraint firstAttribute="height" constant="44" id="dwl-So-Yw7"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="XSI-H4-Bis"/>
+                        </mask>
+                    </variation>
                 </view>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" text="textview" translatesAutoresizingMaskIntoConstraints="NO" id="zgI-8o-fX5" userLabel="body">
                     <rect key="frame" x="0.0" y="64" width="600" height="536"/>

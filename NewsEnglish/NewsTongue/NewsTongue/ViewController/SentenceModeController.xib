@@ -242,7 +242,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do " translatesAutoresizingMaskIntoConstraints="NO" id="1wX-aF-Dyy" userLabel="translated_textview">
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="顶部的文字可以按照句子进行选择" translatesAutoresizingMaskIntoConstraints="NO" id="1wX-aF-Dyy" userLabel="translated_textview">
                             <rect key="frame" x="0.0" y="41" width="580" height="109"/>
                             <color key="backgroundColor" red="0.20442677619999999" green="0.42679708979999997" blue="0.94513494320000002" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
