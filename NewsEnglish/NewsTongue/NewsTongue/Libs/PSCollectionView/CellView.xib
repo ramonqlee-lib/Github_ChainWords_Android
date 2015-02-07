@@ -9,42 +9,50 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="2" customClass="CellView">
-            <rect key="frame" x="0.0" y="0.0" width="200" height="350"/>
+            <rect key="frame" x="0.0" y="0.0" width="150" height="120"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3">
-                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="blueArrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="3">
+                    <rect key="frame" x="0.0" y="0.0" width="150" height="60"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="200" id="8"/>
+                        <constraint firstAttribute="height" constant="60" id="pWM-BM-t3Y"/>
+                        <constraint firstAttribute="width" constant="150" id="smc-tH-l2X"/>
                     </constraints>
                 </imageView>
-                <textView clipsSubviews="YES" contentMode="scaleToFill" editable="NO" text="text" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7">
-                    <rect key="frame" x="0.0" y="200" width="200" height="150"/>
+                <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" text="Why did Greece's Varoufakis bring up Nasiz in Berlin?" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7">
+                    <rect key="frame" x="0.0" y="60" width="150" height="60"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="150" id="15"/>
+                        <constraint firstAttribute="width" constant="150" id="QLi-KY-21K"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="3" firstAttribute="top" secondItem="2" secondAttribute="top" id="9"/>
-                <constraint firstItem="7" firstAttribute="leading" secondItem="3" secondAttribute="leading" id="10"/>
-                <constraint firstItem="7" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="11"/>
-                <constraint firstItem="7" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" id="12"/>
-                <constraint firstAttribute="bottom" secondItem="7" secondAttribute="bottom" id="13"/>
-                <constraint firstAttribute="trailing" secondItem="7" secondAttribute="trailing" id="14"/>
+                <constraint firstItem="3" firstAttribute="width" secondItem="7" secondAttribute="width" id="ATI-PE-PLB"/>
+                <constraint firstAttribute="trailing" secondItem="3" secondAttribute="trailing" id="LFY-QP-EIT"/>
+                <constraint firstItem="3" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="MOo-s3-QSc"/>
+                <constraint firstAttribute="bottom" secondItem="7" secondAttribute="bottom" id="QAT-YV-eIA"/>
+                <constraint firstAttribute="trailing" secondItem="7" secondAttribute="trailing" id="XBR-pf-9Os"/>
+                <constraint firstItem="7" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="aya-x5-QvJ"/>
+                <constraint firstItem="7" firstAttribute="top" secondItem="3" secondAttribute="bottom" id="dEF-hJ-1Om"/>
+                <constraint firstItem="3" firstAttribute="top" secondItem="2" secondAttribute="top" id="jaN-AR-Yof"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="picView" destination="3" id="5"/>
                 <outlet property="textView" destination="7" id="3kd-Gs-SWE"/>
             </connections>
-            <point key="canvasLocation" x="412" y="392.5"/>
+            <point key="canvasLocation" x="412" y="392"/>
         </view>
     </objects>
+    <resources>
+        <image name="blueArrow.png" width="23" height="60"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

@@ -41,17 +41,14 @@
     
     collectionView = [[PullPsCollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [self.view addSubview:collectionView];
-    CGPoint pt = collectionView.frame.origin;
-    CGSize size = collectionView.frame.size;
     
     collectionView.collectionViewDelegate = self;
     collectionView.collectionViewDataSource = self;
     collectionView.pullDelegate=self;
-    collectionView.backgroundColor = [UIColor clearColor];
+    collectionView.backgroundColor = [UIColor grayColor];
     collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
-    
-    collectionView.numColsPortrait = 3;
+    collectionView.numColsPortrait = 2;
     collectionView.numColsLandscape = 3;
     
     collectionView.pullArrowImage = [UIImage imageNamed:@"blackArrow"];
@@ -153,7 +150,7 @@
 
 - (CGFloat)heightForViewAtIndex:(NSInteger)index {
     // TODO 待计算高度
-    return 100;
+    return 120;
     NSDictionary *item = [self.items objectAtIndex:index];
     
     // You should probably subclass PSCollectionViewCell
