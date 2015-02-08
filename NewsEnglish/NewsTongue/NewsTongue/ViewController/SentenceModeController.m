@@ -15,6 +15,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "BaiduMobAdView.h"
 #import "Constants.h"
+#import "Toast+UIView.h"
 
 
 static const CGFloat kLineSpacing = 5.0f;// 行间距
@@ -243,6 +244,11 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 -(IBAction)speakOrigin:(id)sender// 原句阅读
 {
+    if (!sentence || !sentence.length) {
+        [self.view makeToast:NSLocalizedString(@"NO_SELECTED_SENTENCE", @"")];
+        return;
+    }
+    
     [[AFSoundManager sharedManager]changeVolumeToValue:1.0];
     [[AFSoundManager sharedManager]stop];
     
@@ -292,6 +298,11 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 }
 -(IBAction)recordOrigin:(id)sender// 原句跟读
 {
+    if (!sentence || !sentence.length) {
+        [self.view makeToast:NSLocalizedString(@"NO_SELECTED_SENTENCE", @"")];
+        return;
+    }
+    
     // 1.判断是否在录制中，如果在录制中，则停止并保存；否则开始录制
     // TODO 文件名待根据句子生成,比如md5值
     NSString* fileName = [sentence md5];
@@ -312,8 +323,8 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 }
 -(IBAction)playback:(id)sender// 跟读回放
 {
-    if(!sentence)
-    {
+    if (!sentence || !sentence.length) {
+        [self.view makeToast:NSLocalizedString(@"NO_SELECTED_SENTENCE", @"")];
         return;
     }
     

@@ -176,6 +176,7 @@
 		30C8B6961A7E2FBE009CB114 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C8B6951A7E2FBE009CB114 /* UIKit.framework */; };
 		30C8B6981A7E2FC5009CB114 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C8B6971A7E2FC5009CB114 /* Foundation.framework */; };
 		30EC871C1A7C474600BC7363 /* WordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EC871B1A7C474600BC7363 /* WordManager.m */; };
+		30F2F2241A88180E008420D4 /* Toast+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F2F2231A88180E008420D4 /* Toast+UIView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -467,6 +468,8 @@
 		30C8B6971A7E2FC5009CB114 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		30EC871A1A7C474600BC7363 /* WordManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordManager.h; sourceTree = "<group>"; };
 		30EC871B1A7C474600BC7363 /* WordManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordManager.m; sourceTree = "<group>"; };
+		30F2F2221A88180E008420D4 /* Toast+UIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Toast+UIView.h"; sourceTree = "<group>"; };
+		30F2F2231A88180E008420D4 /* Toast+UIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Toast+UIView.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1044,6 +1047,7 @@
 		30ADC9D91A770E5700339771 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				30F2F2211A88180E008420D4 /* Toast */,
 				3033BAEF1A878BE80080B3EB /* baiduAdSDK */,
 				30803CC51A875248000CA931 /* umeng_ios_social_sdk_4.2.1_arm64_custom */,
 				30803C391A874D22000CA931 /* UMengFeedback_SDK_2.1 */,
@@ -1135,6 +1139,15 @@
 				3068FD7C1A7EEAA400E257A9 /* SentenceManager.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		30F2F2211A88180E008420D4 /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				30F2F2221A88180E008420D4 /* Toast+UIView.h */,
+				30F2F2231A88180E008420D4 /* Toast+UIView.m */,
+			);
+			path = Toast;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1351,6 +1364,7 @@
 				3033BB301A878BE80080B3EB /* CJSONScanner.m in Sources */,
 				3068FD791A7EE24100E257A9 /* GTMNSString+HTML.m in Sources */,
 				303381C21A7C79FF0074604E /* AFNetworkActivityIndicatorManager.m in Sources */,
+				30F2F2241A88180E008420D4 /* Toast+UIView.m in Sources */,
 				30ADC9DD1A770E5700339771 /* UITextView+Extras.m in Sources */,
 				300D5DEE1A8426950054CFB7 /* SDWebImageDecoder.m in Sources */,
 				303381BD1A7C79FF0074604E /* AFSecurityPolicy.m in Sources */,

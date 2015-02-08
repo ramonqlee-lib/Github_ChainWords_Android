@@ -12,6 +12,7 @@
 #import "AFURLSessionManager.h"
 #import "BaiduMobAdView.h"
 #import "Constants.h"
+#import "Toast+UIView.h"
 
 static const CGFloat kLineSpacing = 5.0f;// 行间距
 static const CGFloat kMinFontSize = 18.0f;// 字体缩放的最小值
@@ -199,6 +200,11 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 -(IBAction)speakWord:(id)sender
 {
+    if (!word || !word.length) {
+        [self.view makeToast:NSLocalizedString(@"NO_SELECTED_WORD", @"")];
+        return;
+    }
+    
     NSArray* prons = [WordManager getProns:wordDict];
     if (!prons || !prons.count) {
         return;
@@ -249,6 +255,11 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 -(IBAction)recordWord:(id)sender
 {
+    if (!word || !word.length) {
+        [self.view makeToast:NSLocalizedString(@"NO_SELECTED_WORD", @"")];
+        return;
+    }
+    
     // TODO 1.判断是否在录制中，如果在录制中，则停止并保存；否则开始录制
     NSString* recordedFileName = [[WordModeController getRecordFilePath:[NSString stringWithFormat:@"%@_recording",word]]path];
     AFSoundManager* sm = [AFSoundManager sharedManager];
@@ -265,8 +276,8 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 -(IBAction)replayWord:(id)sender
 {
-    if(!word)
-    {
+    if (!word || !word.length) {
+        [self.view makeToast:NSLocalizedString(@"NO_SELECTED_WORD", @"")];
         return;
     }
     

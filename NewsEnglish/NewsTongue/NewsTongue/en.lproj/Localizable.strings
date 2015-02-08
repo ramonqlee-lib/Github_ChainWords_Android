@@ -6,3 +6,7 @@
   Copyright (c) 2015 iDreems. All rights reserved.
 */
 "ShareMessage"="I find NewsLadder on Appstore,try it!";
+
+// 单句模式下的提示
+"NO_SELECTED_SENTENCE"= "Please select sentence first";
+"NO_SELECTED_WORD"= "Please select word first";
