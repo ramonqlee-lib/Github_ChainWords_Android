@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "MobClick.h"
+#import "Constants.h"
+
 
 @interface AppDelegate ()
 
@@ -14,15 +17,10 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    /*(self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.viewController = [[CollectionViewController alloc]init];
-    self.window.rootViewController = self.viewController;
-    [self.window makeKeyAndVisible];
-      */
+    
+    [self initUmengAnalytics];
     return YES;
 }
 
@@ -48,4 +46,13 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark umeng analytics
+
+-(void)initUmengAnalytics
+{
+    [MobClick startWithAppkey:UMENG_APP_KEY reportPolicy:BATCH channelId:@""];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [MobClick setAppVersion:version];
+    [MobClick setEncryptEnabled:YES];
+}
 @end
