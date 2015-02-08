@@ -218,6 +218,13 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     NSURL* audioFileUrl = [WordModeController getAudioFilePath:word];
     if ([[NSFileManager defaultManager]fileExistsAtPath:[audioFileUrl path]]) {
         [[AFSoundManager sharedManager]startPlayingLocalFileWithFilePath:[audioFileUrl path] andBlock:^(int percentage, CGFloat elapsedTime, CGFloat timeRemaining, NSError *error, BOOL finished) {
+            NSLog(@"%d%%",percentage);
+            if (percentage >= 100) {
+                self.progressView.hidden = YES;
+                return;
+            }
+            self.progressView.hidden  = NO;
+            self.progressView.progress = (CGFloat)percentage/100;
             
             if (!error) {
             } else {
@@ -243,6 +250,13 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
         NSLog(@"File downloaded to: %@", filePath);
         [self hideProgress];
         [[AFSoundManager sharedManager]startPlayingLocalFileWithFilePath:[filePath path] andBlock:^(int percentage, CGFloat elapsedTime, CGFloat timeRemaining, NSError *error, BOOL finished) {
+            NSLog(@"%d%%",percentage);
+            if (percentage >= 100) {
+                self.progressView.hidden = YES;
+                return;
+            }
+            self.progressView.hidden  = NO;
+            self.progressView.progress = (CGFloat)percentage/100;
             
             if (!error) {
             } else {

@@ -44,11 +44,17 @@
     _audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:fileURL error:&error];
     [_audioPlayer play];
     
+    if(!block)
+    {
+        return;
+    }
+    
     __block int percentage = 0;
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:1 block:^{
         
-        if (percentage != 100) {
+        if (_audioPlayer.isPlaying) {
+//            NSLog(@"(%f,%f)",_audioPlayer.currentTime,_audioPlayer.duration);
             
             percentage = (int)((_audioPlayer.currentTime * 100)/_audioPlayer.duration);
             int timeRemaining = _audioPlayer.duration - _audioPlayer.currentTime;
@@ -59,7 +65,7 @@
             int timeRemaining = _audioPlayer.duration - _audioPlayer.currentTime;
 
             block(100, _audioPlayer.currentTime, timeRemaining, error, YES);
-            
+
             [_timer invalidate];
         }
     } repeats:YES];
@@ -73,12 +79,17 @@
     _player = [[AVPlayer alloc]initWithURL:streamingURL];
     [_player play];
     
+    if(!block)
+    {
+        return;
+    }
+    
     if (!error) {
     
         __block int percentage = 0;
         
         _timer = [NSTimer scheduledTimerWithTimeInterval:1 block:^{
-            
+//             NSLog(@"(%f,%f)",CMTimeGetSeconds(_player.currentItem.currentTime),CMTimeGetSeconds(_player.currentItem.duration));
             if (percentage != 100) {
                 
                 percentage = (int)((CMTimeGetSeconds(_player.currentItem.currentTime) * 100)/CMTimeGetSeconds(_player.currentItem.duration));
