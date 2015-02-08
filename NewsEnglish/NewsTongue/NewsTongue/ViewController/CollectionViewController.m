@@ -212,24 +212,24 @@
     UIImage *storyMenuItemImage = [UIImage imageNamed:@"bg-menuitem.png"];
     UIImage *storyMenuItemImagePressed = [UIImage imageNamed:@"bg-menuitem-highlighted.png"];
     
-    // Camera MenuItem.
-    QuadCurveMenuItem *cameraMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
+    // About MenuItem.
+    QuadCurveMenuItem *aboutMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
                                                                 highlightedImage:storyMenuItemImagePressed
-                                                                    ContentImage:[UIImage imageNamed:@"icon-star.png"]
+                                                                    ContentImage:[UIImage imageNamed:@"about.png"]
                                                          highlightedContentImage:nil];
-    // People MenuItem.
-    QuadCurveMenuItem *peopleMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
+    // Share MenuItem.
+    QuadCurveMenuItem *shareMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
                                                                 highlightedImage:storyMenuItemImagePressed
-                                                                    ContentImage:[UIImage imageNamed:@"icon-star.png"]
+                                                                    ContentImage:[UIImage imageNamed:@"share.png"]
                                                          highlightedContentImage:nil];
-    // Place MenuItem.
-    QuadCurveMenuItem *placeMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
+    // Feedback MenuItem.
+    QuadCurveMenuItem *feedbackMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
                                                                highlightedImage:storyMenuItemImagePressed
-                                                                   ContentImage:[UIImage imageNamed:@"icon-star.png"]
+                                                                   ContentImage:[UIImage imageNamed:@"feedback.png"]
                                                         highlightedContentImage:nil];
 
     
-    NSArray *menus = [NSArray arrayWithObjects:cameraMenuItem, peopleMenuItem, placeMenuItem, nil];
+    NSArray *menus = [NSArray arrayWithObjects:aboutMenuItem, shareMenuItem, feedbackMenuItem, nil];
     
     QuadCurveMenu *menu = [[QuadCurveMenu alloc] initWithFrame:self.view.bounds menus:menus];
     menu.delegate = self;
