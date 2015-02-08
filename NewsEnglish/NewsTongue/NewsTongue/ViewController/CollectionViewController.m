@@ -234,6 +234,29 @@
 
 - (void)quadCurveMenu:(QuadCurveMenu *)menu didSelectIndex:(NSInteger)idx
 {
-    NSLog(@"Select the index : %d",idx);
+//    NSLog(@"Select the index : %d",idx);
+    switch (idx) {
+        case 0:// about
+            [self popupAbout:nil];
+            break;
+        case 1:// share
+            break;
+        case 2:// feedback
+            break;
+            
+        default:
+            break;
+    }
+}
+
+
+-(IBAction)popupAbout:(id)sender
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"About"
+                                                        message:@"  Copyright (c) 2015 iDreems. All rights reserved."
+                                                       delegate:self
+                                              cancelButtonTitle:@"I Know"
+                                              otherButtonTitles:nil, nil];
+    [alertView show];
 }
 @end
