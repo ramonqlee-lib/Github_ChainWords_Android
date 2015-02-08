@@ -37,7 +37,7 @@
                                 <action selector="return2ParentAction:" destination="-1" eventType="touchUpInside" id="Qnc-1j-k2T"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0On-bG-H6K" userLabel="字体大小">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0On-bG-H6K" userLabel="字体大小">
                             <rect key="frame" x="429" y="2" width="64" height="40"/>
                             <inset key="contentEdgeInsets" minX="0.0" minY="5" maxX="0.0" maxY="0.0"/>
                             <state key="normal" image="scaleFont.png">
@@ -58,7 +58,7 @@
                                 <action selector="switch2WordMode:" destination="-1" eventType="touchUpInside" id="2Dk-qO-ufM"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEF-6q-ztw" userLabel="目标语言">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEF-6q-ztw" userLabel="目标语言">
                             <rect key="frame" x="363" y="7" width="46" height="30"/>
                             <state key="normal" title="中文">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

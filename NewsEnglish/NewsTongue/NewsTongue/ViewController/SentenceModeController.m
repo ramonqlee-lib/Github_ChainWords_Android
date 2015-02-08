@@ -203,13 +203,6 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     }
     [textViewInAlertView becomeFirstResponder];
     [alertView show];
-    
-    // 翻译的textview背景变为白色
-    // 显示 提供建议和关闭按钮
-//    _translatedTextView.backgroundColor = [UIColor whiteColor];
-//    _translatedTextView.editable = YES;
-//    _submitButton.hidden = NO;
-//    _closeButton.hidden = NO;
 }
 
 -(IBAction)finishTranslation:(id)sender

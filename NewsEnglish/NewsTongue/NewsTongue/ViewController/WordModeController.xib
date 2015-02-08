@@ -35,7 +35,7 @@
                                 <action selector="return2ParentAction:" destination="-1" eventType="touchUpInside" id="ObO-9z-BbW"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0On-bG-H6K" userLabel="字体大小">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0On-bG-H6K" userLabel="字体大小">
                             <rect key="frame" x="450" y="2" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="iU1-LE-3B2"/>
@@ -72,7 +72,7 @@
                                 <action selector="return2ParentAction:" destination="-1" eventType="touchUpInside" id="2NS-GF-6cW"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEF-6q-ztw" userLabel="目标语言">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEF-6q-ztw" userLabel="目标语言">
                             <rect key="frame" x="386" y="7" width="46" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="46" id="exG-L0-PI1"/>
@@ -429,6 +429,6 @@
         <image name="record.png" width="20" height="20"/>
         <image name="replay.png" width="20" height="20"/>
         <image name="scaleFont.png" width="40" height="40"/>
-        <image name="speaker.png" width="22" height="20"/>
+        <image name="speaker.png" width="20" height="20"/>
     </resources>
 </document>
