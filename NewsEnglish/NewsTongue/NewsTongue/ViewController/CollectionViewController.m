@@ -56,17 +56,13 @@
     collectionView.numColsLandscape = 3;
     
     collectionView.pullArrowImage = [UIImage imageNamed:@"blackArrow"];
-    collectionView.pullBackgroundColor = [UIColor yellowColor];
+    collectionView.pullBackgroundColor = [UIColor clearColor];
     collectionView.pullTextColor = [UIColor blackColor];
-    //    UIView *headerView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 45)];
-    //    [headerView setBackgroundColor:[UIColor redColor]];
-    //    self.collectionView.headerView=headerView;
     UILabel *loadingLabel = [[UILabel alloc] initWithFrame:self.collectionView.bounds];
     loadingLabel.text = @"Loading...";
     loadingLabel.textAlignment = NSTextAlignmentCenter;
     collectionView.loadingView = loadingLabel;
     
-    //    [self loadDataSource];
     if(!collectionView.pullTableIsRefreshing) {
         collectionView.pullTableIsRefreshing = YES;
         [self performSelector:@selector(refreshTable) withObject:nil afterDelay:0];
@@ -74,16 +70,12 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-    
     [super viewWillAppear:animated];
-    
 }
 - (void) refreshTable
 {
     /*
-     
      Code to actually refresh goes here.
-     
      */
     
     //    [self.items removeAllObjects];
@@ -109,12 +101,12 @@
 
 - (void)pullPsCollectionViewDidTriggerRefresh:(PullPsCollectionView *)pullTableView
 {
-    [self performSelector:@selector(refreshTable) withObject:nil afterDelay:3.0f];
+    [self performSelector:@selector(refreshTable) withObject:nil afterDelay:1.0f];
 }
 
 - (void)pullPsCollectionViewDidTriggerLoadMore:(PullPsCollectionView *)pullTableView
 {
-    [self performSelector:@selector(loadMoreDataToTable) withObject:nil afterDelay:3.0f];
+    [self performSelector:@selector(loadMoreDataToTable) withObject:nil afterDelay:1.0f];
 }
 - (void)viewDidUnload
 {
@@ -132,9 +124,6 @@
     
     // You should probably subclass PSCollectionViewCell
     CellView *v = (CellView *)[self.collectionView dequeueReusableView];
-    //    if (!v) {
-    //        v = [[[PSCollectionViewCell alloc] initWithFrame:CGRectZero] autorelease];
-    //    }
     if(v == nil) {
         NSArray *nib =
         [[NSBundle mainBundle] loadNibNamed:@"CellView" owner:self options:nil];
@@ -147,7 +136,7 @@
         URL = [NSURL URLWithString:[item valueForKey:@"thumbnail"]];
     }
     
-    v.textView.text = [[item valueForKey:@"title"]objectForKey:@"0"];
+    v.textView.text = [item valueForKey:@"title"];
     v.textView.backgroundColor = [UIColor blackColor];
     v.textView.textColor = [UIColor whiteColor];
     v.textView.font = [UIFont systemFontOfSize:15.0f];
@@ -166,13 +155,17 @@
     NSDictionary* item = [self.items objectAtIndex:index];
     NSString* contentStr = [item valueForKey:@"content"];
     contentStr = [contentStr base64DecodedString];
+    
+#if 1
     contentStr = [contentStr stringByConvertingHTMLToPlainText];
     
     // remove multiple new lines
     contentStr = [contentStr stringByReplacingOccurrencesOfString:@"\r\n\r\n" withString:@"\r\n"];
+#endif
     NSLog(@"%@",contentStr);
     
     ReadModeController* controller = [[ReadModeController alloc]init];
+    [controller setTitle:[item objectForKey:@"title"]];
     [controller setTapGranality:UITextGranularityParagraph];
     [controller setText:contentStr];
     [self presentViewController:controller animated:NO completion:nil];
@@ -208,40 +201,6 @@
 
 - (void)dataSourceDidError {
     [self.collectionView reloadData];
-}
-
-//generate random numbers within range
--(int)generateRandomNumberBetweenMin:(int)min Max:(int)max
-{
-    return ( (arc4random() % (max-min+1)) + min );
-}
-
-// TODO 后续考虑增加缓存
--(void)requestNewsList:(void (^)(NSArray* responseObject))success failure:(void (^)(NSError *error))failure
-{
-    NSString *string = @"http://checknewversion.duapp.com/listnews.php";
-    NSURL *url = [NSURL URLWithString:string];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
-    
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray* dict = (NSArray *)responseObject;
-        //        NSLog(@"%@",dict);
-        // TODO 保存到本地
-        if (success) {
-            // 在主线程中更新
-            success(dict);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (failure) {
-            failure(error);
-        }
-    }];
-    
-    // 5
-    [operation start];
 }
 
 @end

@@ -13,11 +13,13 @@
 
 -(void)setText:(NSString*)value;
 -(void)setTapGranality:(UITextGranularity)value;
+-(void)setTitle:(NSString *)title;
 
 -(IBAction)return2ParentAction:(id)sender;
 -(IBAction)sliderValueChangeAction:(UISlider*)sender;
 -(IBAction)changeReviewFontSizeButtonAction:(id)sender;
 
+@property(nonatomic,readwrite,assign)IBOutlet UILabel* titleLabel;
 @property(nonatomic,readwrite,assign)IBOutlet UITextView* textView;
 @property(nonatomic,readwrite,assign)IBOutlet UISlider* slider;
 @property(nonatomic,readwrite,assign)IBOutlet UIView* fontChangeSlider;

@@ -142,13 +142,8 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 {
     wordDict = result;
     // 单词意义
-    _translatedTextView.text = [WordManager getReadableMeaning:wordDict];
-    
-    // 读音
-//    prons = [WordManager getProns:wordDict];
-    
-    // 使用举例
-    //    [WordManager getExamples:result];
+//    _translatedTextView.text = [WordManager getReadableMeaning:wordDict];
+    [self extendWordDetail:nil];
 }
 
 /*
@@ -293,13 +288,13 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     NSMutableString* detail = [[NSMutableString alloc]init];
     [detail appendString:[WordManager getReadableMeaning:wordDict]];
     [detail appendString:@"\n"];
-    if (shortMeaning) {
-        shortMeaning = !shortMeaning;
-        _translatedTextView.text = detail;
-        return;
-    }
+//    if (shortMeaning) {
+//        shortMeaning = !shortMeaning;
+//        _translatedTextView.text = detail;
+//        return;
+//    }
     
-    shortMeaning = !shortMeaning;
+//    shortMeaning = !shortMeaning;
     NSArray* examples = [WordManager getExamples:wordDict];
     for (NSString* item in examples) {
         [detail appendString:item];

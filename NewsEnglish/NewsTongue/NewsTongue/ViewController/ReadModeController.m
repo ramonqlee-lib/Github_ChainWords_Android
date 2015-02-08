@@ -17,7 +17,8 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 @interface ReadModeController ()<UITextViewDelegate>
 {
     UITextGranularity mGranuality;
-    NSString* mBodyText;
+    NSString* bodyText;
+    NSString* titileText;
     CGFloat fontSize;
 }
 @end
@@ -28,13 +29,17 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    if(nil != mBodyText && mBodyText.length > 0)
+    self.titleLabel.text = titileText;
+    if(nil != bodyText && bodyText.length > 0)
     {
-        _textView.attributedText = [[NSAttributedString alloc]initWithString:mBodyText];
+#if 0
+        NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[mBodyText dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+#else
+        NSAttributedString* attributedString = [[NSAttributedString alloc]initWithString:bodyText];
+#endif
+        _textView.attributedText = attributedString;
     }
-    
     [_textView scrollRangeToVisible:NSMakeRange(0, 0)];
-    
     _textView.editable = NO;
     _textView.delegate = self;
     fontSize = kMinFontSize;
@@ -64,20 +69,31 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     }
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)setTitle:(NSString *)title{
+    titileText = title;
+}
 -(void)setText:(NSString*)value
 {
     if(nil == _textView)
     {
-        mBodyText = value;
+        bodyText = value;
         return;
     }
-
-    _textView.attributedText = [[NSAttributedString alloc]initWithString:value];
+#if 0
+    NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[value dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+#else
+    NSAttributedString* attributedString = [[NSAttributedString alloc]initWithString:bodyText];
+#endif
+    _textView.attributedText = attributedString;
 }
 
 -(void)setTapGranality:(UITextGranularity)value
