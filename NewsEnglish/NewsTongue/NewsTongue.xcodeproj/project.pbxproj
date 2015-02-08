@@ -117,7 +117,9 @@
 		30803D151A875248000CA931 /* libUMSocial_Sdk_4.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30803CDF1A875248000CA931 /* libUMSocial_Sdk_4.2.1.a */; };
 		30803D161A875248000CA931 /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30803CE61A875248000CA931 /* libSocialWechat.a */; };
 		30803D171A875248000CA931 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30803CE71A875248000CA931 /* libWeChatSDK.a */; };
-		30803D3A1A875756000CA931 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30803D391A875756000CA931 /* Info.plist */; };
+		30803D3D1A875A5E000CA931 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30803D3F1A875A5E000CA931 /* InfoPlist.strings */; };
+		30803D421A875A77000CA931 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30803D401A875A77000CA931 /* Localizable.strings */; };
+		30803D431A875A83000CA931 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30803D451A875A83000CA931 /* Info.plist */; };
 		3090C9671A858CC30094231B /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3090C95C1A858CC30094231B /* CollectionViewController.m */; };
 		3090C9691A858CC30094231B /* ReadModeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3090C95F1A858CC30094231B /* ReadModeController.m */; };
 		3090C96A1A858CC30094231B /* ReadModeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3090C9601A858CC30094231B /* ReadModeController.xib */; };
@@ -331,7 +333,12 @@
 		30803CE51A875248000CA931 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		30803CE61A875248000CA931 /* libSocialWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWechat.a; sourceTree = "<group>"; };
 		30803CE71A875248000CA931 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		30803D391A875756000CA931 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30803D3E1A875A5E000CA931 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		30803D411A875A77000CA931 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		30803D441A875A83000CA931 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/Info.plist; sourceTree = "<group>"; };
+		30803D461A875A9D000CA931 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		30803D471A875AA1000CA931 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		30803D481A875AE9000CA931 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/Info.plist"; sourceTree = "<group>"; };
 		3090C95B1A858CC30094231B /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
 		3090C95C1A858CC30094231B /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
 		3090C95E1A858CC30094231B /* ReadModeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadModeController.h; sourceTree = "<group>"; };
@@ -559,10 +566,12 @@
 		3010AF151A71B27B009CDECF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				30803D391A875756000CA931 /* Info.plist */,
+				30803D451A875A83000CA931 /* Info.plist */,
 				3010AF171A71B27B009CDECF /* main.m */,
 				3068FD721A7EDED800E257A9 /* readme.rtf */,
 				30803C301A87478E000CA931 /* Constants.h */,
+				30803D3F1A875A5E000CA931 /* InfoPlist.strings */,
+				30803D401A875A77000CA931 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -973,14 +982,16 @@
 				300792061A86F61A00D20875 /* icon-plus-highlighted.png in Resources */,
 				3007921D1A870D3E00D20875 /* scaleFont@2x.png in Resources */,
 				300792041A86F61A00D20875 /* bg-menuitem.png in Resources */,
-				30803D3A1A875756000CA931 /* Info.plist in Resources */,
+				30803D431A875A83000CA931 /* Info.plist in Resources */,
 				300791DE1A86E9F800D20875 /* speaker.png in Resources */,
 				3007920F1A87067B00D20875 /* recording.png in Resources */,
 				30803D131A875248000CA931 /* UMSocialSDKResourcesNew.bundle in Resources */,
+				30803D3D1A875A5E000CA931 /* InfoPlist.strings in Resources */,
 				300792081A86F61A00D20875 /* icon-plus.png in Resources */,
 				30803C5C1A874D22000CA931 /* umeng_fb_audio_dialog_content@2x.png in Resources */,
 				30803C571A874D22000CA931 /* bubble_min@2x.png in Resources */,
 				300D5DE01A8426950054CFB7 /* blackArrow.png in Resources */,
+				30803D421A875A77000CA931 /* Localizable.strings in Resources */,
 				300D5DE51A8426950054CFB7 /* grayArrow@2x.png in Resources */,
 				300D5DE61A8426950054CFB7 /* whiteArrow.png in Resources */,
 				300791FE1A86F61A00D20875 /* bg-addbutton-highlighted.png in Resources */,
@@ -1146,6 +1157,33 @@
 			name = UMSocialLocalizable.strings;
 			sourceTree = "<group>";
 		};
+		30803D3F1A875A5E000CA931 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				30803D3E1A875A5E000CA931 /* en */,
+				30803D461A875A9D000CA931 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		30803D401A875A77000CA931 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				30803D411A875A77000CA931 /* en */,
+				30803D471A875AA1000CA931 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		30803D451A875A83000CA931 /* Info.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				30803D441A875A83000CA931 /* en */,
+				30803D481A875AE9000CA931 /* zh-Hans */,
+			);
+			name = Info.plist;
+			sourceTree = "<group>";
+		};
 		30C251841A858ACE00B004A0 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1257,6 +1295,7 @@
 					"$(PROJECT_DIR)/NewsTongue/Libs/umeng_ios_social_sdk_4.2.1_custom/UMSocial_Sdk_Extra_Frameworks/Wechat",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1282,6 +1321,7 @@
 					"$(PROJECT_DIR)/NewsTongue/Libs/umeng_ios_social_sdk_4.2.1_custom/UMSocial_Sdk_Extra_Frameworks/Wechat",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
