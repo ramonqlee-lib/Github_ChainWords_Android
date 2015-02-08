@@ -26,6 +26,7 @@
 -(IBAction)recordOrigin:(id)sender;// 原句跟读
 -(IBAction)playback:(id)sender;// 跟读回放
 
+@property(nonatomic,readwrite,assign)IBOutlet UIButton* recordButton;
 @property(nonatomic,readwrite,assign)IBOutlet UITextView* textView;
 @property(nonatomic,readwrite,assign)IBOutlet UISlider* slider;
 @property(nonatomic,readwrite,assign)IBOutlet UIView* fontChangeSlider;

@@ -304,10 +304,14 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     NSString* recordedFileName = [[WordModeController getRecordFilePath:[NSString stringWithFormat:@"%@_recording",fileName]]path];
     AFSoundManager* sm = [AFSoundManager sharedManager];
     if ([sm isRecording]) {
+        // TODO 设置为录制完毕图标
+        [self.recordButton setImage:[UIImage imageNamed:@"record.png"] forState:UIControlStateNormal];
         NSLog(@"stopAndSaveRecording: %@",recordedFileName);
         [sm stopAndSaveRecording];
         return;
     }
+    // TODO 设置为录制中图标
+    [self.recordButton setImage:[UIImage imageNamed:@"recording.png"] forState:UIControlStateNormal];
     [sm startRecordingAudioWithFilepath:recordedFileName shouldStopAtSecond:0];
     NSLog(@"startRecordingAudioWithFileName: %@",recordedFileName);
 }

@@ -24,6 +24,7 @@
 
 -(IBAction)extendWordDetail:(id)sender;
 
+@property(nonatomic,readwrite,assign)IBOutlet UIButton* recordButton;
 @property(nonatomic,readwrite,assign)IBOutlet UITextView* textView;
 @property(nonatomic,readwrite,assign)IBOutlet UISlider* slider;
 @property(nonatomic,readwrite,assign)IBOutlet UIView* fontChangeSlider;

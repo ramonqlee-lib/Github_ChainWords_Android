@@ -27,6 +27,12 @@
 		3007920A1A86F61A00D20875 /* icon-star.png in Resources */ = {isa = PBXBuildFile; fileRef = 300791FC1A86F61A00D20875 /* icon-star.png */; };
 		3007920B1A86F61A00D20875 /* icon-star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 300791FD1A86F61A00D20875 /* icon-star@2x.png */; };
 		3007920D1A86FDDC00D20875 /* scaleFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 3007920C1A86FDDC00D20875 /* scaleFont.png */; };
+		3007920F1A87067B00D20875 /* recording.png in Resources */ = {isa = PBXBuildFile; fileRef = 3007920E1A87067B00D20875 /* recording.png */; };
+		300792131A87082100D20875 /* record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 300792121A87082100D20875 /* record@2x.png */; };
+		300792191A870AB700D20875 /* recording@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 300792151A870AB700D20875 /* recording@2x.png */; };
+		3007921A1A870AB700D20875 /* replay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 300792161A870AB700D20875 /* replay@2x.png */; };
+		3007921B1A870AB700D20875 /* speaker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 300792171A870AB700D20875 /* speaker@2x.png */; };
+		3007921D1A870D3E00D20875 /* scaleFont@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3007921C1A870D3E00D20875 /* scaleFont@2x.png */; };
 		300D5DDB1A8426950054CFB7 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 300D5DAC1A8426950054CFB7 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		300D5DDC1A8426950054CFB7 /* LoadMoreTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 300D5DAE1A8426950054CFB7 /* LoadMoreTableFooterView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		300D5DDD1A8426950054CFB7 /* MessageInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 300D5DB01A8426950054CFB7 /* MessageInterceptor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -134,6 +140,12 @@
 		300791FC1A86F61A00D20875 /* icon-star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-star.png"; sourceTree = "<group>"; };
 		300791FD1A86F61A00D20875 /* icon-star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-star@2x.png"; sourceTree = "<group>"; };
 		3007920C1A86FDDC00D20875 /* scaleFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scaleFont.png; sourceTree = "<group>"; };
+		3007920E1A87067B00D20875 /* recording.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recording.png; sourceTree = "<group>"; };
+		300792121A87082100D20875 /* record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record@2x.png"; sourceTree = "<group>"; };
+		300792151A870AB700D20875 /* recording@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "recording@2x.png"; sourceTree = "<group>"; };
+		300792161A870AB700D20875 /* replay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "replay@2x.png"; sourceTree = "<group>"; };
+		300792171A870AB700D20875 /* speaker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speaker@2x.png"; sourceTree = "<group>"; };
+		3007921C1A870D3E00D20875 /* scaleFont@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scaleFont@2x.png"; sourceTree = "<group>"; };
 		300D5DAB1A8426950054CFB7 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		300D5DAC1A8426950054CFB7 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		300D5DAD1A8426950054CFB7 /* LoadMoreTableFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadMoreTableFooterView.h; sourceTree = "<group>"; };
@@ -293,6 +305,12 @@
 		300791D81A86E58000D20875 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3007921C1A870D3E00D20875 /* scaleFont@2x.png */,
+				300792151A870AB700D20875 /* recording@2x.png */,
+				300792161A870AB700D20875 /* replay@2x.png */,
+				300792171A870AB700D20875 /* speaker@2x.png */,
+				300792121A87082100D20875 /* record@2x.png */,
+				3007920E1A87067B00D20875 /* recording.png */,
 				3007920C1A86FDDC00D20875 /* scaleFont.png */,
 				300791DB1A86E9F800D20875 /* replay.png */,
 				300791DC1A86E9F800D20875 /* speaker.png */,
@@ -721,9 +739,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				300792071A86F61A00D20875 /* icon-plus-highlighted@2x.png in Resources */,
+				3007921A1A870AB700D20875 /* replay@2x.png in Resources */,
+				300792131A87082100D20875 /* record@2x.png in Resources */,
 				300792061A86F61A00D20875 /* icon-plus-highlighted.png in Resources */,
+				3007921D1A870D3E00D20875 /* scaleFont@2x.png in Resources */,
 				300792041A86F61A00D20875 /* bg-menuitem.png in Resources */,
 				300791DE1A86E9F800D20875 /* speaker.png in Resources */,
+				3007920F1A87067B00D20875 /* recording.png in Resources */,
 				300792081A86F61A00D20875 /* icon-plus.png in Resources */,
 				300D5DE01A8426950054CFB7 /* blackArrow.png in Resources */,
 				300D5DE51A8426950054CFB7 /* grayArrow@2x.png in Resources */,
@@ -731,6 +753,7 @@
 				300791FE1A86F61A00D20875 /* bg-addbutton-highlighted.png in Resources */,
 				3010AF261A71B27B009CDECF /* LaunchScreen.xib in Resources */,
 				300792021A86F61A00D20875 /* bg-menuitem-highlighted.png in Resources */,
+				3007921B1A870AB700D20875 /* speaker@2x.png in Resources */,
 				30C251861A858ACE00B004A0 /* Main.storyboard in Resources */,
 				300D5DE71A8426950054CFB7 /* whiteArrow@2x.png in Resources */,
 				3007920D1A86FDDC00D20875 /* scaleFont.png in Resources */,
@@ -741,6 +764,7 @@
 				300D5DE11A8426950054CFB7 /* blackArrow@2x.png in Resources */,
 				300792091A86F61A00D20875 /* icon-plus@2x.png in Resources */,
 				300792001A86F61A00D20875 /* bg-addbutton.png in Resources */,
+				300792191A870AB700D20875 /* recording@2x.png in Resources */,
 				300792011A86F61A00D20875 /* bg-addbutton@2x.png in Resources */,
 				3090C96C1A858CC30094231B /* SentenceModeController.xib in Resources */,
 				300792051A86F61A00D20875 /* bg-menuitem@2x.png in Resources */,

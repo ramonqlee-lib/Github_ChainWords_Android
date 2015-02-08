@@ -11,6 +11,7 @@
             <connections>
                 <outlet property="closeButton" destination="uq5-mi-SrK" id="WAd-H3-0mU"/>
                 <outlet property="fontChangeSlider" destination="qPl-RG-U2e" id="HVo-Cs-lIU"/>
+                <outlet property="recordButton" destination="ljx-41-Di9" id="Dsg-9H-3iY"/>
                 <outlet property="slider" destination="gua-dM-ard" id="B3H-4w-Pil"/>
                 <outlet property="submitButton" destination="1w5-pH-Ca1" id="XwO-W8-8lw"/>
                 <outlet property="textView" destination="zgI-8o-fX5" id="Qo7-ML-bQd"/>
@@ -38,6 +39,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0On-bG-H6K" userLabel="字体大小">
                             <rect key="frame" x="429" y="2" width="64" height="40"/>
+                            <inset key="contentEdgeInsets" minX="0.0" minY="5" maxX="0.0" maxY="0.0"/>
                             <state key="normal" image="scaleFont.png">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -338,7 +340,7 @@
                     </variation>
                 </view>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1w5-pH-Ca1">
-                    <rect key="frame" x="10" y="562" width="90" height="30"/>
+                    <rect key="frame" x="11" y="561" width="90" height="30"/>
                     <color key="backgroundColor" red="0.20442677619999999" green="0.42679708979999997" blue="0.94513494320000002" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title=" 提供建议">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -426,6 +428,6 @@
         <image name="record.png" width="20" height="20"/>
         <image name="replay.png" width="20" height="20"/>
         <image name="scaleFont.png" width="40" height="40"/>
-        <image name="speaker.png" width="22" height="20"/>
+        <image name="speaker.png" width="20" height="20"/>
     </resources>
 </document>

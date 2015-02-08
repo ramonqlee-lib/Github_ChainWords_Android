@@ -10,6 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WordModeController">
             <connections>
                 <outlet property="fontChangeSlider" destination="qPl-RG-U2e" id="HVo-Cs-lIU"/>
+                <outlet property="recordButton" destination="ljx-41-Di9" id="S4D-F6-Ba6"/>
                 <outlet property="slider" destination="gua-dM-ard" id="B3H-4w-Pil"/>
                 <outlet property="textView" destination="zgI-8o-fX5" id="Qo7-ML-bQd"/>
                 <outlet property="translatedTextView" destination="1wX-aF-Dyy" id="LQ4-t0-4nV"/>
@@ -39,6 +40,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="iU1-LE-3B2"/>
                             </constraints>
+                            <inset key="contentEdgeInsets" minX="0.0" minY="5" maxX="0.0" maxY="0.0"/>
                             <state key="normal" image="scaleFont.png">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
