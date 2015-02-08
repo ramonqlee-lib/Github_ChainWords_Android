@@ -34,51 +34,95 @@
                                 <action selector="return2ParentAction:" destination="-1" eventType="touchUpInside" id="ObO-9z-BbW"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0On-bG-H6K" userLabel="字体大小">
-                            <rect key="frame" x="456" y="7" width="46" height="30"/>
-                            <state key="normal" title="AA">
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0On-bG-H6K" userLabel="字体大小">
+                            <rect key="frame" x="450" y="2" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="40" id="iU1-LE-3B2"/>
+                            </constraints>
+                            <state key="normal" image="scaleFont.png">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="iU1-LE-3B2"/>
+                                </mask>
+                            </variation>
                             <connections>
                                 <action selector="changeReviewFontSizeButtonAction:" destination="-1" eventType="touchUpInside" id="I6Z-Sl-e6o"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m6t-qG-c5P">
-                            <rect key="frame" x="534" y="7" width="70" height="30"/>
+                            <rect key="frame" x="510" y="7" width="70" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="70" id="EiQ-BB-B9s"/>
+                            </constraints>
                             <state key="normal" title="单词模式">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="EiQ-BB-B9s"/>
+                                </mask>
+                            </variation>
                             <connections>
                                 <action selector="return2ParentAction:" destination="-1" eventType="touchUpInside" id="2NS-GF-6cW"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEF-6q-ztw" userLabel="目标语言">
-                            <rect key="frame" x="402" y="8" width="46" height="30"/>
+                            <rect key="frame" x="386" y="7" width="46" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="46" id="exG-L0-PI1"/>
+                            </constraints>
                             <state key="normal" title="中文">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="exG-L0-PI1"/>
+                                </mask>
+                            </variation>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.20392156859999999" green="0.42745098040000001" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="m6t-qG-c5P" secondAttribute="trailing" constant="20" id="0HB-eg-X0Q"/>
                         <constraint firstItem="m6t-qG-c5P" firstAttribute="top" secondItem="nzC-Ga-RCz" secondAttribute="top" constant="7" id="0Lk-hi-paN"/>
                         <constraint firstItem="vgk-Mu-de7" firstAttribute="top" secondItem="nzC-Ga-RCz" secondAttribute="top" constant="7" id="2U1-mh-Jkt"/>
+                        <constraint firstItem="0On-bG-H6K" firstAttribute="leading" secondItem="mEF-6q-ztw" secondAttribute="trailing" constant="20" id="2zx-Hd-meL"/>
+                        <constraint firstAttribute="centerY" secondItem="mEF-6q-ztw" secondAttribute="centerY" id="61G-K4-19w"/>
                         <constraint firstItem="vgk-Mu-de7" firstAttribute="leading" secondItem="nzC-Ga-RCz" secondAttribute="leading" constant="20" id="9fn-6u-fi0"/>
+                        <constraint firstAttribute="centerY" secondItem="m6t-qG-c5P" secondAttribute="centerY" id="9tJ-Rm-aTL"/>
+                        <constraint firstAttribute="centerY" secondItem="0On-bG-H6K" secondAttribute="centerY" id="KdC-WY-IN0"/>
                         <constraint firstAttribute="trailing" secondItem="m6t-qG-c5P" secondAttribute="trailing" constant="20" id="LiX-PK-G8Q"/>
                         <constraint firstItem="0On-bG-H6K" firstAttribute="baseline" secondItem="vgk-Mu-de7" secondAttribute="baseline" id="Lk6-oB-PYc"/>
                         <constraint firstItem="0On-bG-H6K" firstAttribute="top" secondItem="nzC-Ga-RCz" secondAttribute="top" constant="7" id="QE2-eV-cGr"/>
+                        <constraint firstItem="vgk-Mu-de7" firstAttribute="leading" secondItem="nzC-Ga-RCz" secondAttribute="leading" constant="20" id="SX1-9d-PCI"/>
                         <constraint firstItem="m6t-qG-c5P" firstAttribute="leading" secondItem="0On-bG-H6K" secondAttribute="trailing" constant="32" id="XSI-H4-Bis"/>
+                        <constraint firstItem="m6t-qG-c5P" firstAttribute="leading" secondItem="0On-bG-H6K" secondAttribute="trailing" constant="20" id="cQh-oC-c45"/>
+                        <constraint firstAttribute="centerY" secondItem="vgk-Mu-de7" secondAttribute="centerY" id="cXC-14-D2Q"/>
                         <constraint firstItem="0On-bG-H6K" firstAttribute="baseline" secondItem="mEF-6q-ztw" secondAttribute="baseline" id="dQA-I4-REF"/>
                         <constraint firstAttribute="height" constant="44" id="dwl-So-Yw7"/>
+                        <constraint firstItem="m6t-qG-c5P" firstAttribute="leading" secondItem="0On-bG-H6K" secondAttribute="trailing" constant="30" id="e2l-d6-pQc"/>
                         <constraint firstItem="0On-bG-H6K" firstAttribute="baseline" secondItem="m6t-qG-c5P" secondAttribute="baseline" id="fPc-4Y-oto"/>
                         <constraint firstItem="0On-bG-H6K" firstAttribute="leading" secondItem="mEF-6q-ztw" secondAttribute="trailing" constant="32" id="peF-il-oBH"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="dwl-So-Yw7"/>
+                            <exclude reference="2U1-mh-Jkt"/>
+                            <exclude reference="9fn-6u-fi0"/>
+                            <exclude reference="Lk6-oB-PYc"/>
+                            <exclude reference="QE2-eV-cGr"/>
+                            <exclude reference="dQA-I4-REF"/>
+                            <exclude reference="fPc-4Y-oto"/>
+                            <exclude reference="peF-il-oBH"/>
+                            <exclude reference="0Lk-hi-paN"/>
+                            <exclude reference="LiX-PK-G8Q"/>
+                            <exclude reference="XSI-H4-Bis"/>
+                            <exclude reference="e2l-d6-pQc"/>
                         </mask>
                     </variation>
                 </view>
@@ -382,6 +426,7 @@
     <resources>
         <image name="record.png" width="20" height="20"/>
         <image name="replay.png" width="20" height="20"/>
+        <image name="scaleFont.png" width="40" height="40"/>
         <image name="speaker.png" width="22" height="20"/>
     </resources>
 </document>

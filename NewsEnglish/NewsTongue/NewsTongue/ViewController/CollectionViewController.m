@@ -19,6 +19,7 @@
 #import "CellView.h"
 #import "UIImageView+WebCache.h"
 
+
 @interface CollectionViewController ()
 
 @end
@@ -59,7 +60,10 @@
     collectionView.pullBackgroundColor = [UIColor clearColor];
     collectionView.pullTextColor = [UIColor blackColor];
     UILabel *loadingLabel = [[UILabel alloc] initWithFrame:self.collectionView.bounds];
-    loadingLabel.text = @"Loading...";
+    
+    NSArray* tipArr = [NSArray arrayWithObjects:@"点加号，反馈您的宝贵建议!",@"点加号，将我分享给你的好朋友!", nil];
+    NSInteger pos =  arc4random() % tipArr.count;
+    loadingLabel.text = [tipArr objectAtIndex:pos];
     loadingLabel.textAlignment = NSTextAlignmentCenter;
     collectionView.loadingView = loadingLabel;
     
@@ -67,6 +71,8 @@
         collectionView.pullTableIsRefreshing = YES;
         [self performSelector:@selector(refreshTable) withObject:nil afterDelay:0];
     }
+    
+    [self addSystemMenu];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -77,12 +83,27 @@
     /*
      Code to actually refresh goes here.
      */
+    // Request
+    NSString *string = @"http://checknewversion.duapp.com/listnews.php";
+    NSURL *url = [NSURL URLWithString:string];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
-    //    [self.items removeAllObjects];
-    [self loadDataSource];
-    self.collectionView.pullLastRefreshDate = [NSDate date];
-    self.collectionView.pullTableIsRefreshing = NO;
-    [self.collectionView reloadData];
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        self.items = (NSArray *)responseObject;
+        
+        self.collectionView.pullLastRefreshDate = [NSDate date];
+        self.collectionView.pullTableIsRefreshing = NO;
+        
+        [self dataSourceDidLoad];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self dataSourceDidError];
+    }];
+    
+    // 5
+    [operation start];
 }
 
 - (void) loadMoreDataToTable
@@ -92,7 +113,6 @@
      Code to actually load more data goes here.
      
      */
-    //    [self loadDataSource];
     //    [self.items addObjectsFromArray:self.items];
     [self.collectionView reloadData];
     self.collectionView.pullTableIsLoadingMore = NO;
@@ -174,27 +194,6 @@
 - (NSInteger)numberOfViewsInCollectionView:(PSCollectionView *)collectionView {
     return [self.items count];
 }
-
-- (void)loadDataSource {
-    // Request
-    NSString *string = @"http://checknewversion.duapp.com/listnews.php";
-    NSURL *url = [NSURL URLWithString:string];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
-    
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        self.items = (NSArray *)responseObject;
-        [self dataSourceDidLoad];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self dataSourceDidError];
-    }];
-    
-    // 5
-    [operation start];
-}
-
 - (void)dataSourceDidLoad {
     [self.collectionView reloadData];
 }
@@ -203,4 +202,38 @@
     [self.collectionView reloadData];
 }
 
+#pragma QuadCurveMenuDelegate
+- (void)addSystemMenu
+{
+    UIImage *storyMenuItemImage = [UIImage imageNamed:@"bg-menuitem.png"];
+    UIImage *storyMenuItemImagePressed = [UIImage imageNamed:@"bg-menuitem-highlighted.png"];
+    
+    // Camera MenuItem.
+    QuadCurveMenuItem *cameraMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
+                                                                highlightedImage:storyMenuItemImagePressed
+                                                                    ContentImage:[UIImage imageNamed:@"icon-star.png"]
+                                                         highlightedContentImage:nil];
+    // People MenuItem.
+    QuadCurveMenuItem *peopleMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
+                                                                highlightedImage:storyMenuItemImagePressed
+                                                                    ContentImage:[UIImage imageNamed:@"icon-star.png"]
+                                                         highlightedContentImage:nil];
+    // Place MenuItem.
+    QuadCurveMenuItem *placeMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
+                                                               highlightedImage:storyMenuItemImagePressed
+                                                                   ContentImage:[UIImage imageNamed:@"icon-star.png"]
+                                                        highlightedContentImage:nil];
+
+    
+    NSArray *menus = [NSArray arrayWithObjects:cameraMenuItem, peopleMenuItem, placeMenuItem, nil];
+    
+    QuadCurveMenu *menu = [[QuadCurveMenu alloc] initWithFrame:self.view.bounds menus:menus];
+    menu.delegate = self;
+    [self.view addSubview:menu];
+}
+
+- (void)quadCurveMenu:(QuadCurveMenu *)menu didSelectIndex:(NSInteger)idx
+{
+    NSLog(@"Select the index : %d",idx);
+}
 @end

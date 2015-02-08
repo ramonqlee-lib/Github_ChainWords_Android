@@ -36,9 +36,9 @@
                                 <action selector="return2ParentAction:" destination="-1" eventType="touchUpInside" id="Qnc-1j-k2T"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0On-bG-H6K" userLabel="字体大小">
-                            <rect key="frame" x="456" y="7" width="46" height="30"/>
-                            <state key="normal" title="AA">
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0On-bG-H6K" userLabel="字体大小">
+                            <rect key="frame" x="429" y="2" width="64" height="40"/>
+                            <state key="normal" image="scaleFont.png">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -47,7 +47,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m6t-qG-c5P">
-                            <rect key="frame" x="534" y="7" width="70" height="30"/>
+                            <rect key="frame" x="510" y="7" width="70" height="30"/>
                             <state key="normal" title="单句模式">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -57,7 +57,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEF-6q-ztw" userLabel="目标语言">
-                            <rect key="frame" x="402" y="8" width="46" height="30"/>
+                            <rect key="frame" x="363" y="7" width="46" height="30"/>
                             <state key="normal" title="中文">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -68,16 +68,40 @@
                     <constraints>
                         <constraint firstItem="m6t-qG-c5P" firstAttribute="top" secondItem="nzC-Ga-RCz" secondAttribute="top" constant="7" id="0Lk-hi-paN"/>
                         <constraint firstItem="vgk-Mu-de7" firstAttribute="top" secondItem="nzC-Ga-RCz" secondAttribute="top" constant="7" id="2U1-mh-Jkt"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="m6t-qG-c5P" secondAttribute="trailing" constant="20" id="6P2-3m-UYv"/>
+                        <constraint firstAttribute="centerY" secondItem="mEF-6q-ztw" secondAttribute="centerY" id="7fu-nb-XXV"/>
+                        <constraint firstAttribute="centerY" secondItem="0On-bG-H6K" secondAttribute="centerY" id="86e-Li-BQh"/>
                         <constraint firstItem="vgk-Mu-de7" firstAttribute="leading" secondItem="nzC-Ga-RCz" secondAttribute="leading" constant="20" id="9fn-6u-fi0"/>
+                        <constraint firstItem="0On-bG-H6K" firstAttribute="leading" secondItem="mEF-6q-ztw" secondAttribute="trailing" constant="20" id="H22-FU-j3k"/>
+                        <constraint firstItem="vgk-Mu-de7" firstAttribute="leading" secondItem="nzC-Ga-RCz" secondAttribute="leading" constant="20" id="KnN-fj-yA9"/>
                         <constraint firstAttribute="trailing" secondItem="m6t-qG-c5P" secondAttribute="trailing" constant="20" id="LiX-PK-G8Q"/>
                         <constraint firstItem="0On-bG-H6K" firstAttribute="baseline" secondItem="vgk-Mu-de7" secondAttribute="baseline" id="Lk6-oB-PYc"/>
+                        <constraint firstItem="m6t-qG-c5P" firstAttribute="leading" secondItem="0On-bG-H6K" secondAttribute="trailing" constant="20" id="N2O-XK-QWn"/>
                         <constraint firstItem="0On-bG-H6K" firstAttribute="top" secondItem="nzC-Ga-RCz" secondAttribute="top" constant="7" id="QE2-eV-cGr"/>
                         <constraint firstItem="m6t-qG-c5P" firstAttribute="leading" secondItem="0On-bG-H6K" secondAttribute="trailing" constant="32" id="XSI-H4-Bis"/>
+                        <constraint firstAttribute="centerY" secondItem="m6t-qG-c5P" secondAttribute="centerY" id="YSK-1J-vJE"/>
                         <constraint firstItem="0On-bG-H6K" firstAttribute="baseline" secondItem="mEF-6q-ztw" secondAttribute="baseline" id="dQA-I4-REF"/>
                         <constraint firstAttribute="height" constant="44" id="dwl-So-Yw7"/>
                         <constraint firstItem="0On-bG-H6K" firstAttribute="baseline" secondItem="m6t-qG-c5P" secondAttribute="baseline" id="fPc-4Y-oto"/>
                         <constraint firstItem="0On-bG-H6K" firstAttribute="leading" secondItem="mEF-6q-ztw" secondAttribute="trailing" constant="32" id="peF-il-oBH"/>
+                        <constraint firstAttribute="centerY" secondItem="vgk-Mu-de7" secondAttribute="centerY" id="rve-RC-jHc"/>
+                        <constraint firstAttribute="trailing" secondItem="m6t-qG-c5P" secondAttribute="trailing" constant="20" id="vSd-C8-hiO"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="2U1-mh-Jkt"/>
+                            <exclude reference="9fn-6u-fi0"/>
+                            <exclude reference="Lk6-oB-PYc"/>
+                            <exclude reference="QE2-eV-cGr"/>
+                            <exclude reference="dQA-I4-REF"/>
+                            <exclude reference="fPc-4Y-oto"/>
+                            <exclude reference="peF-il-oBH"/>
+                            <exclude reference="0Lk-hi-paN"/>
+                            <exclude reference="6P2-3m-UYv"/>
+                            <exclude reference="LiX-PK-G8Q"/>
+                            <exclude reference="XSI-H4-Bis"/>
+                        </mask>
+                    </variation>
                 </view>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" editable="NO" text="textview" translatesAutoresizingMaskIntoConstraints="NO" id="zgI-8o-fX5" userLabel="body">
                     <rect key="frame" x="0.0" y="104" width="600" height="280"/>
@@ -401,6 +425,7 @@
     <resources>
         <image name="record.png" width="20" height="20"/>
         <image name="replay.png" width="20" height="20"/>
+        <image name="scaleFont.png" width="40" height="40"/>
         <image name="speaker.png" width="22" height="20"/>
     </resources>
 </document>

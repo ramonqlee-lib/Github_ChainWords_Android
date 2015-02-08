@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "PSCollectionView.h"
 #import "PullPsCollectionView.h"
+#import "QuadCurveMenu.h"
 
-@interface CollectionViewController : UIViewController<PSCollectionViewDelegate,PSCollectionViewDataSource,UIScrollViewDelegate,PullPsCollectionViewDelegate>
+@interface CollectionViewController : UIViewController<PSCollectionViewDelegate,PSCollectionViewDataSource,UIScrollViewDelegate,PullPsCollectionViewDelegate,QuadCurveMenuDelegate>
 
 @property(nonatomic,retain) PullPsCollectionView *collectionView;
 @property(nonatomic,retain)NSArray *items;
--(void)loadDataSource;
 
 @end
 
