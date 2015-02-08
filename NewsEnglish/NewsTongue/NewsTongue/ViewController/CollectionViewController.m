@@ -246,9 +246,9 @@
         case 1:// share
             [UMSocialSnsService presentSnsIconSheetView:self
                                                  appKey:UMENG_APP_KEY
-                                              shareText:@"你要分享的文字"
-                                             shareImage:[UIImage imageNamed:@"icon.png"]
-                                        shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToSina,UMShareToEmail,UMShareToSms,nil]
+                                              shareText:NSLocalizedString(@"ShareMessage", nil)
+                                             shareImage:nil//[UIImage imageNamed:@"icon.png"]
+                                        shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToEmail,UMShareToSms,nil]
                                                delegate:nil];
             break;
         case 2:// feedback
