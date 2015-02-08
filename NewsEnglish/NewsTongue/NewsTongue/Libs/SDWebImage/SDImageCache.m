@@ -366,6 +366,9 @@ static SDImageCache *instance;
     NSDirectoryEnumerator *fileEnumerator = [[NSFileManager defaultManager] enumeratorAtPath:diskCachePath];
     for (NSString *fileName in fileEnumerator)
     {
+        if (!fileName) {
+            continue;
+        }
         count += 1;
     }
     

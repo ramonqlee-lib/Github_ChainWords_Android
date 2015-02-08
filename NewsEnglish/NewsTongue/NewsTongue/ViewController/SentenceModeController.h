@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "UITextView+Extras.h"
+#import "BaiduMobAdDelegateProtocol.h"
 
-@interface SentenceModeController : UIViewController
+@interface SentenceModeController : UIViewController<BaiduMobAdViewDelegate>
+{
+    BaiduMobAdView* sharedAdView;
+}
 
 -(void)setText:(NSString*)value;
 -(void)setTapGranality:(UITextGranularity)value;
@@ -33,4 +37,6 @@
 @property(nonatomic,readwrite,assign)IBOutlet UITextView* translatedTextView;
 @property(nonatomic,readwrite,assign)IBOutlet UIButton* submitButton;
 @property(nonatomic,readwrite,assign)IBOutlet UIButton* closeButton;
+
+@property(nonatomic,readwrite,assign)IBOutlet UIView* adViewContainer;
 @end

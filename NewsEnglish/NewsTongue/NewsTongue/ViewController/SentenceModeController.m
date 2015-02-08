@@ -13,8 +13,9 @@
 #import "AFURLSessionManager.h"
 #import "SentenceManager.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "BaiduMobAdView.h"
+#import "Constants.h"
 
-#define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)//用来获取手机的系统，判断系统是多少
 
 static const CGFloat kLineSpacing = 5.0f;// 行间距
 static const CGFloat kMinFontSize = 18.0f;// 字体缩放的最小值
@@ -36,11 +37,24 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 @implementation SentenceModeController
 
+-(void) startAd
+{
+    //使用嵌入广告的方法实例。
+    sharedAdView = [[BaiduMobAdView alloc] init];
+    sharedAdView.AdUnitTag = BAIDU_AD_APPID;//@"myAdPlaceId1";
+    //此处为广告位id，可以不进行设置，如需设置，在百度移动联盟上设置广告位id，然后将得到的id填写到此处。
+    sharedAdView.AdType = BaiduMobAdViewTypeBanner;
+    sharedAdView.frame = kAdViewPortraitRect;
+    sharedAdView.delegate = self;
+    [self.adViewContainer addSubview:sharedAdView];
+    [sharedAdView start];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     fromLang = @"en";
     toLang = @"zh";
+    [self startAd];
     
     if(nil != mBodyText && mBodyText.length > 0)
     {
@@ -354,11 +368,51 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
     }
 }
-#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
-#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+
 - (void)willPresentAlertView:(UIAlertView *)alertView {
     NSLog(@"width:%f",SCREEN_WIDTH);
     alertView.frame = CGRectMake( 0, 190, SCREEN_WIDTH, 100 );
 }
+
+#pragma mark baidu ad delegate
+
+- (NSString *)publisherId
+{
+    return  BAIDU_AD_APPID;
+}
+
+- (NSString*) appSpec
+{
+    //注意：该计费名为测试用途，不会产生计费，请测试广告展示无误以后，替换为您的应用计费名，然后提交AppStore.
+    return BAIDU_AD_APPID;
+}
+
+-(BOOL) enableLocation
+{
+    //启用location会有一次alert提示
+    return NO;
+}
+
+-(void) willDisplayAd:(BaiduMobAdView*) adview
+{
+    //在广告即将展示时，产生一个动画，把广告条加载到视图中
+    sharedAdView.hidden = NO;
+    CGRect f = sharedAdView.frame;
+    CGFloat xOrg = f.origin.x;
+    f.origin.x = -320;
+    sharedAdView.frame = f;
+    [UIView beginAnimations:nil context:nil];
+    f.origin.x = xOrg;
+    sharedAdView.frame = f;
+    [UIView commitAnimations];
+    NSLog(@"delegate: will display ad");
+    
+}
+
+-(void) failedDisplayAd:(BaiduMobFailReason) reason;
+{
+    NSLog(@"delegate: failedDisplayAd %d", reason);
+}
+
 
 @end
