@@ -12,7 +12,7 @@
 #define NEARRADIUS 130.0f
 #define ENDRADIUS 140.0f
 #define FARRADIUS 160.0f
-#define STARTPOINT CGPointMake(20, 400)
+#define STARTPOINT CGPointMake(20, [UIScreen mainScreen].bounds.size.height-20)
 #define TIMEOFFSET 0.026f
 
 
