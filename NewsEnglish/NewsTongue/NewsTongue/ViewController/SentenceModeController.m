@@ -37,18 +37,6 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 @implementation SentenceModeController
 
--(void) startAd
-{
-    //使用嵌入广告的方法实例。
-    sharedAdView = [[BaiduMobAdView alloc] init];
-    sharedAdView.AdUnitTag = BAIDU_AD_APPID;//@"myAdPlaceId1";
-    //此处为广告位id，可以不进行设置，如需设置，在百度移动联盟上设置广告位id，然后将得到的id填写到此处。
-    sharedAdView.AdType = BaiduMobAdViewTypeBanner;
-    sharedAdView.frame = kAdViewPortraitRect;
-    sharedAdView.delegate = self;
-    [self.adViewContainer addSubview:sharedAdView];
-    [sharedAdView start];
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -399,7 +387,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     sharedAdView.hidden = NO;
     CGRect f = sharedAdView.frame;
     CGFloat xOrg = f.origin.x;
-    f.origin.x = -320;
+    f.origin.x = -SCREEN_WIDTH;
     sharedAdView.frame = f;
     [UIView beginAnimations:nil context:nil];
     f.origin.x = xOrg;
@@ -414,5 +402,18 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     NSLog(@"delegate: failedDisplayAd %d", reason);
 }
 
+
+-(void) startAd
+{
+    //使用嵌入广告的方法实例。
+    sharedAdView = [[BaiduMobAdView alloc] init];
+    sharedAdView.AdUnitTag = BAIDU_AD_APPID;//@"myAdPlaceId1";
+    //此处为广告位id，可以不进行设置，如需设置，在百度移动联盟上设置广告位id，然后将得到的id填写到此处。
+    sharedAdView.AdType = BaiduMobAdViewTypeBanner;
+    sharedAdView.frame = kAdViewPortraitRect;
+    sharedAdView.delegate = self;
+    [self.adViewContainer addSubview:sharedAdView];
+    [sharedAdView start];
+}
 
 @end

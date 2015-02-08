@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "UITextView+Extras.h"
+#import "BaiduMobAdDelegateProtocol.h"
 
-@interface WordModeController : UIViewController
-
+@interface WordModeController : UIViewController<BaiduMobAdViewDelegate>
+{
+    BaiduMobAdView* sharedAdView;
+}
 -(void)setText:(NSString*)value;
 -(void)setTapGranality:(UITextGranularity)value;
 
@@ -29,7 +32,7 @@
 @property(nonatomic,readwrite,assign)IBOutlet UISlider* slider;
 @property(nonatomic,readwrite,assign)IBOutlet UIView* fontChangeSlider;
 @property(nonatomic,readwrite,assign)IBOutlet UITextView* translatedTextView;
-
+@property(nonatomic,readwrite,assign)IBOutlet UIView* adViewContainer;
 
 +(NSURL*)getRecordFilePath:(NSString*)fileName;
 +(NSURL*)getAudioFilePath:(NSString*)fileName;

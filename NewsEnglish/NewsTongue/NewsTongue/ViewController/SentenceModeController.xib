@@ -105,7 +105,7 @@
                     </variation>
                 </view>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" text="textview" translatesAutoresizingMaskIntoConstraints="NO" id="zgI-8o-fX5" userLabel="body">
-                    <rect key="frame" x="0.0" y="104" width="600" height="280"/>
+                    <rect key="frame" x="0.0" y="104" width="600" height="279"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="600" id="7Yh-vk-OmF"/>
@@ -259,7 +259,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rfl-aA-HIN" userLabel="bottom_part">
-                    <rect key="frame" x="10" y="390" width="580" height="150"/>
+                    <rect key="frame" x="10" y="389" width="580" height="150"/>
                     <subviews>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="顶部的文字可以按照句子进行选择" translatesAutoresizingMaskIntoConstraints="NO" id="1wX-aF-Dyy" userLabel="translated_textview">
                             <rect key="frame" x="0.0" y="0.0" width="580" height="150"/>
@@ -293,9 +293,8 @@
                         <constraint firstAttribute="trailing" secondItem="1wX-aF-Dyy" secondAttribute="trailing" id="hSE-MT-iW5"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5lr-Dx-DvZ" userLabel="AdView">
-                    <rect key="frame" x="7" y="547" width="584" height="48"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5lr-Dx-DvZ" userLabel="AdView">
+                    <rect key="frame" x="0.0" y="547" width="600" height="48"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="PXE-KK-Ekv"/>
                     </constraints>
@@ -317,7 +316,7 @@
                 <constraint firstItem="qPl-RG-U2e" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Hnw-Gp-f1J"/>
                 <constraint firstItem="rfl-aA-HIN" firstAttribute="top" secondItem="zgI-8o-fX5" secondAttribute="bottom" constant="8" id="Laj-Zj-0AF"/>
                 <constraint firstItem="rfl-aA-HIN" firstAttribute="top" secondItem="zgI-8o-fX5" secondAttribute="bottom" constant="8" id="Lyp-B4-fKL"/>
-                <constraint firstItem="5lr-Dx-DvZ" firstAttribute="top" secondItem="rfl-aA-HIN" secondAttribute="bottom" constant="7" id="MVk-Bn-drJ"/>
+                <constraint firstItem="5lr-Dx-DvZ" firstAttribute="top" secondItem="rfl-aA-HIN" secondAttribute="bottom" constant="8" id="MVk-Bn-drJ"/>
                 <constraint firstItem="Nro-mU-PQP" firstAttribute="top" secondItem="nzC-Ga-RCz" secondAttribute="bottom" id="N9l-jL-3SL"/>
                 <constraint firstItem="qPl-RG-U2e" firstAttribute="top" relation="lessThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="Or0-6W-fCb"/>
                 <constraint firstItem="rfl-aA-HIN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="QQV-Rd-yea"/>
@@ -334,11 +333,11 @@
                 <constraint firstAttribute="trailing" secondItem="Nro-mU-PQP" secondAttribute="trailing" id="bif-db-vqt"/>
                 <constraint firstItem="zgI-8o-fX5" firstAttribute="top" secondItem="nzC-Ga-RCz" secondAttribute="bottom" constant="40" id="dP0-tG-vKC"/>
                 <constraint firstAttribute="bottom" secondItem="5lr-Dx-DvZ" secondAttribute="bottom" constant="5" id="g3P-KK-6OG"/>
-                <constraint firstAttribute="trailing" secondItem="5lr-Dx-DvZ" secondAttribute="trailing" constant="8" id="hGP-KC-mNQ"/>
+                <constraint firstAttribute="trailing" secondItem="5lr-Dx-DvZ" secondAttribute="trailing" id="hGP-KC-mNQ"/>
                 <constraint firstItem="rfl-aA-HIN" firstAttribute="top" secondItem="zgI-8o-fX5" secondAttribute="bottom" constant="10" id="hKi-vK-iYA"/>
                 <constraint firstItem="rfl-aA-HIN" firstAttribute="top" secondItem="zgI-8o-fX5" secondAttribute="bottom" constant="6" id="kfD-Jp-lY9"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="rfl-aA-HIN" secondAttribute="bottom" constant="60" id="l8d-Nf-lpb"/>
-                <constraint firstItem="5lr-Dx-DvZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="7" id="mjP-9p-8b4"/>
+                <constraint firstItem="5lr-Dx-DvZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="mjP-9p-8b4"/>
                 <constraint firstItem="rfl-aA-HIN" firstAttribute="top" secondItem="zgI-8o-fX5" secondAttribute="bottom" constant="6" id="seP-BO-mvi"/>
                 <constraint firstAttribute="trailing" secondItem="qPl-RG-U2e" secondAttribute="trailing" id="tEm-IS-Nvq"/>
                 <constraint firstItem="nzC-Ga-RCz" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="tQ9-n2-Dih"/>
