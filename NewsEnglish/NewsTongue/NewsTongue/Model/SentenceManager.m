@@ -110,8 +110,13 @@ static SentenceManager* sSentenceManager;
             sentenceQueryCallback = nil;
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        sentenceQueryCallback = nil;
-        // 4
+        
+        if (nil != sentenceQueryCallback) {
+            // 在主线程中更新
+            [sentenceQueryCallback handleResponse:nil];
+            sentenceQueryCallback = nil;
+        }
+        
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Word"
                                                             message:[error localizedDescription]
                                                            delegate:nil

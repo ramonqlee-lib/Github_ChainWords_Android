@@ -137,16 +137,24 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 -(void)updateTranslatedText:(NSString*)originText
 {
+    //  显示翻译中的进度提示
+    [self showProgress];
+    
     _translatedTextView.text = @"";
     //  翻译
     [[SentenceManager sharedInstance]query:[originText lowercaseString] from:fromLang to:toLang response:self];
-    
 }
+
 #pragma mark WordQueryResult protocol
 
 -(void)handleResponse:(NSDictionary*)result
 {
-    //  待展示翻译结果
+    // 关闭翻译中的进度提示
+    [self hideProgress];
+    if (!result || !result.count) {
+        return;
+    }
+    //  展示翻译结果
     _translatedTextView.text = [SentenceManager getTranslate:result];
 }
 /*
@@ -220,18 +228,23 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 -(IBAction)submitTranslate:(id)sender
 {
-    // TODO 将矫正后的翻译文本，提交到服务器端
+    // 将矫正后的翻译文本，提交到服务器端
     NSString* text = _translatedTextView.text;
 
     NSString *idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     //post数据
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *parameters = @{@"src": sentence,@"trans": text,@"uid":[NSString stringWithFormat:@"%@_%@",idfv,[sentence md5]]};
+    
+    [self showProgress];
     [manager POST:@"http://checknewversion.duapp.com/uploadTrans.php" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"JSON: %@", responseObject);
+        [self hideProgress];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
+        [self hideProgress];
     }];
+    
 }
 
 -(IBAction)switch2WordMode:(id)sender
@@ -282,6 +295,8 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
         return [WordModeController getAudioFilePath:fileName];
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        [self hideProgress];
+        
         NSLog(@"File downloaded to: %@", filePath);
         [[AFSoundManager sharedManager]startPlayingLocalFileWithFilePath:[filePath path] andBlock:^(int percentage, CGFloat elapsedTime, CGFloat timeRemaining, NSError *error, BOOL finished) {
             
@@ -294,7 +309,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
         }];
     }];
     [downloadTask resume];
-    
+    [self showProgress];
 }
 -(IBAction)recordOrigin:(id)sender// 原句跟读
 {
@@ -427,4 +442,40 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     [sharedAdView start];
 }
 
+#pragma mark progress api
+-(void) showProgress
+{
+    self.progressView.hidden = NO;
+    self.progressView.progress = 0;
+    
+    // 显示进度条
+    // 定时更新进度，循环更新
+    [self fireNextUpdate];
+}
+-(void) hideProgress
+{
+    self.progressView.hidden = YES;
+}
+
+-(void)fireNextUpdate
+{
+    // fire next one
+    if (self.progressView.hidden) {
+        return;
+    }
+    
+    [self performSelector:@selector(timeFire) withObject:nil afterDelay:0.1];
+}
+
+-(void)timeFire
+{
+    CGFloat progress = self.progressView.progress + 0.1;
+    if (progress >= 1) {
+        progress = 0;
+    }
+    NSLog(@"%f",progress);
+    [self.progressView setProgress:progress animated:YES];
+    
+    [self fireNextUpdate];
+}
 @end

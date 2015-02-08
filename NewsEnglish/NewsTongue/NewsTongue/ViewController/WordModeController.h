@@ -33,6 +33,7 @@
 @property(nonatomic,readwrite,assign)IBOutlet UIView* fontChangeSlider;
 @property(nonatomic,readwrite,assign)IBOutlet UITextView* translatedTextView;
 @property(nonatomic,readwrite,assign)IBOutlet UIView* adViewContainer;
+@property(nonatomic,readwrite,assign)IBOutlet UIProgressView* progressView;
 
 +(NSURL*)getRecordFilePath:(NSString*)fileName;
 +(NSURL*)getAudioFilePath:(NSString*)fileName;

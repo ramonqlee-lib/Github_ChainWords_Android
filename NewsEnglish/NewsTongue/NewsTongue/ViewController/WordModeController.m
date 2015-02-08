@@ -135,6 +135,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 -(void)updateTranslatedText:(NSString*)originText
 {
+    [self showProgress];
     _translatedTextView.text = @"";
     //  翻译单词
     [[WordManager sharedInstance]query:[originText lowercaseString] from:fromLang to:toLang response:self];
@@ -144,6 +145,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 -(void)handleResponse:(NSDictionary*)result
 {
+    [self hideProgress];
     wordDict = result;
     // 单词意义
 //    _translatedTextView.text = [WordManager getReadableMeaning:wordDict];
@@ -239,6 +241,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
         return [WordModeController getAudioFilePath:word];
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
         NSLog(@"File downloaded to: %@", filePath);
+        [self hideProgress];
         [[AFSoundManager sharedManager]startPlayingLocalFileWithFilePath:[filePath path] andBlock:^(int percentage, CGFloat elapsedTime, CGFloat timeRemaining, NSError *error, BOOL finished) {
             
             if (!error) {
@@ -250,7 +253,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
         }];
     }];
     [downloadTask resume];
-    
+    [self showProgress];
 }
 
 -(IBAction)recordWord:(id)sender
@@ -376,4 +379,43 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     [self.adViewContainer addSubview:sharedAdView];
     [sharedAdView start];
 }
+
+
+#pragma mark progress api
+-(void) showProgress
+{
+    self.progressView.hidden = NO;
+    self.progressView.progress = 0;
+    
+    // 显示进度条
+    // 定时更新进度，循环更新
+    [self fireNextUpdate];
+}
+-(void) hideProgress
+{
+    self.progressView.hidden = YES;
+}
+
+-(void)fireNextUpdate
+{
+    // fire next one
+    if (self.progressView.hidden) {
+        return;
+    }
+    
+    [self performSelector:@selector(timeFire) withObject:nil afterDelay:0.1];
+}
+
+-(void)timeFire
+{
+    CGFloat progress = self.progressView.progress + 0.1;
+    if (progress >= 1) {
+        progress = 0;
+    }
+    NSLog(@"%f",progress);
+    [self.progressView setProgress:progress animated:YES];
+    
+    [self fireNextUpdate];
+}
+
 @end

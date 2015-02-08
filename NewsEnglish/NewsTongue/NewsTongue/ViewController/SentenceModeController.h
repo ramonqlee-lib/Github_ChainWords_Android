@@ -39,4 +39,5 @@
 @property(nonatomic,readwrite,assign)IBOutlet UIButton* closeButton;
 
 @property(nonatomic,readwrite,assign)IBOutlet UIView* adViewContainer;
+@property(nonatomic,readwrite,assign)IBOutlet UIProgressView* progressView;
 @end
