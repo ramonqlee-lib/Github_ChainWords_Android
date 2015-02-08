@@ -9,7 +9,8 @@
 #import "AppDelegate.h"
 #import "MobClick.h"
 #import "Constants.h"
-
+#import "UMFeedback.h"
+#import "UMSocial.h"
 
 @interface AppDelegate ()
 
@@ -21,6 +22,7 @@
     // Override point for customization after application launch.
     
     [self initUmengAnalytics];
+    [self initUmengFeedback];
     return YES;
 }
 
@@ -54,5 +56,13 @@
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
     [MobClick setEncryptEnabled:YES];
+}
+-(void) initUmengFeedback
+{
+    [UMFeedback setAppkey:UMENG_APP_KEY];
+}
+-(void) initumengSocial
+{
+    [UMSocialData setAppKey:UMENG_APP_KEY];
 }
 @end

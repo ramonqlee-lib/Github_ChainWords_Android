@@ -19,6 +19,10 @@
 #import "CellView.h"
 #import "UIImageView+WebCache.h"
 
+#import "UMFeedback.h"
+#import "UMSocial.h"
+#import "Constants.h"
+
 
 @interface CollectionViewController ()
 
@@ -240,8 +244,15 @@
             [self popupAbout:nil];
             break;
         case 1:// share
+            [UMSocialSnsService presentSnsIconSheetView:self
+                                                 appKey:UMENG_APP_KEY
+                                              shareText:@"你要分享的文字"
+                                             shareImage:[UIImage imageNamed:@"icon.png"]
+                                        shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToSina,UMShareToEmail,UMShareToSms,nil]
+                                               delegate:nil];
             break;
         case 2:// feedback
+            [self presentViewController:[UMFeedback feedbackModalViewController] animated:YES completion:nil];
             break;
             
         default:

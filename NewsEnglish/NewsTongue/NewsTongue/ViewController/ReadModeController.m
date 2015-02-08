@@ -9,7 +9,8 @@
 #import "ReadModeController.h"
 #import "WordModeController.h"
 #import "SentenceModeController.h"
-
+#import "MobClick.h"
+#import "Constants.h"
 static const CGFloat kLineSpacing = 5.0f;// 行间距
 static const CGFloat kMinFontSize = 18.0f;// 字体缩放的最小值
 static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
@@ -125,6 +126,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 }
 -(IBAction)changeReviewFontSizeButtonAction:(id)sender
 {
+    [MobClick event:CHANGE_FONT_SIZE_AT_READ_MODE_PAGE];
     if (nil == _fontChangeSlider) {
         return;
     }
