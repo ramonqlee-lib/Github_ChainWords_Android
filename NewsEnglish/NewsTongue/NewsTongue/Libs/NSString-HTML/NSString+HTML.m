@@ -410,4 +410,15 @@
     }
     return resultStr;
 }
+
+-(NSString*) stringByTrimmingStopCharactersInSet
+{
+    NSCharacterSet *stopCharacters = [NSCharacterSet characterSetWithCharactersInString:[NSString stringWithFormat:@"< \t\n\r%d%d%d%d", 0x0085, 0x000C, 0x2028, 0x2029]];
+    
+    if (!self || !self.length ) {
+        return self;
+    }
+    
+    return  [self stringByTrimmingCharactersInSet:stopCharacters];
+}
 @end

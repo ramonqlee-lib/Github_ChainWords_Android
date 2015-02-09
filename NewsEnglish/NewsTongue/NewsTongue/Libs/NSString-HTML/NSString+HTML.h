@@ -67,4 +67,6 @@
 - (NSString *)md5;
 
 - (NSString *)stringByURLEncodingStringParameter;
+
+- (NSString *)stringByTrimmingStopCharactersInSet;
 @end

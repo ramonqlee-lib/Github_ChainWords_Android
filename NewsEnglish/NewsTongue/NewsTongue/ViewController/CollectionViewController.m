@@ -242,7 +242,7 @@
                                                  appKey:UMENG_APP_KEY
                                               shareText:NSLocalizedString(@"ShareMessage", nil)
                                              shareImage:nil//[UIImage imageNamed:@"icon.png"]
-                                        shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatSession,UMShareToWechatTimeline,UMShareToEmail,UMShareToSms,nil]
+                                        shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQQ,UMShareToTencent,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToEmail,UMShareToSms,nil]
                                                delegate:nil];
             break;
         case 2:// feedback

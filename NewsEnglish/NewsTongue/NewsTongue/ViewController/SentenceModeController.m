@@ -113,7 +113,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
         UITextGranularity granularity = mGranuality;
         
         NSString* tappedString = [_textView substringWithGranularity:granularity atPoint:tappedPoint];
-        if (nil == tappedString || tappedString.length == 0) {
+        if (nil == tappedString || !tappedString.length || ![[NSString stringWithString:tappedString] stringByTrimmingStopCharactersInSet].length) {
             return;
         }
         NSLog(@"%@",tappedString);
@@ -137,6 +137,10 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 -(void)updateTranslatedText:(NSString*)originText
 {
+    if (!originText || !originText.length || ![[NSString stringWithString:originText] stringByTrimmingStopCharactersInSet].length) {
+        return;
+    }
+    
     //  显示翻译中的进度提示
     [self showProgress];
     

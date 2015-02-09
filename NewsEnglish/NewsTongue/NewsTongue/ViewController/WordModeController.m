@@ -12,6 +12,7 @@
 #import "AFURLSessionManager.h"
 #import "BaiduMobAdView.h"
 #import "Constants.h"
+#import "NSString+HTML.h"
 #import "Toast+UIView.h"
 
 static const CGFloat kLineSpacing = 5.0f;// 行间距
@@ -112,7 +113,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
         UITextGranularity granularity = mGranuality;
         
         NSString* tappedString = [_textView substringWithGranularity:granularity atPoint:tappedPoint];
-        if (nil == tappedString || tappedString.length == 0) {
+        if (nil == tappedString || !tappedString.length || ![[NSString stringWithString:tappedString] stringByTrimmingStopCharactersInSet].length) {
             return;
         }
         NSLog(@"%@",tappedString);
@@ -135,6 +136,10 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 -(void)updateTranslatedText:(NSString*)originText
 {
+    if (!originText || !originText.length || ![[NSString stringWithString:originText] stringByTrimmingStopCharactersInSet].length) {
+        return;
+    }
+    
     [self showProgress];
     _translatedTextView.text = @"";
     //  翻译单词

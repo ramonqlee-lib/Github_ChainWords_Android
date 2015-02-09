@@ -11,6 +11,8 @@
 #import "SentenceModeController.h"
 #import "MobClick.h"
 #import "Constants.h"
+#import "NSString+HTML.h"
+
 static const CGFloat kLineSpacing = 5.0f;// 行间距
 static const CGFloat kMinFontSize = 18.0f;// 字体缩放的最小值
 static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
@@ -154,7 +156,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
         
         NSString* tappedString = [_textView substringWithGranularity:granularity atPoint:tappedPoint];
 
-        if (nil == tappedString || tappedString.length == 0) {
+        if (nil == tappedString || !tappedString.length || ![[NSString stringWithString:tappedString] stringByTrimmingStopCharactersInSet].length) {
             return;
         }
         NSLog(@"%@",tappedString);
@@ -178,6 +180,11 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 -(void)selectPragraph:(NSString*)text
 {
+    // 是否选择了合法的输入
+    if (!text || !text.length || ![[NSString stringWithString:text] stringByTrimmingStopCharactersInSet].length) {
+        return;
+    }
+    
     // 进入学习模式：单词模式和单句模式
     // TODO 通过上下文弹出菜单方式，确认进入的模式，缺省进入单句模式
     SentenceModeController* controller = [[SentenceModeController alloc]init];
