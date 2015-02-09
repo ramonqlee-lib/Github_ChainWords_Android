@@ -179,13 +179,7 @@
     NSDictionary* item = [self.items objectAtIndex:index];
     NSString* contentStr = [item valueForKey:@"content"];
     contentStr = [contentStr base64DecodedString];
-    
-#if 1
     contentStr = [contentStr stringByConvertingHTMLToPlainText];
-    
-    // remove multiple new lines
-    contentStr = [contentStr stringByReplacingOccurrencesOfString:@"\r\n\r\n" withString:@"\r\n"];
-#endif
     NSLog(@"%@",contentStr);
     
     ReadModeController* controller = [[ReadModeController alloc]init];

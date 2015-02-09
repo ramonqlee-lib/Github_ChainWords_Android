@@ -44,6 +44,7 @@
 	NSCharacterSet *stopCharacters = [NSCharacterSet characterSetWithCharactersInString:[NSString stringWithFormat:@"< \t\n\r%d%d%d%d", 0x0085, 0x000C, 0x2028, 0x2029]];
 	NSCharacterSet *newLineAndWhitespaceCharacters = [NSCharacterSet characterSetWithCharactersInString:[NSString stringWithFormat:@" \t\n\r%d%d%d%d", 0x0085, 0x000C, 0x2028, 0x2029]];
 	NSCharacterSet *tagNameCharacters = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"];
+    NSString* newLineDup = @"\r\n";
     
 	// Scan and find all tags
 	NSMutableString *result = [[NSMutableString alloc] initWithCapacity:self.length];
@@ -94,12 +95,20 @@
 					}
                     // add new line
                     if ([tagName isEqualToString:@"div"] ||
-                         [tagName isEqualToString:@"p"]) {
-                             [result appendString:@"\r\n"];
+                        [tagName isEqualToString:@"p"]) {
+                        if (![result hasSuffix:@"\r\n"]) {
+                            [result appendString:@"\r\n\r\n"];
+                        }
+                        // [result appendString:@"\r\n"];
                     }
                     
 					// Replace tag with string unless it was an inline
-					if (!dontReplaceTagWithSpace && result.length > 0 && ![scanner isAtEnd]) [result appendString:@" "];
+					if (!dontReplaceTagWithSpace && result.length > 0 && ![scanner isAtEnd])
+                    {
+                        if (![result hasSuffix:@"\r\n"]) {
+                            [result appendString:@" "];
+                        }
+                    }
                     
 				}
                 
@@ -113,7 +122,13 @@
             
 			// Stopped at whitespace - replace all whitespace and newlines with a space
 			if ([scanner scanCharactersFromSet:newLineAndWhitespaceCharacters intoString:NULL]) {
-				if (result.length > 0 && ![scanner isAtEnd]) [result appendString:@" "]; // Dont append space to beginning or end of result
+				if (result.length > 0 && ![scanner isAtEnd])
+//                    [result appendString:@" "]; // Dont append space to beginning or end of result
+                {
+                    if (![result hasSuffix:@"\r\n"]) {
+                        [result appendString:@" "];
+                    }
+                }
 			}
             
 		}

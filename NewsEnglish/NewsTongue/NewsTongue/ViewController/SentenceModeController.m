@@ -316,7 +316,6 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
             
             if (!error) {
             } else {
-                
                 NSLog(@"There has been an error playing the remote file: %@", [error description]);
             }
             
