@@ -197,6 +197,10 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 -(IBAction)startTranslation:(id)sender
 {
+    if (!sentence || !sentence.length) {
+        [self.view makeToast:NSLocalizedString(@"NO_SELECTED_SENTENCE", @"")];
+        return;
+    }
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
                                                         message:sentence
                                                        delegate:self
