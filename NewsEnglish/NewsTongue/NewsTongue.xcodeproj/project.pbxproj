@@ -449,6 +449,7 @@
 		3090C9641A858CC30094231B /* WordModeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordModeController.h; sourceTree = "<group>"; };
 		3090C9651A858CC30094231B /* WordModeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordModeController.m; sourceTree = "<group>"; };
 		3090C9661A858CC30094231B /* WordModeController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WordModeController.xib; sourceTree = "<group>"; };
+		309ED22F1A8960520031695A /* NewsLadder-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NewsLadder-Prefix.pch"; sourceTree = "<group>"; };
 		30ADC9DB1A770E5700339771 /* UITextView+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Extras.h"; sourceTree = "<group>"; };
 		30ADC9DC1A770E5700339771 /* UITextView+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Extras.m"; sourceTree = "<group>"; };
 		30C171CB1A7DA62C001CD87A /* SQLiteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteManager.h; sourceTree = "<group>"; };
@@ -685,6 +686,7 @@
 		3010AF151A71B27B009CDECF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				309ED22F1A8960520031695A /* NewsLadder-Prefix.pch */,
 				30803D451A875A83000CA931 /* Info.plist */,
 				3010AF171A71B27B009CDECF /* main.m */,
 				3068FD721A7EDED800E257A9 /* readme.rtf */,
@@ -1559,9 +1561,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
+				GCC_PREFIX_HEADER = "NewsTongue/NewsLadder-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/NewsTongueTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1592,9 +1596,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
+				GCC_PREFIX_HEADER = "NewsTongue/NewsLadder-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/NewsTongueTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
