@@ -9,7 +9,7 @@
 #import "WordManager.h"
 #import "AFNetworking.h"
 #import "SQLiteManager.h"
-#import "Base64.h"
+#import "Base64Simple.h"
 
 /**
  词典api

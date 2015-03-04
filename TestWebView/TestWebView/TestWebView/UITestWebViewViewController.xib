@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UITestWebViewViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="webview" destination="SCI-Hu-OMo" id="rNF-oe-knZ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SCI-Hu-OMo">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="600" id="QAO-h1-ZAt"/>
+                        <constraint firstAttribute="height" constant="600" id="a0i-SL-COh"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="QAO-h1-ZAt"/>
+                        </mask>
+                    </variation>
+                </webView>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="em5-As-Tci">
+                    <rect key="frame" x="100" y="100" width="108" height="30"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                    <state key="normal" title="关闭">
+                        <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="close:" destination="-1" eventType="touchUpInside" id="fTQ-c9-ekn"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="SCI-Hu-OMo" secondAttribute="trailing" id="0f4-2T-YAC"/>
+                <constraint firstAttribute="centerX" secondItem="SCI-Hu-OMo" secondAttribute="centerX" id="HCg-bW-WFR"/>
+                <constraint firstItem="em5-As-Tci" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Z3X-NS-jKW"/>
+                <constraint firstItem="SCI-Hu-OMo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ZZH-qS-1JM"/>
+                <constraint firstItem="em5-As-Tci" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="cSc-20-lK1"/>
+                <constraint firstAttribute="centerY" secondItem="SCI-Hu-OMo" secondAttribute="centerY" id="e89-Ty-vca"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

@@ -12,7 +12,7 @@
 #import "SentenceModeController.h"
 
 #import "AFNetworking.h"
-#import "Base64.h"
+#import "Base64Simple.h"
 #import "NSString+HTML.h"
 
 #import "PSCollectionViewCell.h"

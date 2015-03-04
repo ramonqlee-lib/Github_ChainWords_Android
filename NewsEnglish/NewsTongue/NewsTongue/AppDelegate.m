@@ -11,6 +11,9 @@
 #import "Constants.h"
 #import "UMFeedback.h"
 #import "UMSocial.h"
+#import "BPush.h"
+#import "JSONKit.h"
+#import "OpenUDID.h"
 
 @interface AppDelegate ()
 
@@ -20,10 +23,79 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
     [self initUmengAnalytics];
     [self initUmengFeedback];
+    [self initBaiduPush:application didFinishLaunchingWithOptions:launchOptions];
     return YES;
+}
+
+#if SUPPORT_IOS8
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    //register to receive notifications
+    [application registerForRemoteNotifications];
+}
+#endif
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    NSLog(@"test:%@",deviceToken);
+    [BPush registerDeviceToken: deviceToken];
+    
+//    self.viewController.textView.text = [self.viewController.textView.text stringByAppendingFormat: @"Register device token: %@\n openudid: %@", deviceToken, [OpenUDID value]];
+}
+
+- (void) onMethod:(NSString*)method response:(NSDictionary*)data {
+    NSLog(@"On method:%@", method);
+    NSLog(@"data:%@", [data description]);
+    /*
+    NSDictionary* res = [[[NSDictionary alloc] initWithDictionary:data] autorelease];
+    if ([BPushRequestMethod_Bind isEqualToString:method]) {
+        NSString *appid = [res valueForKey:BPushRequestAppIdKey];
+        NSString *userid = [res valueForKey:BPushRequestUserIdKey];
+        NSString *channelid = [res valueForKey:BPushRequestChannelIdKey];
+        //NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
+        int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
+        
+        if (returnCode == BPushErrorCode_Success) {
+//            self.viewController.appidText.text = appid;
+//            self.viewController.useridText.text = userid;
+//            self.viewController.channelidText.text = channelid;
+            
+            // 在内存中备份，以便短时间内进入可以看到这些值，而不需要重新bind
+//            self.appId = appid;
+//            self.channelId = channelid;
+//            self.userId = userid;
+        }
+    } else if ([BPushRequestMethod_Unbind isEqualToString:method]) {
+        int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
+        if (returnCode == BPushErrorCode_Success) {
+//            self.viewController.appidText.text = nil;
+//            self.viewController.useridText.text = nil;
+//            self.viewController.channelidText.text = nil;
+        }
+    }
+     */
+//    self.viewController.textView.text = [[[NSString alloc] initWithFormat: @"%@ return: \n%@", method, [data description]] autorelease];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSLog(@"Receive Notify: %@", [userInfo JSONString]);
+    NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+    if (application.applicationState == UIApplicationStateActive) {
+        // Nothing to do if applicationState is Inactive, the iOS already displayed an alert view.
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"NewsAlert"
+                                                            message:[NSString stringWithFormat:@"%@", alert]
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+    [application setApplicationIconBadgeNumber:0];
+    
+    [BPush handleNotification:userInfo];
+    
+//    self.viewController.textView.text = [self.viewController.textView.text stringByAppendingFormat:@"Receive notification:\n%@", [userInfo JSONString]];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -64,5 +136,24 @@
 -(void) initumengSocial
 {
     [UMSocialData setAppKey:UMENG_APP_KEY];
+}
+
+-(void) initBaiduPush:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [BPush setupChannel:launchOptions];
+    [BPush setDelegate:self];
+    
+    [application setApplicationIconBadgeNumber:0];
+#if SUPPORT_IOS8
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        UIUserNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:myTypes categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    }else
+#endif
+    {
+        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound;
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
+    }
 }
 @end
