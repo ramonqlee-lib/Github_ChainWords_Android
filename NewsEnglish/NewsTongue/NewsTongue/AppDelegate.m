@@ -42,6 +42,7 @@
     NSLog(@"test:%@",deviceToken);
     [BPush registerDeviceToken: deviceToken];
     
+    [BPush bindChannel]; 
 //    self.viewController.textView.text = [self.viewController.textView.text stringByAppendingFormat: @"Register device token: %@\n openudid: %@", deviceToken, [OpenUDID value]];
 }
 
@@ -84,7 +85,7 @@
     NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
     if (application.applicationState == UIApplicationStateActive) {
         // Nothing to do if applicationState is Inactive, the iOS already displayed an alert view.
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"NewsAlert"
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"NewsLadder"
                                                             message:[NSString stringWithFormat:@"%@", alert]
                                                            delegate:self
                                                   cancelButtonTitle:@"OK"
@@ -114,6 +115,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [application setApplicationIconBadgeNumber:0];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

@@ -10,7 +10,7 @@
 
 #define NSLog(...)
 #define SUPPORT_IOS8 1
-#define BAIDU_AD_APPID @"ade01d31"
+#define BAIDU_AD_APPID @"f84efff4"
 
 #define UMENG_APP_KEY @"54d70fd8fd98c535da000661"
 
