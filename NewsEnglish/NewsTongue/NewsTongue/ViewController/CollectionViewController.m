@@ -181,9 +181,10 @@
     contentStr = [contentStr base64DecodedString];
     contentStr = [contentStr stringByConvertingHTMLToPlainText];
     NSLog(@"%@",contentStr);
-    
+    NSString* updated = [item objectForKey:@"updated"];
     ReadModeController* controller = [[ReadModeController alloc]init];
     [controller setTitle:[item objectForKey:@"title"]];
+    [controller setTime: [updated intValue]];
     [controller setTapGranality:UITextGranularityParagraph];
     [controller setText:contentStr];
     [self presentViewController:controller animated:NO completion:nil];

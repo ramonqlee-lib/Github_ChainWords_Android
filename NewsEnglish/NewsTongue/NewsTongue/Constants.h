@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define NSLog(...)
+//#define NSLog(...)
 #define SUPPORT_IOS8 1
 #define BAIDU_AD_APPID @"f84efff4"
 

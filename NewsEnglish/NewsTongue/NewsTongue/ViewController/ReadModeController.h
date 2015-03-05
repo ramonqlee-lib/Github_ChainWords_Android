@@ -12,6 +12,7 @@
 @interface ReadModeController : UIViewController
 
 -(void)setText:(NSString*)value;
+-(void)setTime:(NSInteger)time;
 -(void)setTapGranality:(UITextGranularity)value;
 -(void)setTitle:(NSString *)title;
 

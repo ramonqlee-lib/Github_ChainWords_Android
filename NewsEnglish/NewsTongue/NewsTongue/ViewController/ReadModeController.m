@@ -23,6 +23,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     NSString* bodyText;
     NSString* titileText;
     CGFloat fontSize;
+    NSInteger updated;
 }
 @end
 
@@ -38,20 +39,16 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 #if 0
         NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[mBodyText dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
 #else
-        NSAttributedString* attributedString = [[NSAttributedString alloc]initWithString:bodyText];
+        NSAttributedString* attributedString = [self getFormatedBody];//[[NSAttributedString alloc]initWithString:bodyText];
 #endif
         _textView.attributedText = attributedString;
     }
     [_textView scrollRangeToVisible:NSMakeRange(0, 0)];
     _textView.editable = NO;
     _textView.delegate = self;
-    fontSize = kMinFontSize;
-    _textView.font = [UIFont fontWithName:_textView.font.fontName size:fontSize];
     [_textView setLineSpacing:kLineSpacing clearPrevious:NO];
-    CGFloat val = (CGFloat)0x40/256;
-    _textView.textColor = [UIColor colorWithRed:val green:val blue:val alpha:1];
     
-    val = (CGFloat)0xf0/256;
+    CGFloat val = (CGFloat)0xf0/256;
     _textView.backgroundColor = [UIColor colorWithRed:val green:val blue:val alpha:1];
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(_handleTap:)];
@@ -84,6 +81,11 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 -(void)setTitle:(NSString *)title{
     titileText = title;
 }
+
+-(void)setTime:(NSInteger)time{
+    updated = time;
+}
+
 -(void)setText:(NSString*)value
 {
     if(nil == _textView)
@@ -94,9 +96,50 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 #if 0
     NSAttributedString *attributedString = [[NSAttributedString alloc] initWithData:[value dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
 #else
-    NSAttributedString* attributedString = [[NSAttributedString alloc]initWithString:bodyText];
+    NSAttributedString* attributedString = [self getFormatedBody];//[[NSAttributedString alloc]initWithString:bodyText];
 #endif
     _textView.attributedText = attributedString;
+}
+-(NSAttributedString*)getFormatedBody
+{
+    if (NO) {
+        NSMutableAttributedString *stringText = [[NSMutableAttributedString alloc] initWithString:@"This is a text"];
+        //Bold the first four characters.
+        [stringText addAttribute: NSFontAttributeName value: [UIFont systemFontOfSize:20.0] range: NSMakeRange(0, 4)];
+        // Sets the font color of last four characters to green.
+        [stringText addAttribute: NSForegroundColorAttributeName value: [UIColor greenColor] range: NSMakeRange(9, 4)];
+        return stringText;
+    }
+    
+    NSDate* date = [NSDate dateWithTimeIntervalSince1970:updated];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"MM-dd hh:mm";
+    NSString *formatedTime = [dateFormatter stringFromDate:date];
+
+    NSString* tmp = [NSString stringWithFormat:@"%@\n%@\n\n%@",titileText,formatedTime,bodyText];//titileText + time + bodyText;
+    NSMutableAttributedString *hogan = [[NSMutableAttributedString alloc] initWithString:tmp];
+    [hogan addAttribute:NSFontAttributeName
+                  value:[UIFont systemFontOfSize:25.0]
+                  range:NSMakeRange(0, titileText.length)];
+    [hogan addAttribute:NSFontAttributeName
+                  value:[UIFont systemFontOfSize:15.0]
+                  range:NSMakeRange(titileText.length+1,formatedTime.length)];
+    
+    // body setting
+    fontSize = kMinFontSize;
+    UIFont* bodyFont = [UIFont fontWithName:_textView.font.fontName size:fontSize];
+    NSInteger start = titileText.length+1+formatedTime.length;
+    NSInteger len = tmp.length-start;
+    [hogan addAttribute:NSFontAttributeName
+                  value:bodyFont
+                  range:NSMakeRange(start,len)];
+    
+    CGFloat val = (CGFloat)0x40/256;
+    [hogan addAttribute:NSForegroundColorAttributeName
+                  value:[UIColor colorWithRed:val green:val blue:val alpha:1]
+                  range:NSMakeRange(start,len)];
+    
+    return hogan;
 }
 
 -(void)setTapGranality:(UITextGranularity)value
@@ -123,8 +166,28 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     if (nil == _textView) {
         return;
     }
+    CGFloat inc = sender.value - fontSize;
     fontSize = sender.value;
-    _textView.font = [UIFont fontWithName:_textView.font.fontName size:sender.value];
+    //_textView.font = [UIFont fontWithName:_textView.font.fontName size:sender.value];
+    //  遍历，逐项size进行相应变动
+    NSMutableAttributedString *res = [self.textView.attributedText mutableCopy];
+    [res beginEditing];
+    __block BOOL found = NO;
+    [res enumerateAttribute:NSFontAttributeName inRange:NSMakeRange(0, res.length) options:0 usingBlock:^(id value, NSRange range, BOOL *stop) {
+        if (value) {
+            UIFont *oldFont = (UIFont *)value;
+            UIFont *newFont = [oldFont fontWithSize:oldFont.pointSize + inc];
+            NSLog(@"font size: %f",oldFont.pointSize + inc);
+            [res removeAttribute:NSFontAttributeName range:range];
+            [res addAttribute:NSFontAttributeName value:newFont range:range];
+            found = YES;
+        }
+    }];
+    if (!found) {
+        // No font was found - do something else?
+    }
+    [res endEditing];
+    self.textView.attributedText = res;
 }
 -(IBAction)changeReviewFontSizeButtonAction:(id)sender
 {
@@ -162,8 +225,8 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
         NSLog(@"%@",tappedString);
         
         NSRange range = [_textView rangeWithGranularity:granularity atPoint:tappedPoint];
-        [_textView setLineSpacing:kLineSpacing clearPrevious:YES];
-        _textView.font = [UIFont fontWithName:_textView.font.fontName size:fontSize];
+//        [_textView setLineSpacing:kLineSpacing clearPrevious:YES];
+//        _textView.font = [UIFont fontWithName:_textView.font.fontName size:fontSize];
         
         [_textView addColor:range value:[UIColor redColor] clearPrevious:NO];
         UIFont* font = _textView.font;
