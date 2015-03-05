@@ -102,15 +102,6 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 }
 -(NSAttributedString*)getFormatedBody
 {
-    if (NO) {
-        NSMutableAttributedString *stringText = [[NSMutableAttributedString alloc] initWithString:@"This is a text"];
-        //Bold the first four characters.
-        [stringText addAttribute: NSFontAttributeName value: [UIFont systemFontOfSize:20.0] range: NSMakeRange(0, 4)];
-        // Sets the font color of last four characters to green.
-        [stringText addAttribute: NSForegroundColorAttributeName value: [UIColor greenColor] range: NSMakeRange(9, 4)];
-        return stringText;
-    }
-    
     NSDate* date = [NSDate dateWithTimeIntervalSince1970:updated];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"MM-dd hh:mm";
