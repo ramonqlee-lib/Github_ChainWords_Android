@@ -164,6 +164,16 @@
 		3090C96D1A858CC30094231B /* WordModeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3090C9651A858CC30094231B /* WordModeController.m */; };
 		3090C96E1A858CC30094231B /* WordModeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3090C9661A858CC30094231B /* WordModeController.xib */; };
 		30ADC9DD1A770E5700339771 /* UITextView+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 30ADC9DC1A770E5700339771 /* UITextView+Extras.m */; };
+		30B9F49C1AAE587C00163DF3 /* head1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30B9F4981AAE587C00163DF3 /* head1.jpg */; };
+		30B9F49D1AAE587C00163DF3 /* head2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30B9F4991AAE587C00163DF3 /* head2.jpg */; };
+		30B9F49E1AAE587C00163DF3 /* leftside_shadow_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30B9F49A1AAE587C00163DF3 /* leftside_shadow_bg@2x.png */; };
+		30B9F49F1AAE587C00163DF3 /* sidebar_bg@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 30B9F49B1AAE587C00163DF3 /* sidebar_bg@2x.jpg */; };
+		30B9F4A31AAE588900163DF3 /* SliderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B9F4A21AAE588900163DF3 /* SliderViewController.m */; };
+		30B9F4AC1AAE589300163DF3 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B9F4A51AAE589300163DF3 /* LeftViewController.m */; };
+		30B9F4AD1AAE589300163DF3 /* MainAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B9F4A71AAE589300163DF3 /* MainAppViewController.m */; };
+		30B9F4AE1AAE589300163DF3 /* QHMainGestureRecognizerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B9F4A91AAE589300163DF3 /* QHMainGestureRecognizerViewController.m */; };
+		30B9F4AF1AAE589300163DF3 /* RightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B9F4AB1AAE589300163DF3 /* RightViewController.m */; };
+		30B9F4D41AAE592900163DF3 /* SubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B9F4D31AAE592900163DF3 /* SubViewController.m */; };
 		30C171CD1A7DA62C001CD87A /* SQLiteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C171CC1A7DA62C001CD87A /* SQLiteManager.m */; };
 		30C171CF1A7DB4DF001CD87A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C171CE1A7DB4DF001CD87A /* libsqlite3.dylib */; };
 		30C251861A858ACE00B004A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30C251841A858ACE00B004A0 /* Main.storyboard */; };
@@ -459,6 +469,22 @@
 		309ED22F1A8960520031695A /* NewsLadder-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NewsLadder-Prefix.pch"; sourceTree = "<group>"; };
 		30ADC9DB1A770E5700339771 /* UITextView+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Extras.h"; sourceTree = "<group>"; };
 		30ADC9DC1A770E5700339771 /* UITextView+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Extras.m"; sourceTree = "<group>"; };
+		30B9F4981AAE587C00163DF3 /* head1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = head1.jpg; sourceTree = "<group>"; };
+		30B9F4991AAE587C00163DF3 /* head2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = head2.jpg; sourceTree = "<group>"; };
+		30B9F49A1AAE587C00163DF3 /* leftside_shadow_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leftside_shadow_bg@2x.png"; sourceTree = "<group>"; };
+		30B9F49B1AAE587C00163DF3 /* sidebar_bg@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "sidebar_bg@2x.jpg"; sourceTree = "<group>"; };
+		30B9F4A11AAE588900163DF3 /* SliderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderViewController.h; sourceTree = "<group>"; };
+		30B9F4A21AAE588900163DF3 /* SliderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderViewController.m; sourceTree = "<group>"; };
+		30B9F4A41AAE589300163DF3 /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftViewController.h; sourceTree = "<group>"; };
+		30B9F4A51AAE589300163DF3 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
+		30B9F4A61AAE589300163DF3 /* MainAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainAppViewController.h; sourceTree = "<group>"; };
+		30B9F4A71AAE589300163DF3 /* MainAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainAppViewController.m; sourceTree = "<group>"; };
+		30B9F4A81AAE589300163DF3 /* QHMainGestureRecognizerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHMainGestureRecognizerViewController.h; sourceTree = "<group>"; };
+		30B9F4A91AAE589300163DF3 /* QHMainGestureRecognizerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHMainGestureRecognizerViewController.m; sourceTree = "<group>"; };
+		30B9F4AA1AAE589300163DF3 /* RightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightViewController.h; sourceTree = "<group>"; };
+		30B9F4AB1AAE589300163DF3 /* RightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightViewController.m; sourceTree = "<group>"; };
+		30B9F4D21AAE592900163DF3 /* SubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubViewController.h; sourceTree = "<group>"; };
+		30B9F4D31AAE592900163DF3 /* SubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubViewController.m; sourceTree = "<group>"; };
 		30C171CB1A7DA62C001CD87A /* SQLiteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteManager.h; sourceTree = "<group>"; };
 		30C171CC1A7DA62C001CD87A /* SQLiteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteManager.m; sourceTree = "<group>"; };
 		30C171CE1A7DB4DF001CD87A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -542,6 +568,10 @@
 		300791D81A86E58000D20875 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				30B9F4981AAE587C00163DF3 /* head1.jpg */,
+				30B9F4991AAE587C00163DF3 /* head2.jpg */,
+				30B9F49A1AAE587C00163DF3 /* leftside_shadow_bg@2x.png */,
+				30B9F49B1AAE587C00163DF3 /* sidebar_bg@2x.jpg */,
 				3007921C1A870D3E00D20875 /* scaleFont@2x.png */,
 				300792151A870AB700D20875 /* recording@2x.png */,
 				300792161A870AB700D20875 /* replay@2x.png */,
@@ -1054,6 +1084,16 @@
 		3090C95A1A858CC30094231B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				30B9F4D21AAE592900163DF3 /* SubViewController.h */,
+				30B9F4D31AAE592900163DF3 /* SubViewController.m */,
+				30B9F4A41AAE589300163DF3 /* LeftViewController.h */,
+				30B9F4A51AAE589300163DF3 /* LeftViewController.m */,
+				30B9F4A61AAE589300163DF3 /* MainAppViewController.h */,
+				30B9F4A71AAE589300163DF3 /* MainAppViewController.m */,
+				30B9F4A81AAE589300163DF3 /* QHMainGestureRecognizerViewController.h */,
+				30B9F4A91AAE589300163DF3 /* QHMainGestureRecognizerViewController.m */,
+				30B9F4AA1AAE589300163DF3 /* RightViewController.h */,
+				30B9F4AB1AAE589300163DF3 /* RightViewController.m */,
 				3090C95B1A858CC30094231B /* CollectionViewController.h */,
 				3090C95C1A858CC30094231B /* CollectionViewController.m */,
 				3090C95E1A858CC30094231B /* ReadModeController.h */,
@@ -1072,6 +1112,7 @@
 		30ADC9D91A770E5700339771 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				30B9F4A01AAE588900163DF3 /* SliderViewController */,
 				30DAE6021AA7BA7200328CBE /* LibBPush */,
 				30F2F2211A88180E008420D4 /* Toast */,
 				3033BAEF1A878BE80080B3EB /* baiduAdSDK */,
@@ -1099,6 +1140,15 @@
 				30ADC9DC1A770E5700339771 /* UITextView+Extras.m */,
 			);
 			path = UITextViewEx;
+			sourceTree = "<group>";
+		};
+		30B9F4A01AAE588900163DF3 /* SliderViewController */ = {
+			isa = PBXGroup;
+			children = (
+				30B9F4A11AAE588900163DF3 /* SliderViewController.h */,
+				30B9F4A21AAE588900163DF3 /* SliderViewController.m */,
+			);
+			path = SliderViewController;
 			sourceTree = "<group>";
 		};
 		30C171CA1A7DA62C001CD87A /* SQLiteManager */ = {
@@ -1295,8 +1345,10 @@
 				3007921D1A870D3E00D20875 /* scaleFont@2x.png in Resources */,
 				300792041A86F61A00D20875 /* bg-menuitem.png in Resources */,
 				30803D431A875A83000CA931 /* Info.plist in Resources */,
+				30B9F49C1AAE587C00163DF3 /* head1.jpg in Resources */,
 				300791DE1A86E9F800D20875 /* speaker.png in Resources */,
 				3007920F1A87067B00D20875 /* recording.png in Resources */,
+				30B9F49F1AAE587C00163DF3 /* sidebar_bg@2x.jpg in Resources */,
 				30803D131A875248000CA931 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				30803D3D1A875A5E000CA931 /* InfoPlist.strings in Resources */,
 				30803D4B1A8767A0000CA931 /* share.png in Resources */,
@@ -1308,11 +1360,13 @@
 				300D5DE51A8426950054CFB7 /* grayArrow@2x.png in Resources */,
 				300D5DE61A8426950054CFB7 /* whiteArrow.png in Resources */,
 				300791FE1A86F61A00D20875 /* bg-addbutton-highlighted.png in Resources */,
+				30B9F49E1AAE587C00163DF3 /* leftside_shadow_bg@2x.png in Resources */,
 				3010AF261A71B27B009CDECF /* LaunchScreen.xib in Resources */,
 				30803C5F1A874D22000CA931 /* umeng_fb_audio_play_03@2x.png in Resources */,
 				30803C601A874D22000CA931 /* umeng_fb_audio_play_default@2x.png in Resources */,
 				300792021A86F61A00D20875 /* bg-menuitem-highlighted.png in Resources */,
 				30803D141A875248000CA931 /* UMSocialLocalizable.strings in Resources */,
+				30B9F49D1AAE587C00163DF3 /* head2.jpg in Resources */,
 				30DAE61B1AA7BBAC00328CBE /* BPushConfig.plist in Resources */,
 				3007921B1A870AB700D20875 /* speaker@2x.png in Resources */,
 				30803D0C1A875248000CA931 /* UMSCommentInputController.xib in Resources */,
@@ -1384,6 +1438,7 @@
 				3033BB2D1A878BE80080B3EB /* CDataScanner_Extensions.m in Sources */,
 				3090C9691A858CC30094231B /* ReadModeController.m in Sources */,
 				303381C81A7C79FF0074604E /* UIRefreshControl+AFNetworking.m in Sources */,
+				30B9F4AF1AAE589300163DF3 /* RightViewController.m in Sources */,
 				3090C96D1A858CC30094231B /* WordModeController.m in Sources */,
 				30DAE6191AA7BA7200328CBE /* Reachability.m in Sources */,
 				3033BB2C1A878BE80080B3EB /* CJSONSerializedData.m in Sources */,
@@ -1400,6 +1455,7 @@
 				3033BB321A878BE80080B3EB /* ZipArchive.mm in Sources */,
 				303381BA1A7C79FF0074604E /* AFHTTPRequestOperationManager.m in Sources */,
 				300D5DF01A8426950054CFB7 /* SDWebImageManager.m in Sources */,
+				30B9F4D41AAE592900163DF3 /* SubViewController.m in Sources */,
 				300D5DED1A8426950054CFB7 /* SDImageCache.m in Sources */,
 				3068FD7A1A7EE24100E257A9 /* NSString+HTML.m in Sources */,
 				3033BB2B1A878BE80080B3EB /* CJSONSerialization.m in Sources */,
@@ -1408,7 +1464,9 @@
 				300D5DEA1A8426950054CFB7 /* PSCollectionView.m in Sources */,
 				303381C61A7C79FF0074604E /* UIImageView+AFNetworking.m in Sources */,
 				30C8B68E1A7E2E75009CB114 /* AFSoundManager.m in Sources */,
+				30B9F4A31AAE588900163DF3 /* SliderViewController.m in Sources */,
 				3033BB2A1A878BE80080B3EB /* CJSONDeserializer_BlocksExtensions.m in Sources */,
+				30B9F4AD1AAE589300163DF3 /* MainAppViewController.m in Sources */,
 				3033BB2E1A878BE80080B3EB /* NSDictionary_JSONExtensions.m in Sources */,
 				303381BB1A7C79FF0074604E /* AFHTTPSessionManager.m in Sources */,
 				300D5DEB1A8426950054CFB7 /* PSCollectionViewCell.m in Sources */,
@@ -1423,6 +1481,7 @@
 				3068FD791A7EE24100E257A9 /* GTMNSString+HTML.m in Sources */,
 				303381C21A7C79FF0074604E /* AFNetworkActivityIndicatorManager.m in Sources */,
 				30F2F2241A88180E008420D4 /* Toast+UIView.m in Sources */,
+				30B9F4AE1AAE589300163DF3 /* QHMainGestureRecognizerViewController.m in Sources */,
 				30ADC9DD1A770E5700339771 /* UITextView+Extras.m in Sources */,
 				300D5DEE1A8426950054CFB7 /* SDWebImageDecoder.m in Sources */,
 				303381BD1A7C79FF0074604E /* AFSecurityPolicy.m in Sources */,
@@ -1444,6 +1503,7 @@
 				300D5DDE1A8426950054CFB7 /* PullPsCollectionView.m in Sources */,
 				3033BB311A878BE80080B3EB /* CJSONSerializer.m in Sources */,
 				3033BB271A878BE80080B3EB /* OpenUDID.m in Sources */,
+				30B9F4AC1AAE589300163DF3 /* LeftViewController.m in Sources */,
 				3090C96B1A858CC30094231B /* SentenceModeController.m in Sources */,
 				3033BB2F1A878BE80080B3EB /* CJSONDeserializer.m in Sources */,
 				3033BB261A878BE80080B3EB /* mongoose.c in Sources */,

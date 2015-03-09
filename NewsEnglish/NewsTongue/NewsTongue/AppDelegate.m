@@ -15,6 +15,12 @@
 #import "JSONKit.h"
 #import "OpenUDID.h"
 
+#import "CollectionViewController.h"
+#import "SliderViewController.h"
+#import "MainAppViewController.h"
+#import "LeftViewController.h"
+#import "RightViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -26,6 +32,23 @@
     [self initUmengAnalytics];
     [self initUmengFeedback];
     [self initBaiduPush:application didFinishLaunchingWithOptions:launchOptions];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    // Override point for customization after application launch.
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    QHMainGestureRecognizerViewController *mainViewController = [[QHMainGestureRecognizerViewController alloc] init];
+    self.window.rootViewController = mainViewController;
+    mainViewController.moveType = moveTypeMove;
+    
+    [SliderViewController sharedSliderController].LeftVC=[[LeftViewController alloc] init];
+    [SliderViewController sharedSliderController].RightVC= [[RightViewController alloc] init];
+    [SliderViewController sharedSliderController].MainVC = [[CollectionViewController alloc]init];//[[MainAppViewController alloc] init];
+    [SliderViewController sharedSliderController].RightSContentOffset=260;
+    [SliderViewController sharedSliderController].RightSContentScale=0.68;
+    [SliderViewController sharedSliderController].RightSJudgeOffset=160;
+    [mainViewController addViewController2Main:[SliderViewController sharedSliderController]];
+    
     return YES;
 }
 
@@ -42,8 +65,7 @@
     NSLog(@"test:%@",deviceToken);
     [BPush registerDeviceToken: deviceToken];
     
-    [BPush bindChannel]; 
-//    self.viewController.textView.text = [self.viewController.textView.text stringByAppendingFormat: @"Register device token: %@\n openudid: %@", deviceToken, [OpenUDID value]];
+    [BPush bindChannel];
 }
 
 - (void) onMethod:(NSString*)method response:(NSDictionary*)data {
@@ -59,9 +81,6 @@
         int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
         
         if (returnCode == BPushErrorCode_Success) {
-//            self.viewController.appidText.text = appid;
-//            self.viewController.useridText.text = userid;
-//            self.viewController.channelidText.text = channelid;
             
             // 在内存中备份，以便短时间内进入可以看到这些值，而不需要重新bind
 //            self.appId = appid;
@@ -71,13 +90,9 @@
     } else if ([BPushRequestMethod_Unbind isEqualToString:method]) {
         int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
         if (returnCode == BPushErrorCode_Success) {
-//            self.viewController.appidText.text = nil;
-//            self.viewController.useridText.text = nil;
-//            self.viewController.channelidText.text = nil;
         }
     }
      */
-//    self.viewController.textView.text = [[[NSString alloc] initWithFormat: @"%@ return: \n%@", method, [data description]] autorelease];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
@@ -95,8 +110,6 @@
     [application setApplicationIconBadgeNumber:0];
     
     [BPush handleNotification:userInfo];
-    
-//    self.viewController.textView.text = [self.viewController.textView.text stringByAppendingFormat:@"Receive notification:\n%@", [userInfo JSONString]];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
