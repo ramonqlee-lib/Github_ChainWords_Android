@@ -78,6 +78,7 @@
     [_scrollV setPagingEnabled:YES];
     [_scrollV setShowsHorizontalScrollIndicator:NO];
     [self.view insertSubview:_scrollV belowSubview:_navView];
+    
     _scrollV.delegate = self;
     [_scrollV.panGestureRecognizer addTarget:self action:@selector(scrollHandlePan:)];
     

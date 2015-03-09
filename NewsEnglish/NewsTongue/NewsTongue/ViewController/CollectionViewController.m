@@ -22,10 +22,18 @@
 #import "UMFeedback.h"
 #import "UMSocial.h"
 #import "Constants.h"
+#import "SliderViewController.h"
 
+#define MENU_HEIGHT 0//25
+#define MENU_BUTTON_WIDTH  60
 
 @interface CollectionViewController ()
-
+{
+    UIView *_navView;
+    UIView *_topNaviV;
+    UIScrollView *_navScrollV;
+    UIView *_navBgV;
+}
 @end
 
 @implementation CollectionViewController
@@ -44,8 +52,51 @@
 {
     [super viewDidLoad];
     
-    collectionView = [[PullPsCollectionView alloc] initWithFrame:CGRectMake(0, 24, self.view.frame.size.width, self.view.frame.size.height)];
-    [self.view addSubview:collectionView];
+    self.view.backgroundColor = [UIColor whiteColor];
+    UIView *statusBarView = [[UIImageView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.view.frame.size.width, 0.f)];
+    if (isIos7 >= 7 && __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_6_1)
+    {
+        statusBarView.frame = CGRectMake(statusBarView.frame.origin.x, statusBarView.frame.origin.y, statusBarView.frame.size.width, 20.f);
+        statusBarView.backgroundColor = [UIColor clearColor];
+        ((UIImageView *)statusBarView).backgroundColor = RGBA(159,5,13,1);
+        [self.view addSubview:statusBarView];
+    }
+    
+    _navView = [[UIImageView alloc] initWithFrame:CGRectMake(0.f, StatusbarSize, self.view.frame.size.width, 44.f)];
+    ((UIImageView *)_navView).backgroundColor = RGBA(159,5,13,1);
+    [self.view insertSubview:_navView belowSubview:statusBarView];
+    _navView.userInteractionEnabled = YES;
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((_navView.frame.size.width - 200)/2, (_navView.frame.size.height - 40)/2, 200, 40)];
+    [titleLabel setText:@"新闻列表"];
+    [titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [titleLabel setTextColor:[UIColor whiteColor]];
+    [titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
+    [titleLabel setBackgroundColor:[UIColor clearColor]];
+    [_navView addSubview:titleLabel];
+    
+    UIButton *lbtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [lbtn setFrame:CGRectMake(10, 2, 40, 40)];
+    [lbtn setTitle:@"左" forState:UIControlStateNormal];
+    [lbtn addTarget:self action:@selector(leftAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_navView addSubview:lbtn];
+    
+    UIButton *rbtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [rbtn setFrame:CGRectMake(_navView.frame.size.width - 50, 2, 40, 40)];
+    [rbtn setTitle:@"右" forState:UIControlStateNormal];
+    [rbtn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_navView addSubview:rbtn];
+    
+    _topNaviV = [[UIView alloc] initWithFrame:CGRectMake(0, _navView.frame.size.height + _navView.frame.origin.y, self.view.frame.size.width, MENU_HEIGHT)];
+    //    [_topNaviV setBackgroundColor:[UIColor greenColor]];
+    _topNaviV.backgroundColor = RGBA(236.f, 236.f, 236.f, 1);
+    [self.view addSubview:_topNaviV];
+    
+    collectionView = [[PullPsCollectionView alloc] initWithFrame:CGRectMake(0, _topNaviV.frame.origin.y + _topNaviV.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - _topNaviV.frame.origin.y - _topNaviV.frame.size.height)];
+    [self.view insertSubview:collectionView belowSubview:_navView];
+    
+//    collectionView = [[PullPsCollectionView alloc] initWithFrame:CGRectMake(0, 24, self.view.frame.size.width, self.view.frame.size.height)];
+//    [self.view addSubview:collectionView];
     
     collectionView.collectionViewDelegate = self;
     collectionView.collectionViewDataSource = self;
@@ -265,4 +316,52 @@
                                               otherButtonTitles:nil, nil];
     [alertView show];
 }
+
+#pragma left and right action
+
+- (void)leftAction:(UIButton *)btn
+{
+//    if ([collectionView isHidden] == NO)
+//    {
+//        [self showSelectView:btn];
+//        return;
+//    }
+    [((SliderViewController *)[[[self.view superview] superview] nextResponder]) showLeftViewController];
+}
+
+- (void)rightAction:(UIButton *)btn
+{
+//    if ([collectionView isHidden] == NO)
+//    {
+//        [self showSelectView:btn];
+//        return;
+//    }
+    [((SliderViewController *)[[[self.view superview] superview] nextResponder]) showRightViewController];
+}
+
+- (void)showSelectView:(UIButton *)btn
+{
+    if ([collectionView isHidden] == YES)
+    {
+        [collectionView setHidden:NO];
+        [UIView animateWithDuration:0.6 animations:^
+         {
+//             [collectionView setFrame:CGRectMake(0, collectionView.frame.origin.y, collectionView.frame.size.width, collectionView.frame.size.height)];
+         } completion:^(BOOL finished)
+         {
+         }];
+    }else
+    {
+        [UIView animateWithDuration:0.6 animations:^
+         {
+//             [_selectTabV setFrame:CGRectMake(0, _scrollV.frame.origin.y - _scrollV.frame.size.height, _scrollV.frame.size.width, _scrollV.frame.size.height)];
+         } completion:^(BOOL finished)
+         {
+             [collectionView setHidden:YES];
+         }];
+    }
+}
+
+
+
 @end
