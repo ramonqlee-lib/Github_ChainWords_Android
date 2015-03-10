@@ -93,9 +93,6 @@
     collectionView = [[PullPsCollectionView alloc] initWithFrame:CGRectMake(0, _topNaviV.frame.origin.y + _topNaviV.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - _topNaviV.frame.origin.y - _topNaviV.frame.size.height)];
     [self.view insertSubview:collectionView belowSubview:_navView];
     
-//    collectionView = [[PullPsCollectionView alloc] initWithFrame:CGRectMake(0, 24, self.view.frame.size.width, self.view.frame.size.height)];
-//    [self.view addSubview:collectionView];
-    
     collectionView.collectionViewDelegate = self;
     collectionView.collectionViewDataSource = self;
     collectionView.pullDelegate=self;
@@ -114,7 +111,7 @@
     collectionView.pullTextColor = [UIColor blackColor];
     UILabel *loadingLabel = [[UILabel alloc] initWithFrame:self.collectionView.bounds];
     
-    NSArray* tipArr = [NSArray arrayWithObjects:@"点加号，反馈您的宝贵建议!",@"点加号，将我分享给你的好朋友!", nil];
+    NSArray* tipArr = [NSArray arrayWithObjects:@"反馈您的宝贵建议!",@"将我分享给你的好朋友!", nil];
     NSInteger pos =  arc4random() % tipArr.count;
     loadingLabel.text = [tipArr objectAtIndex:pos];
     loadingLabel.textAlignment = NSTextAlignmentCenter;
@@ -125,7 +122,6 @@
         [self performSelector:@selector(refreshTable) withObject:nil afterDelay:0];
     }
     
-    [self addSystemMenu];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -250,70 +246,6 @@
     [self.collectionView reloadData];
 }
 
-#pragma QuadCurveMenuDelegate
-- (void)addSystemMenu
-{
-    UIImage *storyMenuItemImage = [UIImage imageNamed:@"bg-menuitem.png"];
-    UIImage *storyMenuItemImagePressed = [UIImage imageNamed:@"bg-menuitem-highlighted.png"];
-    
-    // About MenuItem.
-    QuadCurveMenuItem *aboutMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
-                                                                highlightedImage:storyMenuItemImagePressed
-                                                                    ContentImage:[UIImage imageNamed:@"about.png"]
-                                                         highlightedContentImage:nil];
-    // Share MenuItem.
-    QuadCurveMenuItem *shareMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
-                                                                highlightedImage:storyMenuItemImagePressed
-                                                                    ContentImage:[UIImage imageNamed:@"share.png"]
-                                                         highlightedContentImage:nil];
-    // Feedback MenuItem.
-    QuadCurveMenuItem *feedbackMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
-                                                               highlightedImage:storyMenuItemImagePressed
-                                                                   ContentImage:[UIImage imageNamed:@"feedback.png"]
-                                                        highlightedContentImage:nil];
-
-    
-    NSArray *menus = [NSArray arrayWithObjects:aboutMenuItem, shareMenuItem, feedbackMenuItem, nil];
-    
-    QuadCurveMenu *menu = [[QuadCurveMenu alloc] initWithFrame:self.view.bounds menus:menus];
-    menu.delegate = self;
-    [self.view addSubview:menu];
-}
-
-- (void)quadCurveMenu:(QuadCurveMenu *)menu didSelectIndex:(NSInteger)idx
-{
-//    NSLog(@"Select the index : %d",idx);
-    switch (idx) {
-        case 0:// about
-            [self popupAbout:nil];
-            break;
-        case 1:// share
-//            [UMSocialSnsService presentSnsIconSheetView:self
-//                                                 appKey:UMENG_APP_KEY
-//                                              shareText:NSLocalizedString(@"ShareMessage", nil)
-//                                             shareImage:nil//[UIImage imageNamed:@"icon.png"]
-//                                        shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQQ,UMShareToTencent,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToEmail,UMShareToSms,nil]
-//                                               delegate:nil];
-            break;
-        case 2:// feedback
-//            [self presentViewController:[UMFeedback feedbackModalViewController] animated:YES completion:nil];
-            break;
-            
-        default:
-            break;
-    }
-}
-
-
--(IBAction)popupAbout:(id)sender
-{
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"About"
-                                                        message:@"  Copyright (c) 2015 iDreems. All rights reserved."
-                                                       delegate:self
-                                              cancelButtonTitle:@"I Know"
-                                              otherButtonTitles:nil, nil];
-    [alertView show];
-}
 
 #pragma left and right action
 
