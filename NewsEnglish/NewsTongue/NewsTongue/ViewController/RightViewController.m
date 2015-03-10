@@ -1,5 +1,5 @@
 //
-//  RightViewController.m
+//  LeftViewController.m
 //  WYApp
 //
 //  Created by chen on 14-7-17.
@@ -8,62 +8,79 @@
 
 #import "RightViewController.h"
 
+#import "UMFeedback.h"
+#import "UMSocial.h"
+
+@interface RightViewController ()
+{
+
+}
+
+@end
+
 @implementation RightViewController
 
 - (void)viewDidLoad
 {
+    NSArray *_arData = @[@"设置",@"提建议", @"推荐给好友",@"关于"];
+    SEL selectors[] = {@selector(setting:),@selector(feedback:),@selector(share:),@selector(about:)};
+    
     [self.view setBackgroundColor:[UIColor clearColor]];
     UIImageView *imageBgV = [[UIImageView alloc] initWithFrame:self.view.bounds];
     [imageBgV setImage:[UIImage imageNamed:@"sidebar_bg.jpg"]];
     [self.view addSubview:imageBgV];
-    imageBgV.userInteractionEnabled = YES;
     
-    float y = 0.3*self.view.frame.size.height;
-    // 头像
-    _headImageView = [[UIImageView alloc] init];
-    _headImageView.backgroundColor = [UIColor clearColor];
-    _headImageView.frame = CGRectMake(self.view.center.x - 40*0.7, y, 100, 100);
-    _headImageView.layer.cornerRadius = 50.0;
-    _headImageView.layer.borderWidth = 1.0;
-    _headImageView.layer.borderColor = [UIColor whiteColor].CGColor;
-    _headImageView.layer.masksToBounds = YES;
-    _headImageView.image = [UIImage imageNamed:@"head1.jpg"];
-    [imageBgV addSubview:_headImageView];
-    _headImageView.userInteractionEnabled = YES;
-    
-    UITapGestureRecognizer *singleTapRecognizer = [[UITapGestureRecognizer alloc] init];
-    singleTapRecognizer.numberOfTapsRequired = 1;
-    [singleTapRecognizer addTarget:self action:@selector(headPhotoAnimation)];
-    [_headImageView addGestureRecognizer:singleTapRecognizer];
+    __block float h = self.view.frame.size.height*0.7/[_arData count];
+    __block float y = 0.15*self.view.frame.size.height;
+    for (NSInteger i = 0; i < _arData.count; ++i)
+    {
+        NSString* obj = [_arData objectAtIndex:i];
+        
+        UIView *listV = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-200, y, self.view.frame.size.width, h)];
+        [listV setBackgroundColor:[UIColor clearColor]];
+        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, listV.frame.size.width - 60, listV.frame.size.height)];
+        [l setFont:[UIFont systemFontOfSize:20]];
+        [l setTextColor:[UIColor whiteColor]];
+        [l setBackgroundColor:[UIColor clearColor]];
+        [l setText:obj];
+        [listV addSubview:l];
+        
+        // event
+        UITapGestureRecognizer *single_tap_recognizer = [[UITapGestureRecognizer alloc] initWithTarget : self action: selectors[i]];
+        [single_tap_recognizer setNumberOfTouchesRequired : 1];
+        [listV addGestureRecognizer : single_tap_recognizer];
+        
+        [self.view addSubview:listV];
+        y += h;
+    };
 }
 
-- (void)headPhotoAnimation
+#pragma mark selectors
+
+-(void)feedback:(UIView*)view
 {
-    [self rotate360WithDuration:2.0 repeatCount:1];
-    _headImageView.animationDuration = 2.0;
-    _headImageView.animationImages = [NSArray arrayWithObjects:[UIImage imageNamed:@"head1.jpg"],
-                                      [UIImage imageNamed:@"head2.jpg"],[UIImage imageNamed:@"head2.jpg"],
-                                      [UIImage imageNamed:@"head2.jpg"],[UIImage imageNamed:@"head2.jpg"],
-                                      [UIImage imageNamed:@"head1.jpg"], nil];
-    _headImageView.animationRepeatCount = 1;
-    [_headImageView startAnimating];
+    [self presentViewController:[UMFeedback feedbackModalViewController] animated:YES completion:nil];
 }
-
-- (void)rotate360WithDuration:(CGFloat)aDuration repeatCount:(CGFloat)aRepeatCount
+-(void)about:(UIView*)view
 {
-	CAKeyframeAnimation *theAnimation = [CAKeyframeAnimation animation];
-	theAnimation.values = [NSArray arrayWithObjects:
-						   [NSValue valueWithCATransform3D:CATransform3DMakeRotation(0, 0,1,0)],
-						   [NSValue valueWithCATransform3D:CATransform3DMakeRotation(M_PI, 0,1,0)],
-                           [NSValue valueWithCATransform3D:CATransform3DMakeRotation(M_PI, 0,1,0)],
-						   [NSValue valueWithCATransform3D:CATransform3DMakeRotation(2*M_PI, 0,1,0)],
-						   nil];
-	theAnimation.cumulative = YES;
-	theAnimation.duration = aDuration;
-	theAnimation.repeatCount = aRepeatCount;
-	theAnimation.removedOnCompletion = YES;
-    
-	[_headImageView.layer addAnimation:theAnimation forKey:@"transform"];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"About"
+                                                        message:@"  Copyright (c) 2015 iDreems. All rights reserved."
+                                                       delegate:self
+                                              cancelButtonTitle:@"I Know"
+                                              otherButtonTitles:nil, nil];
+    [alertView show];
 }
-
+-(void)share:(UIView*)view
+{
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:UMENG_APP_KEY
+                                      shareText:NSLocalizedString(@"ShareMessage", nil)
+                                     shareImage:nil//[UIImage imageNamed:@"icon.png"]
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQQ,UMShareToTencent,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToEmail,UMShareToSms,nil]
+                                       delegate:nil];
+}
+-(void)setting:(UIView*)view
+{
+    NSLog(@"setting");
+}
 @end

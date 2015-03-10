@@ -1,5 +1,5 @@
 //
-//  RightViewController.h
+//  LeftViewController.h
 //  WYApp
 //
 //  Created by chen on 14-7-17.
@@ -9,8 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface RightViewController : UIViewController
-
-//可以旋转的UIImage
-@property (nonatomic,retain) UIImageView *headImageView;
 
 @end

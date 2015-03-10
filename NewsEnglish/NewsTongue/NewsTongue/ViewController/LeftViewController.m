@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad
 {
-    _arData = @[@"收藏", @"翻译机器人"];
+    _arData = @[@"收藏", @"翻译助手"];
     
     [self.view setBackgroundColor:[UIColor clearColor]];
     UIImageView *imageBgV = [[UIImageView alloc] initWithFrame:self.view.bounds];

@@ -19,8 +19,6 @@
 #import "CellView.h"
 #import "UIImageView+WebCache.h"
 
-#import "UMFeedback.h"
-#import "UMSocial.h"
 #import "Constants.h"
 #import "SliderViewController.h"
 
@@ -290,15 +288,15 @@
             [self popupAbout:nil];
             break;
         case 1:// share
-            [UMSocialSnsService presentSnsIconSheetView:self
-                                                 appKey:UMENG_APP_KEY
-                                              shareText:NSLocalizedString(@"ShareMessage", nil)
-                                             shareImage:nil//[UIImage imageNamed:@"icon.png"]
-                                        shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQQ,UMShareToTencent,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToEmail,UMShareToSms,nil]
-                                               delegate:nil];
+//            [UMSocialSnsService presentSnsIconSheetView:self
+//                                                 appKey:UMENG_APP_KEY
+//                                              shareText:NSLocalizedString(@"ShareMessage", nil)
+//                                             shareImage:nil//[UIImage imageNamed:@"icon.png"]
+//                                        shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToQQ,UMShareToTencent,UMShareToRenren,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToEmail,UMShareToSms,nil]
+//                                               delegate:nil];
             break;
         case 2:// feedback
-            [self presentViewController:[UMFeedback feedbackModalViewController] animated:YES completion:nil];
+//            [self presentViewController:[UMFeedback feedbackModalViewController] animated:YES completion:nil];
             break;
             
         default:
