@@ -162,15 +162,13 @@ static NSString *const cellIdentifier=@"QQChart";
 {
     ChartMessage *chartMessage=[[ChartMessage alloc]init];
     
-    int random=arc4random_uniform(2);
-    NSLog(@"%d",random);
-    chartMessage.icon=[NSString stringWithFormat:@"icon%02d.jpg",random+1];
+    chartMessage.icon=@"chat_to_icon.jpg";
     chartMessage.messageType=kMessageTo;
     chartMessage.content=textFiled.text;
     textFiled.text=@"";
     
     [self addMessage:chartMessage];
-    // TODO 在此增加翻译功能
+    // 在此增加翻译功能
     [self addTranslatedText:chartMessage.content];
 }
 
@@ -199,9 +197,7 @@ static NSString *const cellIdentifier=@"QQChart";
     //  展示翻译结果
     ChartMessage *chartMessage=[[ChartMessage alloc]init];
     
-    int random=arc4random_uniform(2);
-    NSLog(@"%d",random);
-    chartMessage.icon=[NSString stringWithFormat:@"icon%02d.jpg",random+1];
+    chartMessage.icon=@"chat_from_icon.jpg";
     chartMessage.messageType=kMessageFrom;
     chartMessage.content=[SentenceManager getTranslate:result];
     
