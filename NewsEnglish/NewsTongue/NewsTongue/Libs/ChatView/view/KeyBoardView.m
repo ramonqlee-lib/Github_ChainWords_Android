@@ -40,6 +40,7 @@
     [btn addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     return btn;
 }
+
 -(void)initialData
 {
     self.backImageView=[[UIImageView alloc]initWithFrame:self.bounds];
@@ -133,16 +134,14 @@
 }
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    if([self.delegate respondsToSelector:@selector(KeyBordView:textFiledBegin:)]){
-        
-        [self.delegate KeyBordView:self textFleldBegin:textField];
+    if([self.delegate respondsToSelector:@selector(KeyBoardView:textFieldBegin:)]){
+        [self.delegate KeyBoardView:self textFieldBegin:textField];
     }
     return YES;
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if([self.delegate respondsToSelector:@selector(KeyBordView:textFiledReturn:)]){
-    
+    if([self.delegate respondsToSelector:@selector(KeyBoardView:textFieldReturn:)]){
         [self.delegate KeyBoardView:self textFieldReturn:textField];
     }
     return YES;

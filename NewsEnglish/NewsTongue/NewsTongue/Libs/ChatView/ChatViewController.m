@@ -14,8 +14,15 @@
 #import "NSString+DocumentPath.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
+#import "NSString+HTML.h"
+#import "SentenceManager.h"
 
-@interface ChatViewController ()<UITableViewDataSource,UITableViewDelegate,KeyBoardViewDelegate,ChartCellDelegate,AVAudioPlayerDelegate>
+
+@interface ChatViewController ()<UITableViewDataSource,UITableViewDelegate,KeyBoardViewDelegate,ChartCellDelegate,AVAudioPlayerDelegate,SentenceQueryResult>
+{
+    NSString* fromLang;
+    NSString* toLang;
+}
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) KeyBoardView *keyBordView;
 @property (nonatomic,strong) NSMutableArray *cellFrames;
@@ -62,10 +69,12 @@ static NSString *const cellIdentifier=@"QQChart";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    fromLang = @"en";
+    toLang = @"zh";
     
-    self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backToIndex)];
+    self.navigationItem.leftBarButtonItem =[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"RETURN", @"") style:UIBarButtonItemStylePlain target:self action:@selector(backToIndex)];
     
-    self.title=@"QQ chat";
+    self.title= NSLocalizedString(@"TRANSLATOR_TITLE", @"");
     self.view.backgroundColor=[UIColor whiteColor];
     
     //add UItableView
@@ -83,29 +92,27 @@ static NSString *const cellIdentifier=@"QQChart";
     self.keyBordView=[[KeyBoardView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height-108, self.view.frame.size.width, 44)];
     self.keyBordView.delegate=self;
     [self.view addSubview:self.keyBordView];
+
     //初始化数据
-    
     [self initwithData];
     
 }
 -(void)initwithData
 {
-
     self.cellFrames=[NSMutableArray array];
     
     NSString *path=[[NSBundle mainBundle] pathForResource:@"messages" ofType:@"plist"];
     NSArray *data=[NSArray arrayWithContentsOfFile:path];
     
     for(NSDictionary *dict in data){
-      
         ChartCellFrame *cellFrame=[[ChartCellFrame alloc]init];
         ChartMessage *chartMessage=[[ChartMessage alloc]init];
         chartMessage.dict=dict;
         cellFrame.chartMessage=chartMessage;
         [self.cellFrames addObject:cellFrame];
     }
-
 }
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.cellFrames.count;
@@ -153,24 +160,66 @@ static NSString *const cellIdentifier=@"QQChart";
 }
 -(void)KeyBoardView:(KeyBoardView *)keyBoardView textFieldReturn:(UITextField *)textFiled
 {
-    ChartCellFrame *cellFrame=[[ChartCellFrame alloc]init];
     ChartMessage *chartMessage=[[ChartMessage alloc]init];
     
     int random=arc4random_uniform(2);
     NSLog(@"%d",random);
     chartMessage.icon=[NSString stringWithFormat:@"icon%02d.jpg",random+1];
-    chartMessage.messageType=random;
+    chartMessage.messageType=kMessageTo;
     chartMessage.content=textFiled.text;
-    cellFrame.chartMessage=chartMessage;
-    
-    [self.cellFrames addObject:cellFrame];
-    [self.tableView reloadData];
-    
-    //滚动到当前行
-    
-    [self tableViewScrollCurrentIndexPath];
     textFiled.text=@"";
+    
+    [self addMessage:chartMessage];
+    // TODO 在此增加翻译功能
+    [self addTranslatedText:chartMessage.content];
+}
 
+-(void)addTranslatedText:(NSString*)originText
+{
+    if (!originText || !originText.length || ![[NSString stringWithString:originText] stringByTrimmingStopCharactersInSet].length) {
+        return;
+    }
+    
+    //  显示翻译中的进度提示
+//    [self showProgress];
+    //  翻译
+    [[SentenceManager sharedInstance]query:[originText lowercaseString] from:fromLang to:toLang response:self];
+}
+
+#pragma mark WordQueryResult protocol
+
+-(void)handleResponse:(NSDictionary*)result
+{
+    // 关闭翻译中的进度提示
+//    [self hideProgress];
+    if (!result || !result.count) {
+        return;
+    }
+    
+    //  展示翻译结果
+    ChartMessage *chartMessage=[[ChartMessage alloc]init];
+    
+    int random=arc4random_uniform(2);
+    NSLog(@"%d",random);
+    chartMessage.icon=[NSString stringWithFormat:@"icon%02d.jpg",random+1];
+    chartMessage.messageType=kMessageFrom;
+    chartMessage.content=[SentenceManager getTranslate:result];
+    
+    [self addMessage:chartMessage];
+}
+
+-(void)addMessage:(ChartMessage*)chartMessage
+{
+    if (!chartMessage) {
+        return;
+    }
+    ChartCellFrame *cellFrame=[[ChartCellFrame alloc]init];
+    cellFrame.chartMessage=chartMessage;
+    [self.cellFrames addObject:cellFrame];
+    
+    [self.tableView reloadData];
+    //滚动到当前行
+    [self tableViewScrollCurrentIndexPath];
 }
 -(void)KeyBordView:(KeyBoardView *)keyBoardView textFleldBegin:(UITextField *)textFiled
 {
@@ -229,6 +278,9 @@ static NSString *const cellIdentifier=@"QQChart";
 }
 -(void)tableViewScrollCurrentIndexPath
 {
+    if (self.cellFrames.count==0) {
+        return;
+    }
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:self.cellFrames.count-1 inSection:0];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }

@@ -5,8 +5,12 @@
   Created by ramonqlee on 2/8/15.
   Copyright (c) 2015 iDreems. All rights reserved.
 */
+"RETURN" = "返回";
 "ShareMessage"="想快速提升英语水平，去Appstore,下载【读新闻学英语】，读纯正新闻，学地道英语！";
 
 // 单句模式下的提示
 "NO_SELECTED_SENTENCE"= "请先点击选择一句话!";
 "NO_SELECTED_WORD"= "请先点击选择一个单词!";
+
+// 翻译小助手界面
+"TRANSLATOR_TITLE" = "翻译小助手";

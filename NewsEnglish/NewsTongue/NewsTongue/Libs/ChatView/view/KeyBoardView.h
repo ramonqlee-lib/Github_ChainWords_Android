@@ -13,7 +13,7 @@
 @protocol KeyBoardViewDelegate <NSObject>
 
 -(void)KeyBoardView:(KeyBoardView *)keyBoardView textFieldReturn:(UITextField *)textField;
--(void)KeyBordView:(KeyBoardView *)keyBoardView textFleldBegin:(UITextField *)textField;
+-(void)KeyBoardView:(KeyBoardView *)keyBoardView textFieldBegin:(UITextField *)textField;
 -(void)beginRecord;
 -(void)finishRecord;
 @end
