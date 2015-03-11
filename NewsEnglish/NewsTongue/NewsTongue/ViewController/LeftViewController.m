@@ -7,6 +7,7 @@
 //
 
 #import "LeftViewController.h"
+#import "ChatViewController.h"
 
 @interface LeftViewController ()
 {
@@ -20,7 +21,7 @@
 - (void)viewDidLoad
 {
     _arData = @[@"单词收藏",@"新闻收藏", @"翻译助手"];
-    SEL selectors[] = {@selector(wordList:),@selector(newsList::),@selector(translator:)};
+    SEL selectors[] = {@selector(wordList:),@selector(newsList:),@selector(translator:)};
     
     [self.view setBackgroundColor:[UIColor clearColor]];
     UIImageView *imageBgV = [[UIImageView alloc] initWithFrame:self.view.bounds];
@@ -40,6 +41,12 @@
         [l setBackgroundColor:[UIColor clearColor]];
         [l setText:obj];
         [listV addSubview:l];
+    
+        // event
+        UITapGestureRecognizer *single_tap_recognizer = [[UITapGestureRecognizer alloc] initWithTarget : self action: selectors[i]];
+        [single_tap_recognizer setNumberOfTouchesRequired : 1];
+        [listV addGestureRecognizer : single_tap_recognizer];
+        
         [self.view addSubview:listV];
         y += h;
     };
@@ -59,6 +66,9 @@
 
 -(void)translator:(UIView*)view
 {
+    UINavigationController *nav=[[[UINavigationController alloc]initWithRootViewController:[ChatViewController alloc]]init];
     
+    
+    [self presentViewController:nav animated:YES completion:nil];
 }
 @end
