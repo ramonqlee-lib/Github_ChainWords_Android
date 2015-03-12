@@ -22,6 +22,7 @@
 #import "Constants.h"
 #import "SliderViewController.h"
 
+#define LOAD_COUNT 30 // 每次加载更多，请求的条数
 #define MENU_HEIGHT 0//25
 #define MENU_BUTTON_WIDTH  60
 
@@ -127,13 +128,14 @@
 {
     [super viewWillAppear:animated];
 }
+
 - (void) refreshTable
 {
     /*
      Code to actually refresh goes here.
      */
-    // Request
-    NSString *string = @"http://checknewversion.duapp.com/listnews.php";
+    // 支持分页加载
+    NSString *string = [NSString stringWithFormat:@"http://checknewversion.duapp.com/newsladder/listnews.php?offset=%d&count=%d",0,LOAD_COUNT];
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
@@ -141,7 +143,14 @@
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        self.items = (NSArray *)responseObject;
+        if ([responseObject isKindOfClass:[NSArray class]])
+        {
+            if (!self.items) {
+                self.items = [[NSMutableArray alloc] initWithCapacity:10];
+            }
+            [self.items removeAllObjects];
+            [self.items addObjectsFromArray:(NSArray *)responseObject];
+        }
         
         self.collectionView.pullLastRefreshDate = [NSDate date];
         self.collectionView.pullTableIsRefreshing = NO;
@@ -162,9 +171,32 @@
      Code to actually load more data goes here.
      
      */
-    //    [self.items addObjectsFromArray:self.items];
-    [self.collectionView reloadData];
-    self.collectionView.pullTableIsLoadingMore = NO;
+    NSString *string = [NSString stringWithFormat:@"http://checknewversion.duapp.com/newsladder/listnews.php?offset=%lu&count=%d",(unsigned long)self.items.count,LOAD_COUNT];
+    NSURL *url = [NSURL URLWithString:string];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSArray class]]) {
+            if (!self.items) {
+                self.items = [[NSMutableArray alloc] initWithCapacity:10];
+            }
+            NSArray *data = (NSArray *)responseObject;
+            [self.items addObjectsFromArray:data];
+        }
+        
+        self.collectionView.pullLastRefreshDate = [NSDate date];
+        self.collectionView.pullTableIsLoadingMore = NO;
+        
+        [self dataSourceDidLoad];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self dataSourceDidError];
+    }];
+    
+    // 5
+    [operation start];
 }
 #pragma mark - PullTableViewDelegate
 
@@ -251,21 +283,21 @@
 
 - (void)leftAction:(UIButton *)btn
 {
-//    if ([collectionView isHidden] == NO)
-//    {
-//        [self showSelectView:btn];
-//        return;
-//    }
+    //    if ([collectionView isHidden] == NO)
+    //    {
+    //        [self showSelectView:btn];
+    //        return;
+    //    }
     [((SliderViewController *)[[[self.view superview] superview] nextResponder]) showLeftViewController];
 }
 
 - (void)rightAction:(UIButton *)btn
 {
-//    if ([collectionView isHidden] == NO)
-//    {
-//        [self showSelectView:btn];
-//        return;
-//    }
+    //    if ([collectionView isHidden] == NO)
+    //    {
+    //        [self showSelectView:btn];
+    //        return;
+    //    }
     [((SliderViewController *)[[[self.view superview] superview] nextResponder]) showRightViewController];
 }
 
@@ -276,7 +308,7 @@
         [collectionView setHidden:NO];
         [UIView animateWithDuration:0.6 animations:^
          {
-//             [collectionView setFrame:CGRectMake(0, collectionView.frame.origin.y, collectionView.frame.size.width, collectionView.frame.size.height)];
+             //             [collectionView setFrame:CGRectMake(0, collectionView.frame.origin.y, collectionView.frame.size.width, collectionView.frame.size.height)];
          } completion:^(BOOL finished)
          {
          }];
@@ -284,7 +316,7 @@
     {
         [UIView animateWithDuration:0.6 animations:^
          {
-//             [_selectTabV setFrame:CGRectMake(0, _scrollV.frame.origin.y - _scrollV.frame.size.height, _scrollV.frame.size.width, _scrollV.frame.size.height)];
+             //             [_selectTabV setFrame:CGRectMake(0, _scrollV.frame.origin.y - _scrollV.frame.size.height, _scrollV.frame.size.width, _scrollV.frame.size.height)];
          } completion:^(BOOL finished)
          {
              [collectionView setHidden:YES];

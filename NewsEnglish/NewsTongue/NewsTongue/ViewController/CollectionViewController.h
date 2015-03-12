@@ -13,7 +13,7 @@
 @interface CollectionViewController : UIViewController<PSCollectionViewDelegate,PSCollectionViewDataSource,UIScrollViewDelegate,PullPsCollectionViewDelegate>
 
 @property(nonatomic,retain) PullPsCollectionView *collectionView;
-@property(nonatomic,retain)NSArray *items;
+@property(nonatomic,retain)NSMutableArray *items;
 
 @end
 

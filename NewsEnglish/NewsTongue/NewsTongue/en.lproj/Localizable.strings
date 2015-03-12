@@ -5,7 +5,7 @@
   Created by ramonqlee on 2/8/15.
   Copyright (c) 2015 iDreems. All rights reserved.
 */
-"RETURN"="Return";
+"RETURN"="Back";
 "ShareMessage"="I find NewsLadder on Appstore,try it!";
 
 // 单句模式下的提示

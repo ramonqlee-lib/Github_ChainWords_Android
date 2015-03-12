@@ -8,7 +8,7 @@
 
 #import "LeftViewController.h"
 #import "ChatViewController.h"
-
+#import "SliderViewController.h"
 @interface LeftViewController ()
 {
     NSArray *_arData;
@@ -20,8 +20,8 @@
 
 - (void)viewDidLoad
 {
-    _arData = @[@"单词收藏",@"新闻收藏", @"翻译助手"];
-    SEL selectors[] = {@selector(wordList:),@selector(newsList:),@selector(translator:)};
+    _arData = @[@"实时新闻",@"新闻收藏", @"翻译助手"];
+    SEL selectors[] = {@selector(newsList:),@selector(localNewsList:),@selector(translator:)};
     
     [self.view setBackgroundColor:[UIColor clearColor]];
     UIImageView *imageBgV = [[UIImageView alloc] initWithFrame:self.view.bounds];
@@ -53,14 +53,14 @@
 }
 
 #pragma mark selectors
--(void)wordList:(UIView*)view
+-(void)localNewsList:(UIView*)view
 {
     
 }
 
 -(void)newsList:(UIView*)view
 {
-    
+    [[SliderViewController sharedSliderController] showLeftViewController];
 }
 
 
