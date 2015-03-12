@@ -171,7 +171,7 @@
      Code to actually load more data goes here.
      
      */
-    NSString *string = [NSString stringWithFormat:@"http://checknewversion.duapp.com/newsladder/listnews.php?offset=%lu&count=%d",(unsigned long)self.items.count,LOAD_COUNT];
+    NSString *string = [NSString stringWithFormat:@"http://checknewversion.duapp.com/newsladder/listnews.php?offset=%lu&count=%d&stat=1",(unsigned long)self.items.count,LOAD_COUNT];
     NSURL *url = [NSURL URLWithString:string];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
@@ -179,13 +179,26 @@
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if ([responseObject isKindOfClass:[NSArray class]]) {
+        
+        if (![responseObject isKindOfClass:[NSDictionary class]]) {
+            self.collectionView.pullLastRefreshDate = [NSDate date];
+            self.collectionView.pullTableIsLoadingMore = NO;
+            
+            [self dataSourceDidLoad];
+            return;
+        }
+        
+        NSString* countStr = [((NSDictionary*)responseObject) objectForKey:@"count"];
+        NSArray* data = [((NSDictionary*)responseObject) objectForKey:@"data"];
+        // 是否还有更多数据
+        if(self.items.count < countStr.integerValue)
+        {
             if (!self.items) {
                 self.items = [[NSMutableArray alloc] initWithCapacity:10];
             }
-            NSArray *data = (NSArray *)responseObject;
             [self.items addObjectsFromArray:data];
         }
+        
         
         self.collectionView.pullLastRefreshDate = [NSDate date];
         self.collectionView.pullTableIsLoadingMore = NO;
