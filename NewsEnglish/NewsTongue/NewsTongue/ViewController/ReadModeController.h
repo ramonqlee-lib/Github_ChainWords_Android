@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "UITextView+Extras.h"
+#import "BaiduMobAdDelegateProtocol.h"
 
-@interface ReadModeController : UIViewController
+@interface ReadModeController : UIViewController<BaiduMobAdViewDelegate>
 
 -(void)setText:(NSString*)value;
 -(void)setTime:(NSInteger)time;
@@ -24,4 +25,5 @@
 @property(nonatomic,readwrite,assign)IBOutlet UITextView* textView;
 @property(nonatomic,readwrite,assign)IBOutlet UISlider* slider;
 @property(nonatomic,readwrite,assign)IBOutlet UIView* fontChangeSlider;
+@property(nonatomic,readwrite,assign)IBOutlet UIView* adViewContainer;
 @end
