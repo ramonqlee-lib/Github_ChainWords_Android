@@ -273,6 +273,7 @@
     NSLog(@"%@",contentStr);
     NSString* updated = [item objectForKey:@"updated"];
     ReadModeController* controller = [[ReadModeController alloc]init];
+    controller.data = item;
     [controller setTitle:[item objectForKey:@"title"]];
     [controller setTime: [updated intValue]];
     [controller setTapGranality:UITextGranularityParagraph];

@@ -13,6 +13,8 @@
 #import "Constants.h"
 #import "NSString+HTML.h"
 #import "BaiduMobAdView.h"
+#import "DbCache.h"
+#import "Base64Simple.h"
 
 static const CGFloat kLineSpacing = 5.0f;// 行间距
 static const CGFloat kMinFontSize = 18.0f;// 字体缩放的最小值
@@ -195,6 +197,53 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     // 设置slider的当前值
     if (!_fontChangeSlider.hidden) {
         _slider.value = _textView.font.pointSize;
+    }
+}
+
+-(IBAction)add2Favorites:(id)sender
+{
+    // TODO 添加到收藏中
+    /**
+     {
+     "title": "Netanyahu vows no Palestinian state",
+     "summary": "Israeli Prime Minister Benjamin Netanyahu says he will not allow the creation of a Palestinian state if he is re-elected on Tuesday.",
+     "content": "nRlbnQ+",
+     "thumbnail": "http://ichef.bbci.co.uk/moira/img/iphone/v2/thumbnail/mcs/media/images/81693000/jpg/_81693119_81693118.jpg",
+     "updated": "1426547470",
+     "category": "top stories"
+     }
+     */
+    DbCache* cache =[[DbCache alloc]init];
+    cache.dbName = kNewsCacheDbName;
+    cache.tableName = kNewsCacheTableName;
+    /**
+     NSString *sqlCreateTable = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT)",SENTENCES_TABLE_NAME, SENTENCE_MD5_KEY,FROM_LANG_KEY, TO_LANG_KEY,DATA_KEY];
+     */
+     NSString* sql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT)",kNewsCacheTableName, kTitle,kSummary,kContent,kThumbnail,kUpdated,kCategory];
+    [cache createDbIfNotExist:sql];
+    
+    /**
+    NSString *sql = [NSString stringWithFormat:
+                     @"INSERT INTO '%@' ('%@', '%@', '%@', '%@') VALUES ('%@', '%@', '%@', '%@')",
+                     SENTENCES_TABLE_NAME, SENTENCE_MD5_KEY, FROM_LANG_KEY, TO_LANG_KEY,DATA_KEY,word,fromLang,toLang,json];
+     */
+    NSString* title = [self.data objectForKey:kTitle];
+    NSString* summary = [self.data objectForKey:kSummary];
+    NSString* content = [self.data objectForKey:kContent];
+    NSString* thumbnail = [self.data objectForKey:kThumbnail];
+    NSString* lastUpdated = [self.data objectForKey:kUpdated];
+    NSString* category = [self.data objectForKey:kCategory];
+    
+    sql = [NSString stringWithFormat:
+           @"INSERT INTO '%@' ('%@', '%@', '%@', '%@', '%@', '%@') VALUES ('%@', '%@', '%@', '%@', '%@', '%@')",
+           kNewsCacheTableName, kTitle,kSummary,kContent,kThumbnail,kUpdated,kCategory,title,summary,content,thumbnail,lastUpdated,category];
+    [cache save:sql];
+    
+    // FIXME test get
+    sql = [NSString stringWithFormat:@"SELECT * FROM %@ LIMIT %d OFFSET %d",kNewsCacheTableName,10,0];
+    NSArray* ret = [cache get:sql];
+    for (NSDictionary* item in ret) {
+        NSLog(@"%@",item);
     }
 }
 

@@ -196,6 +196,7 @@
 		30DAE6171AA7BA7200328CBE /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DAE60E1AA7BA7200328CBE /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		30DAE6191AA7BA7200328CBE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DAE6121AA7BA7200328CBE /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		30DAE61B1AA7BBAC00328CBE /* BPushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30DAE61A1AA7BBAC00328CBE /* BPushConfig.plist */; };
+		30DC2E8B1AB79A6900AC8E0F /* DbCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DC2E8A1AB79A6900AC8E0F /* DbCache.m */; };
 		30EC871C1A7C474600BC7363 /* WordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EC871B1A7C474600BC7363 /* WordManager.m */; };
 		30F2F2241A88180E008420D4 /* Toast+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F2F2231A88180E008420D4 /* Toast+UIView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
@@ -528,6 +529,8 @@
 		30DAE6111AA7BA7200328CBE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		30DAE6121AA7BA7200328CBE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		30DAE61A1AA7BBAC00328CBE /* BPushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BPushConfig.plist; sourceTree = "<group>"; };
+		30DC2E891AB79A6900AC8E0F /* DbCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DbCache.h; sourceTree = "<group>"; };
+		30DC2E8A1AB79A6900AC8E0F /* DbCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DbCache.m; sourceTree = "<group>"; };
 		30EC871A1A7C474600BC7363 /* WordManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordManager.h; sourceTree = "<group>"; };
 		30EC871B1A7C474600BC7363 /* WordManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordManager.m; sourceTree = "<group>"; };
 		30F2F2221A88180E008420D4 /* Toast+UIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Toast+UIView.h"; sourceTree = "<group>"; };
@@ -1196,6 +1199,8 @@
 				30EC871B1A7C474600BC7363 /* WordManager.m */,
 				3068FD7B1A7EEAA400E257A9 /* SentenceManager.h */,
 				3068FD7C1A7EEAA400E257A9 /* SentenceManager.m */,
+				30DC2E891AB79A6900AC8E0F /* DbCache.h */,
+				30DC2E8A1AB79A6900AC8E0F /* DbCache.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1541,6 +1546,7 @@
 				303381BB1A7C79FF0074604E /* AFHTTPSessionManager.m in Sources */,
 				300D5DEB1A8426950054CFB7 /* PSCollectionViewCell.m in Sources */,
 				303381C31A7C79FF0074604E /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				30DC2E8B1AB79A6900AC8E0F /* DbCache.m in Sources */,
 				300D5DDF1A8426950054CFB7 /* PullTableView.m in Sources */,
 				30DAE6161AA7BA7200328CBE /* GzipCompressor.m in Sources */,
 				300D5DDB1A8426950054CFB7 /* EGORefreshTableHeaderView.m in Sources */,

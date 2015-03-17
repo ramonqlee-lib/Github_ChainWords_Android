@@ -51,6 +51,16 @@
                                 <action selector="changeReviewFontSizeButtonAction:" destination="-1" eventType="touchUpInside" id="R43-Je-CDn"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJ7-dJ-zud">
+                            <rect key="frame" x="457" y="7" width="46" height="30"/>
+                            <state key="normal" title="收藏">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="add2Favorites:" destination="-1" eventType="touchUpInside" id="09j-rM-BWh"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.20392156859999999" green="0.42745098040000001" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -62,12 +72,14 @@
                         <constraint firstAttribute="centerY" secondItem="vgk-Mu-de7" secondAttribute="centerY" id="OAu-se-lFn"/>
                         <constraint firstItem="0On-bG-H6K" firstAttribute="top" secondItem="nzC-Ga-RCz" secondAttribute="top" constant="7" id="QE2-eV-cGr"/>
                         <constraint firstAttribute="centerY" secondItem="0On-bG-H6K" secondAttribute="centerY" id="Ujr-xG-O9x"/>
+                        <constraint firstItem="0On-bG-H6K" firstAttribute="leading" secondItem="dJ7-dJ-zud" secondAttribute="trailing" constant="37" id="W8K-jk-Utu"/>
                         <constraint firstAttribute="height" constant="44" id="dwl-So-Yw7"/>
                         <constraint firstAttribute="centerY" secondItem="0On-bG-H6K" secondAttribute="centerY" id="eN8-Pl-nkU"/>
                         <constraint firstAttribute="centerY" secondItem="vgk-Mu-de7" secondAttribute="centerY" id="gN3-nP-xWU"/>
                         <constraint firstAttribute="trailing" secondItem="0On-bG-H6K" secondAttribute="trailing" constant="20" id="hjM-gY-WdY"/>
                         <constraint firstAttribute="centerY" secondItem="vgk-Mu-de7" secondAttribute="centerY" id="pb1-bY-w2s"/>
                         <constraint firstItem="vgk-Mu-de7" firstAttribute="leading" secondItem="nzC-Ga-RCz" secondAttribute="leading" constant="20" id="rJW-ng-yYn"/>
+                        <constraint firstItem="0On-bG-H6K" firstAttribute="centerY" secondItem="dJ7-dJ-zud" secondAttribute="centerY" id="ysn-Iy-nXr"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">

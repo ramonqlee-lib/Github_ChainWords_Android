@@ -20,6 +20,9 @@
 -(IBAction)return2ParentAction:(id)sender;
 -(IBAction)sliderValueChangeAction:(UISlider*)sender;
 -(IBAction)changeReviewFontSizeButtonAction:(id)sender;
+-(IBAction)add2Favorites:(id)sender;
+
+@property(nonatomic,assign)NSDictionary* data;
 
 @property(nonatomic,readwrite,assign)IBOutlet UILabel* titleLabel;
 @property(nonatomic,readwrite,assign)IBOutlet UITextView* textView;

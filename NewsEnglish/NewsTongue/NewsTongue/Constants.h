@@ -24,3 +24,12 @@
 #define kAdViewPortraitRect CGRectMake( (SCREEN_WIDTH-kBaiduAdViewSizeDefaultWidth)/2, 0, kBaiduAdViewSizeDefaultWidth, kBaiduAdViewSizeDefaultHeight)
 
 #define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)//用来获取手机的系统，判断系统是多少
+
+#define kNewsCacheDbName @"newscache.sqlite"
+#define kNewsCacheTableName @"news"
+#define kTitle @"title"
+#define kSummary @"summary"
+#define kContent @"content"
+#define kThumbnail @"thumbnail"
+#define kUpdated @"updated"
+#define kCategory @"category"
