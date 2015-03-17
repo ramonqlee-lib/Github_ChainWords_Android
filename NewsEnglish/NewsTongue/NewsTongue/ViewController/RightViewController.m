@@ -22,8 +22,8 @@
 
 - (void)viewDidLoad
 {
-    NSArray *_arData = @[@"设置",@"提建议", @"推荐给好友",@"关于"];
-    SEL selectors[] = {@selector(setting:),@selector(feedback:),@selector(share:),@selector(about:)};
+    NSArray *_arData = @[@"提建议", @"推荐给好友",@"关于"];
+    SEL selectors[] = {@selector(feedback:),@selector(share:),@selector(about:)};
     
     [self.view setBackgroundColor:[UIColor clearColor]];
     UIImageView *imageBgV = [[UIImageView alloc] initWithFrame:self.view.bounds];
