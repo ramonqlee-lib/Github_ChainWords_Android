@@ -219,7 +219,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     /**
      NSString *sqlCreateTable = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT)",SENTENCES_TABLE_NAME, SENTENCE_MD5_KEY,FROM_LANG_KEY, TO_LANG_KEY,DATA_KEY];
      */
-     NSString* sql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT)",kNewsCacheTableName, kTitle,kSummary,kContent,kThumbnail,kUpdated,kCategory];
+     NSString* sql = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT PRIMARY KEY, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT)",kNewsCacheTableName, kTitle,kSummary,kContent,kThumbnail,kUpdated,kCategory];
     [cache createDbIfNotExist:sql];
     
     /**
@@ -243,9 +243,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     /*
     sql = [NSString stringWithFormat:@"SELECT * FROM %@ LIMIT %d OFFSET %d",kNewsCacheTableName,10,0];
     NSArray* ret = [cache get:sql];
-    for (NSDictionary* item in ret) {
-        NSLog(@"%@",item);
-    }
+    NSLog(@"count: %lu",(unsigned long)ret.count);
     */
 }
 
