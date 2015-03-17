@@ -152,6 +152,8 @@
 		30B9F4AE1AAE589300163DF3 /* QHMainGestureRecognizerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B9F4A91AAE589300163DF3 /* QHMainGestureRecognizerViewController.m */; };
 		30B9F4AF1AAE589300163DF3 /* RightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B9F4AB1AAE589300163DF3 /* RightViewController.m */; };
 		30B9F4D41AAE592900163DF3 /* SubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B9F4D31AAE592900163DF3 /* SubViewController.m */; };
+		30B9FC911AB8E3B4007D1851 /* MyFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B9FC901AB8E3B4007D1851 /* MyFavoritesViewController.m */; };
+		30B9FC951AB8E41B007D1851 /* DbCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B9FC941AB8E41B007D1851 /* DbCache.m */; };
 		30C171CD1A7DA62C001CD87A /* SQLiteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C171CC1A7DA62C001CD87A /* SQLiteManager.m */; };
 		30C171CF1A7DB4DF001CD87A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C171CE1A7DB4DF001CD87A /* libsqlite3.dylib */; };
 		30C251861A858ACE00B004A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30C251841A858ACE00B004A0 /* Main.storyboard */; };
@@ -196,7 +198,6 @@
 		30DAE6171AA7BA7200328CBE /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DAE60E1AA7BA7200328CBE /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		30DAE6191AA7BA7200328CBE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DAE6121AA7BA7200328CBE /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		30DAE61B1AA7BBAC00328CBE /* BPushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30DAE61A1AA7BBAC00328CBE /* BPushConfig.plist */; };
-		30DC2E8B1AB79A6900AC8E0F /* DbCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DC2E8A1AB79A6900AC8E0F /* DbCache.m */; };
 		30EC871C1A7C474600BC7363 /* WordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EC871B1A7C474600BC7363 /* WordManager.m */; };
 		30F2F2241A88180E008420D4 /* Toast+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F2F2231A88180E008420D4 /* Toast+UIView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
@@ -466,6 +467,10 @@
 		30B9F4AB1AAE589300163DF3 /* RightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightViewController.m; sourceTree = "<group>"; };
 		30B9F4D21AAE592900163DF3 /* SubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubViewController.h; sourceTree = "<group>"; };
 		30B9F4D31AAE592900163DF3 /* SubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubViewController.m; sourceTree = "<group>"; };
+		30B9FC8F1AB8E3B4007D1851 /* MyFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFavoritesViewController.h; sourceTree = "<group>"; };
+		30B9FC901AB8E3B4007D1851 /* MyFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFavoritesViewController.m; sourceTree = "<group>"; };
+		30B9FC931AB8E41B007D1851 /* DbCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DbCache.h; sourceTree = "<group>"; };
+		30B9FC941AB8E41B007D1851 /* DbCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DbCache.m; sourceTree = "<group>"; };
 		30C171CB1A7DA62C001CD87A /* SQLiteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteManager.h; sourceTree = "<group>"; };
 		30C171CC1A7DA62C001CD87A /* SQLiteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteManager.m; sourceTree = "<group>"; };
 		30C171CE1A7DB4DF001CD87A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -529,8 +534,6 @@
 		30DAE6111AA7BA7200328CBE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		30DAE6121AA7BA7200328CBE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		30DAE61A1AA7BBAC00328CBE /* BPushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BPushConfig.plist; sourceTree = "<group>"; };
-		30DC2E891AB79A6900AC8E0F /* DbCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DbCache.h; sourceTree = "<group>"; };
-		30DC2E8A1AB79A6900AC8E0F /* DbCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DbCache.m; sourceTree = "<group>"; };
 		30EC871A1A7C474600BC7363 /* WordManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordManager.h; sourceTree = "<group>"; };
 		30EC871B1A7C474600BC7363 /* WordManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordManager.m; sourceTree = "<group>"; };
 		30F2F2221A88180E008420D4 /* Toast+UIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Toast+UIView.h"; sourceTree = "<group>"; };
@@ -1070,6 +1073,8 @@
 		3090C95A1A858CC30094231B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				30B9FC8F1AB8E3B4007D1851 /* MyFavoritesViewController.h */,
+				30B9FC901AB8E3B4007D1851 /* MyFavoritesViewController.m */,
 				30B9F4D21AAE592900163DF3 /* SubViewController.h */,
 				30B9F4D31AAE592900163DF3 /* SubViewController.m */,
 				30B9F4A41AAE589300163DF3 /* LeftViewController.h */,
@@ -1098,6 +1103,7 @@
 		30ADC9D91A770E5700339771 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				30B9FC921AB8E41B007D1851 /* DBCache */,
 				30CE20C61AB1010F00526075 /* ChatView */,
 				30B9F4A01AAE588900163DF3 /* SliderViewController */,
 				30DAE6021AA7BA7200328CBE /* LibBPush */,
@@ -1135,6 +1141,15 @@
 				30B9F4A21AAE588900163DF3 /* SliderViewController.m */,
 			);
 			path = SliderViewController;
+			sourceTree = "<group>";
+		};
+		30B9FC921AB8E41B007D1851 /* DBCache */ = {
+			isa = PBXGroup;
+			children = (
+				30B9FC931AB8E41B007D1851 /* DbCache.h */,
+				30B9FC941AB8E41B007D1851 /* DbCache.m */,
+			);
+			path = DBCache;
 			sourceTree = "<group>";
 		};
 		30C171CA1A7DA62C001CD87A /* SQLiteManager */ = {
@@ -1199,8 +1214,6 @@
 				30EC871B1A7C474600BC7363 /* WordManager.m */,
 				3068FD7B1A7EEAA400E257A9 /* SentenceManager.h */,
 				3068FD7C1A7EEAA400E257A9 /* SentenceManager.m */,
-				30DC2E891AB79A6900AC8E0F /* DbCache.h */,
-				30DC2E8A1AB79A6900AC8E0F /* DbCache.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1546,7 +1559,6 @@
 				303381BB1A7C79FF0074604E /* AFHTTPSessionManager.m in Sources */,
 				300D5DEB1A8426950054CFB7 /* PSCollectionViewCell.m in Sources */,
 				303381C31A7C79FF0074604E /* UIActivityIndicatorView+AFNetworking.m in Sources */,
-				30DC2E8B1AB79A6900AC8E0F /* DbCache.m in Sources */,
 				300D5DDF1A8426950054CFB7 /* PullTableView.m in Sources */,
 				30DAE6161AA7BA7200328CBE /* GzipCompressor.m in Sources */,
 				300D5DDB1A8426950054CFB7 /* EGORefreshTableHeaderView.m in Sources */,
@@ -1557,6 +1569,7 @@
 				303381C21A7C79FF0074604E /* AFNetworkActivityIndicatorManager.m in Sources */,
 				30F2F2241A88180E008420D4 /* Toast+UIView.m in Sources */,
 				30B9F4AE1AAE589300163DF3 /* QHMainGestureRecognizerViewController.m in Sources */,
+				30B9FC951AB8E41B007D1851 /* DbCache.m in Sources */,
 				30ADC9DD1A770E5700339771 /* UITextView+Extras.m in Sources */,
 				300D5DEE1A8426950054CFB7 /* SDWebImageDecoder.m in Sources */,
 				303381BD1A7C79FF0074604E /* AFSecurityPolicy.m in Sources */,
@@ -1565,6 +1578,7 @@
 				303381BF1A7C79FF0074604E /* AFURLRequestSerialization.m in Sources */,
 				300D5DDD1A8426950054CFB7 /* MessageInterceptor.m in Sources */,
 				300D5DF21A8426950054CFB7 /* UIButton+WebCache.m in Sources */,
+				30B9FC911AB8E3B4007D1851 /* MyFavoritesViewController.m in Sources */,
 				303381BC1A7C79FF0074604E /* AFNetworkReachabilityManager.m in Sources */,
 				3033BB291A878BE80080B3EB /* CFilteringJSONSerializer.m in Sources */,
 				300D5DF11A8426950054CFB7 /* SDWebImagePrefetcher.m in Sources */,

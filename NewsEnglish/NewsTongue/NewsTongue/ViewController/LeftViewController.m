@@ -9,6 +9,8 @@
 #import "LeftViewController.h"
 #import "ChatViewController.h"
 #import "SliderViewController.h"
+#import "MyFavoritesViewController.h"
+
 @interface LeftViewController ()
 {
     NSArray *_arData;
@@ -55,7 +57,9 @@
 #pragma mark selectors
 -(void)localNewsList:(UIView*)view
 {
+    UIViewController *myFavoriteViewController= [[MyFavoritesViewController alloc]init];
     
+    [self presentViewController:myFavoriteViewController animated:YES completion:nil];
 }
 
 -(void)newsList:(UIView*)view
