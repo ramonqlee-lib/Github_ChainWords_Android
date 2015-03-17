@@ -236,15 +236,17 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     
     sql = [NSString stringWithFormat:
            @"INSERT INTO '%@' ('%@', '%@', '%@', '%@', '%@', '%@') VALUES ('%@', '%@', '%@', '%@', '%@', '%@')",
-           kNewsCacheTableName, kTitle,kSummary,kContent,kThumbnail,kUpdated,kCategory,title,summary,content,thumbnail,lastUpdated,category];
+           kNewsCacheTableName, kTitle,kSummary,kContent,kThumbnail,kUpdated,kCategory,[title base64EncodedString],[summary base64EncodedString],content,[thumbnail base64EncodedString],[lastUpdated base64EncodedString],[category base64EncodedString]];
     [cache save:sql];
     
     // FIXME test get
+    /*
     sql = [NSString stringWithFormat:@"SELECT * FROM %@ LIMIT %d OFFSET %d",kNewsCacheTableName,10,0];
     NSArray* ret = [cache get:sql];
     for (NSDictionary* item in ret) {
         NSLog(@"%@",item);
     }
+    */
 }
 
 #pragma mark - Gesture Handling
