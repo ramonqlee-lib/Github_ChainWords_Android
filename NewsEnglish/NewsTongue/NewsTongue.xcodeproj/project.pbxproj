@@ -152,7 +152,7 @@
 		30B9F4AE1AAE589300163DF3 /* QHMainGestureRecognizerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B9F4A91AAE589300163DF3 /* QHMainGestureRecognizerViewController.m */; };
 		30B9F4AF1AAE589300163DF3 /* RightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B9F4AB1AAE589300163DF3 /* RightViewController.m */; };
 		30B9F4D41AAE592900163DF3 /* SubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B9F4D31AAE592900163DF3 /* SubViewController.m */; };
-		30B9FC911AB8E3B4007D1851 /* MyFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B9FC901AB8E3B4007D1851 /* MyFavoritesViewController.m */; };
+		30B9FC911AB8E3B4007D1851 /* MyFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B9FC901AB8E3B4007D1851 /* MyFavoritesViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		30B9FC951AB8E41B007D1851 /* DbCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B9FC941AB8E41B007D1851 /* DbCache.m */; };
 		30C171CD1A7DA62C001CD87A /* SQLiteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C171CC1A7DA62C001CD87A /* SQLiteManager.m */; };
 		30C171CF1A7DB4DF001CD87A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 30C171CE1A7DB4DF001CD87A /* libsqlite3.dylib */; };

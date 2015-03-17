@@ -68,7 +68,7 @@
     _navView.userInteractionEnabled = YES;
     
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((_navView.frame.size.width - 200)/2, (_navView.frame.size.height - 40)/2, 200, 40)];
-    [titleLabel setText:@"新闻列表"];
+    [titleLabel setText:@"收藏列表"];
     [titleLabel setTextAlignment:NSTextAlignmentCenter];
     [titleLabel setTextColor:[UIColor whiteColor]];
     [titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
@@ -77,15 +77,9 @@
     
     UIButton *lbtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [lbtn setFrame:CGRectMake(10, 2, 40, 40)];
-    [lbtn setTitle:@"左" forState:UIControlStateNormal];
-    [lbtn addTarget:self action:@selector(leftAction:) forControlEvents:UIControlEventTouchUpInside];
+    [lbtn setTitle:NSLocalizedString(@"RETURN", "") forState:UIControlStateNormal];
+    [lbtn addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     [_navView addSubview:lbtn];
-    
-    UIButton *rbtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [rbtn setFrame:CGRectMake(_navView.frame.size.width - 50, 2, 40, 40)];
-    [rbtn setTitle:@"右" forState:UIControlStateNormal];
-    [rbtn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
-    [_navView addSubview:rbtn];
     
     _topNaviV = [[UIView alloc] initWithFrame:CGRectMake(0, _navView.frame.size.height + _navView.frame.origin.y, self.view.frame.size.width, MENU_HEIGHT)];
     //    [_topNaviV setBackgroundColor:[UIColor greenColor]];
@@ -259,16 +253,11 @@
 }
 
 
-#pragma left and right action
+#pragma return action
 
-- (void)leftAction:(UIButton *)btn
+- (void)backAction:(UIButton *)btn
 {
-    [[SliderViewController sharedSliderController] showLeftViewController];
-}
-
-- (void)rightAction:(UIButton *)btn
-{
-    [[SliderViewController sharedSliderController] showRightViewController];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
