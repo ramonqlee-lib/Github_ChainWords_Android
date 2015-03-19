@@ -15,6 +15,7 @@
 #import "BaiduMobAdView.h"
 #import "DbCache.h"
 #import "Base64Simple.h"
+#import "Toast+UIView.h"
 
 static const CGFloat kLineSpacing = 5.0f;// 行间距
 static const CGFloat kMinFontSize = 18.0f;// 字体缩放的最小值
@@ -238,13 +239,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
            @"INSERT INTO '%@' ('%@', '%@', '%@', '%@', '%@', '%@') VALUES ('%@', '%@', '%@', '%@', '%@', '%@')",
            kNewsCacheTableName, kTitle,kSummary,kContent,kThumbnail,kUpdated,kCategory,[title base64EncodedString],[summary base64EncodedString],content,[thumbnail base64EncodedString],[lastUpdated base64EncodedString],[category base64EncodedString]];
     [cache save:sql];
-    
-    // FIXME test get
-    /*
-    sql = [NSString stringWithFormat:@"SELECT * FROM %@ LIMIT %d OFFSET %d",kNewsCacheTableName,10,0];
-    NSArray* ret = [cache get:sql];
-    NSLog(@"count: %lu",(unsigned long)ret.count);
-    */
+    [self.view makeToast:NSLocalizedString(@"ADD2FAVORITE", "")];
 }
 
 #pragma mark - Gesture Handling
