@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		300047961ABB85F00073B0E6 /* DemoHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3000478F1ABB85F00073B0E6 /* DemoHintView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		300047971ABB85F00073B0E6 /* SEAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 300047911ABB85F00073B0E6 /* SEAnimationFactory.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		300047981ABB85F00073B0E6 /* TBHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 300047931ABB85F00073B0E6 /* TBHintView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		300047991ABB85F00073B0E6 /* UIView+SEAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 300047951ABB85F00073B0E6 /* UIView+SEAnimations.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3000479C1ABB8A850073B0E6 /* 60-x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3000479A1ABB8A850073B0E6 /* 60-x.png */; };
+		3000479D1ABB8A850073B0E6 /* 90-lifebuoy.png in Resources */ = {isa = PBXBuildFile; fileRef = 3000479B1ABB8A850073B0E6 /* 90-lifebuoy.png */; };
+		3000479F1ABB8BA10073B0E6 /* touchbee_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 3000479E1ABB8BA10073B0E6 /* touchbee_small.png */; };
 		300791DA1A86E58000D20875 /* record.png in Resources */ = {isa = PBXBuildFile; fileRef = 300791D91A86E58000D20875 /* record.png */; };
 		300791DD1A86E9F800D20875 /* replay.png in Resources */ = {isa = PBXBuildFile; fileRef = 300791DB1A86E9F800D20875 /* replay.png */; };
 		300791DE1A86E9F800D20875 /* speaker.png in Resources */ = {isa = PBXBuildFile; fileRef = 300791DC1A86E9F800D20875 /* speaker.png */; };
@@ -213,6 +220,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3000478E1ABB85F00073B0E6 /* DemoHintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoHintView.h; sourceTree = "<group>"; };
+		3000478F1ABB85F00073B0E6 /* DemoHintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoHintView.m; sourceTree = "<group>"; };
+		300047901ABB85F00073B0E6 /* SEAnimationFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEAnimationFactory.h; sourceTree = "<group>"; };
+		300047911ABB85F00073B0E6 /* SEAnimationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEAnimationFactory.m; sourceTree = "<group>"; };
+		300047921ABB85F00073B0E6 /* TBHintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBHintView.h; sourceTree = "<group>"; };
+		300047931ABB85F00073B0E6 /* TBHintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBHintView.m; sourceTree = "<group>"; };
+		300047941ABB85F00073B0E6 /* UIView+SEAnimations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SEAnimations.h"; sourceTree = "<group>"; };
+		300047951ABB85F00073B0E6 /* UIView+SEAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SEAnimations.m"; sourceTree = "<group>"; };
+		3000479A1ABB8A850073B0E6 /* 60-x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "60-x.png"; sourceTree = "<group>"; };
+		3000479B1ABB8A850073B0E6 /* 90-lifebuoy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "90-lifebuoy.png"; sourceTree = "<group>"; };
+		3000479E1ABB8BA10073B0E6 /* touchbee_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = touchbee_small.png; sourceTree = "<group>"; };
 		300791D91A86E58000D20875 /* record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = record.png; sourceTree = "<group>"; };
 		300791DB1A86E9F800D20875 /* replay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = replay.png; sourceTree = "<group>"; };
 		300791DC1A86E9F800D20875 /* speaker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speaker.png; sourceTree = "<group>"; };
@@ -585,6 +603,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3000478D1ABB85F00073B0E6 /* TBHintView */ = {
+			isa = PBXGroup;
+			children = (
+				3000479E1ABB8BA10073B0E6 /* touchbee_small.png */,
+				3000479A1ABB8A850073B0E6 /* 60-x.png */,
+				3000479B1ABB8A850073B0E6 /* 90-lifebuoy.png */,
+				3000478E1ABB85F00073B0E6 /* DemoHintView.h */,
+				3000478F1ABB85F00073B0E6 /* DemoHintView.m */,
+				300047901ABB85F00073B0E6 /* SEAnimationFactory.h */,
+				300047911ABB85F00073B0E6 /* SEAnimationFactory.m */,
+				300047921ABB85F00073B0E6 /* TBHintView.h */,
+				300047931ABB85F00073B0E6 /* TBHintView.m */,
+				300047941ABB85F00073B0E6 /* UIView+SEAnimations.h */,
+				300047951ABB85F00073B0E6 /* UIView+SEAnimations.m */,
+			);
+			path = TBHintView;
+			sourceTree = "<group>";
+		};
 		300791D81A86E58000D20875 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -1103,6 +1139,7 @@
 		30ADC9D91A770E5700339771 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				3000478D1ABB85F00073B0E6 /* TBHintView */,
 				30B9FC921AB8E41B007D1851 /* DBCache */,
 				30CE20C61AB1010F00526075 /* ChatView */,
 				30B9F4A01AAE588900163DF3 /* SliderViewController */,
@@ -1425,11 +1462,13 @@
 				300792131A87082100D20875 /* record@2x.png in Resources */,
 				3007921D1A870D3E00D20875 /* scaleFont@2x.png in Resources */,
 				30803D431A875A83000CA931 /* Info.plist in Resources */,
+				3000479D1ABB8A850073B0E6 /* 90-lifebuoy.png in Resources */,
 				30B9F49C1AAE587C00163DF3 /* head1.jpg in Resources */,
 				30CE20F61AB1010F00526075 /* chat_bottom_smile_nor.png in Resources */,
 				300791DE1A86E9F800D20875 /* speaker.png in Resources */,
 				3007920F1A87067B00D20875 /* recording.png in Resources */,
 				30CE21031AB1010F00526075 /* toolbar_bottom_bar.png in Resources */,
+				3000479F1ABB8BA10073B0E6 /* touchbee_small.png in Resources */,
 				30CE20F51AB1010F00526075 /* chat_bottom_keyboard_press.png in Resources */,
 				30B9F49F1AAE587C00163DF3 /* sidebar_bg@2x.jpg in Resources */,
 				30803D131A875248000CA931 /* UMSocialSDKResourcesNew.bundle in Resources */,
@@ -1469,6 +1508,7 @@
 				30803D111A875248000CA931 /* UMShareEditViewControlleriPad.xib in Resources */,
 				30CE20F81AB1010F00526075 /* chat_bottom_textfield.png in Resources */,
 				30CE21001AB1010F00526075 /* chatto_bg_normal.png in Resources */,
+				3000479C1ABB8A850073B0E6 /* 60-x.png in Resources */,
 				30CE21011AB1010F00526075 /* chat_from_icon.jpg in Resources */,
 				30803C561A874D22000CA931 /* ToolViewInputVoiceHL@2x.png in Resources */,
 				30CE20F91AB1010F00526075 /* chat_bottom_up_nor.png in Resources */,
@@ -1529,6 +1569,8 @@
 				30CE20F01AB1010F00526075 /* UIImage+StretchImage.m in Sources */,
 				303381B91A7C79FF0074604E /* AFHTTPRequestOperation.m in Sources */,
 				300D5DE81A8426950054CFB7 /* CellView.m in Sources */,
+				300047971ABB85F00073B0E6 /* SEAnimationFactory.m in Sources */,
+				300047991ABB85F00073B0E6 /* UIView+SEAnimations.m in Sources */,
 				30CE21051AB1010F00526075 /* ChartMessage.m in Sources */,
 				30C8B6871A7DB8AB009CB114 /* Base64Simple.m in Sources */,
 				3033BB351A878BE80080B3EB /* unzip.c in Sources */,
@@ -1541,6 +1583,7 @@
 				30CE21061AB1010F00526075 /* ChartContentView.m in Sources */,
 				303381BA1A7C79FF0074604E /* AFHTTPRequestOperationManager.m in Sources */,
 				300D5DF01A8426950054CFB7 /* SDWebImageManager.m in Sources */,
+				300047961ABB85F00073B0E6 /* DemoHintView.m in Sources */,
 				30B9F4D41AAE592900163DF3 /* SubViewController.m in Sources */,
 				300D5DED1A8426950054CFB7 /* SDImageCache.m in Sources */,
 				3068FD7A1A7EE24100E257A9 /* NSString+HTML.m in Sources */,
@@ -1578,6 +1621,7 @@
 				303381BF1A7C79FF0074604E /* AFURLRequestSerialization.m in Sources */,
 				300D5DDD1A8426950054CFB7 /* MessageInterceptor.m in Sources */,
 				300D5DF21A8426950054CFB7 /* UIButton+WebCache.m in Sources */,
+				300047981ABB85F00073B0E6 /* TBHintView.m in Sources */,
 				30B9FC911AB8E3B4007D1851 /* MyFavoritesViewController.m in Sources */,
 				303381BC1A7C79FF0074604E /* AFNetworkReachabilityManager.m in Sources */,
 				3033BB291A878BE80080B3EB /* CFilteringJSONSerializer.m in Sources */,

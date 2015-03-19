@@ -16,12 +16,14 @@
 #import "DbCache.h"
 #import "Base64Simple.h"
 #import "Toast+UIView.h"
+#import "DemoHintView.h"
+#import "WordManager.h"
 
 static const CGFloat kLineSpacing = 5.0f;// 行间距
 static const CGFloat kMinFontSize = 18.0f;// 字体缩放的最小值
 static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
-@interface ReadModeController ()<UITextViewDelegate>
+@interface ReadModeController ()<UITextViewDelegate,WordQueryResult>
 {
     UITextGranularity mGranuality;
     NSString* bodyText;
@@ -29,6 +31,10 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     CGFloat fontSize;
     NSInteger updated;
     BaiduMobAdView* sharedAdView;
+    DemoHintView* hintView;
+    
+    NSString* fromLang;
+    NSString* toLang;
 }
 @end
 
@@ -36,6 +42,10 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    fromLang = @"en";
+    toLang = @"zh";
+    
     // Do any additional setup after loading the view from its nib.
     [self startAd];
     
@@ -287,11 +297,15 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     }
     
     // 进入学习模式：单词模式和单句模式
-    // TODO 通过上下文弹出菜单方式，确认进入的模式，缺省进入单句模式
+    // 通过上下文弹出菜单方式，确认进入的模式，缺省进入单句模式
+#if 0
     SentenceModeController* controller = [[SentenceModeController alloc]init];
     [controller setTapGranality:UITextGranularitySentence];
     [controller setText:text];
     [self presentViewController:controller animated:NO completion:nil];
+#else
+    [self popupWordView:text];
+#endif
 }
 
 #pragma mark baidu ad delegate
@@ -347,4 +361,47 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     [self.adViewContainer addSubview:sharedAdView];
     [sharedAdView start];
 }
+
+#pragma mark pop up window
+
+-(IBAction) popupWordView:(NSString*)word
+{
+    // 联网查询单词，然后显示，中间可以加入进图提示
+    [[WordManager sharedInstance]query:[word lowercaseString] from:fromLang to:toLang response:self];
+}
+#pragma mark WordQueryResult protocol
+
+-(void)handleResponse:(NSDictionary*)wordDict
+{
+    NSMutableString* detail = [[NSMutableString alloc]init];
+    [detail appendString:[WordManager getReadableMeaning:wordDict]];
+    [detail appendString:@"\n"];
+    
+    NSArray* examples = [WordManager getExamples:wordDict];
+    for (NSString* item in examples) {
+        [detail appendString:item];
+        if ([item hasSuffix:@"\n"]) {
+            continue;
+        }
+        [detail appendString:@"\n"];
+    }
+    
+    // 显示
+    if (hintView) {
+        [hintView dismiss];
+    }
+    hintView = [DemoHintView  warningHintViewARC];
+    
+    // Overwrites the pages titles
+    hintView.title = @"Word";
+    
+    hintView.hintID = kHintID_Home;
+    [hintView addPageWithTitle:@"Page1" text:detail];
+    
+//    [hintView addPageWithTitle:@"Page 2" text:@"This is some demo text. Swipe this message to see the next hint!"];
+//    [hintView addPageWithTitle:@"Page 3" image:[UIImage imageNamed:@"touchbee_small.png"]];
+    
+    [hintView showInView:self.view orientation:kHintViewOrientationBottom presentation:kHintViewPresentationBounce];
+}
+
 @end

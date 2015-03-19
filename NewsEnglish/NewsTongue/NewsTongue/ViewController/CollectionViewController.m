@@ -276,7 +276,7 @@
     controller.data = item;
     [controller setTitle:[item objectForKey:@"title"]];
     [controller setTime: [updated intValue]];
-    [controller setTapGranality:UITextGranularityParagraph];
+    [controller setTapGranality:UITextGranularityWord];
     [controller setText:contentStr];
     [self presentViewController:controller animated:NO completion:nil];
 }
