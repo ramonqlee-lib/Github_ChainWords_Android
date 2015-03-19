@@ -14,6 +14,10 @@
 		3000479C1ABB8A850073B0E6 /* 60-x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3000479A1ABB8A850073B0E6 /* 60-x.png */; };
 		3000479D1ABB8A850073B0E6 /* 90-lifebuoy.png in Resources */ = {isa = PBXBuildFile; fileRef = 3000479B1ABB8A850073B0E6 /* 90-lifebuoy.png */; };
 		3000479F1ABB8BA10073B0E6 /* touchbee_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 3000479E1ABB8BA10073B0E6 /* touchbee_small.png */; };
+		300047A41ABB92C40073B0E6 /* burger.png in Resources */ = {isa = PBXBuildFile; fileRef = 300047A01ABB92C40073B0E6 /* burger.png */; };
+		300047A51ABB92C40073B0E6 /* burger@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 300047A11ABB92C40073B0E6 /* burger@2x.png */; };
+		300047A61ABB92C40073B0E6 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 300047A21ABB92C40073B0E6 /* gear.png */; };
+		300047A71ABB92C40073B0E6 /* gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 300047A31ABB92C40073B0E6 /* gear@2x.png */; };
 		300791DA1A86E58000D20875 /* record.png in Resources */ = {isa = PBXBuildFile; fileRef = 300791D91A86E58000D20875 /* record.png */; };
 		300791DD1A86E9F800D20875 /* replay.png in Resources */ = {isa = PBXBuildFile; fileRef = 300791DB1A86E9F800D20875 /* replay.png */; };
 		300791DE1A86E9F800D20875 /* speaker.png in Resources */ = {isa = PBXBuildFile; fileRef = 300791DC1A86E9F800D20875 /* speaker.png */; };
@@ -231,6 +235,10 @@
 		3000479A1ABB8A850073B0E6 /* 60-x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "60-x.png"; sourceTree = "<group>"; };
 		3000479B1ABB8A850073B0E6 /* 90-lifebuoy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "90-lifebuoy.png"; sourceTree = "<group>"; };
 		3000479E1ABB8BA10073B0E6 /* touchbee_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = touchbee_small.png; sourceTree = "<group>"; };
+		300047A01ABB92C40073B0E6 /* burger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = burger.png; sourceTree = "<group>"; };
+		300047A11ABB92C40073B0E6 /* burger@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "burger@2x.png"; sourceTree = "<group>"; };
+		300047A21ABB92C40073B0E6 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
+		300047A31ABB92C40073B0E6 /* gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gear@2x.png"; sourceTree = "<group>"; };
 		300791D91A86E58000D20875 /* record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = record.png; sourceTree = "<group>"; };
 		300791DB1A86E9F800D20875 /* replay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = replay.png; sourceTree = "<group>"; };
 		300791DC1A86E9F800D20875 /* speaker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speaker.png; sourceTree = "<group>"; };
@@ -624,6 +632,10 @@
 		300791D81A86E58000D20875 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				300047A01ABB92C40073B0E6 /* burger.png */,
+				300047A11ABB92C40073B0E6 /* burger@2x.png */,
+				300047A21ABB92C40073B0E6 /* gear.png */,
+				300047A31ABB92C40073B0E6 /* gear@2x.png */,
 				30B9F4981AAE587C00163DF3 /* head1.jpg */,
 				30B9F4991AAE587C00163DF3 /* head2.jpg */,
 				30B9F49A1AAE587C00163DF3 /* leftside_shadow_bg@2x.png */,
@@ -1486,6 +1498,7 @@
 				30803D141A875248000CA931 /* UMSocialLocalizable.strings in Resources */,
 				30B9F49D1AAE587C00163DF3 /* head2.jpg in Resources */,
 				30DAE61B1AA7BBAC00328CBE /* BPushConfig.plist in Resources */,
+				300047A51ABB92C40073B0E6 /* burger@2x.png in Resources */,
 				3007921B1A870AB700D20875 /* speaker@2x.png in Resources */,
 				30803D0C1A875248000CA931 /* UMSCommentInputController.xib in Resources */,
 				30803C5D1A874D22000CA931 /* umeng_fb_audio_play_01@2x.png in Resources */,
@@ -1504,11 +1517,13 @@
 				30803D0B1A875248000CA931 /* UMSCommentDetailController.xib in Resources */,
 				30803C5B1A874D22000CA931 /* umeng_fb_audio_dialog_cancel@2x.png in Resources */,
 				30803D121A875248000CA931 /* UMSnsAccountViewController.xib in Resources */,
+				300047A61ABB92C40073B0E6 /* gear.png in Resources */,
 				30803D0F1A875248000CA931 /* UMSShareListController.xib in Resources */,
 				30803D111A875248000CA931 /* UMShareEditViewControlleriPad.xib in Resources */,
 				30CE20F81AB1010F00526075 /* chat_bottom_textfield.png in Resources */,
 				30CE21001AB1010F00526075 /* chatto_bg_normal.png in Resources */,
 				3000479C1ABB8A850073B0E6 /* 60-x.png in Resources */,
+				300047A41ABB92C40073B0E6 /* burger.png in Resources */,
 				30CE21011AB1010F00526075 /* chat_from_icon.jpg in Resources */,
 				30803C561A874D22000CA931 /* ToolViewInputVoiceHL@2x.png in Resources */,
 				30CE20F91AB1010F00526075 /* chat_bottom_up_nor.png in Resources */,
@@ -1520,6 +1535,7 @@
 				30CE20FE1AB1010F00526075 /* chatfrom_bg_normal.png in Resources */,
 				3090C96C1A858CC30094231B /* SentenceModeController.xib in Resources */,
 				30803D0D1A875248000CA931 /* UMSCommentInputControlleriPad.xib in Resources */,
+				300047A71ABB92C40073B0E6 /* gear@2x.png in Resources */,
 				300D5DE41A8426950054CFB7 /* grayArrow.png in Resources */,
 				3090C96A1A858CC30094231B /* ReadModeController.xib in Resources */,
 				30CE20F41AB1010F00526075 /* chat_bottom_keyboard_nor.png in Resources */,

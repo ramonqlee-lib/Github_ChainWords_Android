@@ -375,9 +375,16 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 {
     NSMutableString* detail = [[NSMutableString alloc]init];
     [detail appendString:[WordManager getReadableMeaning:wordDict]];
-    [detail appendString:@"\n"];
+    if (detail.length > 0) {
+        [detail appendString:@"\n"];
+    }
     
     NSArray* examples = [WordManager getExamples:wordDict];
+    //empty
+    if (detail.length == 0 && examples.count == 0) {
+        return;
+    }
+    
     for (NSString* item in examples) {
         [detail appendString:item];
         if ([item hasSuffix:@"\n"]) {
@@ -393,7 +400,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     hintView = [DemoHintView  warningHintViewARC];
     
     // Overwrites the pages titles
-    hintView.title = @"Word";
+    hintView.title = @"";
     
     hintView.hintID = kHintID_Home;
     [hintView addPageWithTitle:@"Page1" text:detail];

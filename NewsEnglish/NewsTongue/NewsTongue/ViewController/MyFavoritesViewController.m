@@ -236,7 +236,7 @@
     controller.data = item;
     [controller setTitle:[[item objectForKey:@"title"] base64DecodedString]];
     [controller setTime: [updated intValue]];
-    [controller setTapGranality:UITextGranularityParagraph];
+    [controller setTapGranality:UITextGranularityWord];
     [controller setText:contentStr];
     [self presentViewController:controller animated:NO completion:^(void){
         controller.add2FavButton.hidden = YES;

@@ -76,13 +76,15 @@
     
     UIButton *lbtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [lbtn setFrame:CGRectMake(10, 2, 40, 40)];
-    [lbtn setTitle:@"左" forState:UIControlStateNormal];
+//    [lbtn setTitle:@"左" forState:UIControlStateNormal];
+    [lbtn setImage:[UIImage imageNamed:@"burger"] forState:UIControlStateNormal];
     [lbtn addTarget:self action:@selector(leftAction:) forControlEvents:UIControlEventTouchUpInside];
     [_navView addSubview:lbtn];
     
     UIButton *rbtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [rbtn setFrame:CGRectMake(_navView.frame.size.width - 50, 2, 40, 40)];
-    [rbtn setTitle:@"右" forState:UIControlStateNormal];
+//    [rbtn setTitle:@"右" forState:UIControlStateNormal];
+    [rbtn setImage:[UIImage imageNamed:@"gear"] forState:UIControlStateNormal];
     [rbtn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
     [_navView addSubview:rbtn];
     
