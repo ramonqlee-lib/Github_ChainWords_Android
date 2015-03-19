@@ -29,4 +29,5 @@
 @property(nonatomic,readwrite,assign)IBOutlet UISlider* slider;
 @property(nonatomic,readwrite,assign)IBOutlet UIView* fontChangeSlider;
 @property(nonatomic,readwrite,assign)IBOutlet UIView* adViewContainer;
+@property(nonatomic,readwrite,assign)IBOutlet UIButton* add2FavButton;
 @end

@@ -130,7 +130,7 @@
     DbCache* cache =[[DbCache alloc]init];
     cache.dbName = kNewsCacheDbName;
     cache.tableName = kNewsCacheTableName;
-    NSString* sql = [NSString stringWithFormat:@"SELECT * FROM %@ LIMIT %d OFFSET %d",kNewsCacheTableName,LOAD_COUNT,0];
+    NSString* sql = [NSString stringWithFormat:@"SELECT * FROM %@ order by %@ desc LIMIT %d OFFSET %d",kNewsCacheTableName,kUpdated,LOAD_COUNT,0];
     NSArray* ret = [cache get:sql];
     NSLog(@"count: %lu",(unsigned long)ret.count);
     if (ret.count > 0) {
@@ -156,7 +156,7 @@
     DbCache* cache =[[DbCache alloc]init];
     cache.dbName = kNewsCacheDbName;
     cache.tableName = kNewsCacheTableName;
-    NSString* sql = [NSString stringWithFormat:@"SELECT * FROM %@ LIMIT %d OFFSET %lu",kNewsCacheTableName,LOAD_COUNT,(unsigned long)self.items.count];
+    NSString* sql = [NSString stringWithFormat:@"SELECT * FROM %@ order by %@ desc LIMIT %d OFFSET %lu",kNewsCacheTableName,kUpdated,LOAD_COUNT,(unsigned long)self.items.count];
     NSArray* ret = [cache get:sql];
     NSLog(@"count: %lu",(unsigned long)ret.count);
     if (ret.count > 0) {
@@ -231,14 +231,16 @@
     contentStr = [contentStr base64DecodedString];
     contentStr = [contentStr stringByConvertingHTMLToPlainText];
     NSLog(@"%@",contentStr);
-    NSString* updated = [[item objectForKey:@"updated"] base64DecodedString];
+    NSString* updated = [item objectForKey:@"updated"];
     ReadModeController* controller = [[ReadModeController alloc]init];
     controller.data = item;
     [controller setTitle:[[item objectForKey:@"title"] base64DecodedString]];
     [controller setTime: [updated intValue]];
     [controller setTapGranality:UITextGranularityParagraph];
     [controller setText:contentStr];
-    [self presentViewController:controller animated:NO completion:nil];
+    [self presentViewController:controller animated:NO completion:^(void){
+        controller.add2FavButton.hidden = YES;
+    }];
 }
 
 - (NSInteger)numberOfViewsInCollectionView:(PSCollectionView *)collectionView {

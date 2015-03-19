@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReadModeController">
             <connections>
                 <outlet property="adViewContainer" destination="KcU-NO-z3u" id="6yG-LF-RLX"/>
+                <outlet property="add2FavButton" destination="dJ7-dJ-zud" id="hqR-ky-nq3"/>
                 <outlet property="fontChangeSlider" destination="qPl-RG-U2e" id="HVo-Cs-lIU"/>
                 <outlet property="slider" destination="gua-dM-ard" id="B3H-4w-Pil"/>
                 <outlet property="textView" destination="zgI-8o-fX5" id="Qo7-ML-bQd"/>
