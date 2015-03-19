@@ -51,7 +51,7 @@
         self.clipsToBounds = YES;
         self.spanWidthWeight = 1.0f;
         self.layer.cornerRadius = 12.0;
-        self.maximumHeight = 160.0f;
+        self.maximumHeight = [UIScreen mainScreen].bounds.size.height/2;//160.0f;
         self.userInteractionEnabled = YES;
         self.presentationAnimation = kHintViewPresentationSlide;
         self.orientation = kHintViewOrientationBottom;
@@ -142,7 +142,7 @@
         
 		labelTitle.backgroundColor = [UIColor clearColor];
 		labelTitle.adjustsFontSizeToFitWidth = YES;
-		labelTitle.textAlignment = UITextAlignmentLeft;
+		labelTitle.textAlignment = NSTextAlignmentLeft;
         labelTitle.font = [UIFont boldSystemFontOfSize:17.0];
 		labelTitle.shadowColor = [UIColor blackColor];
 		labelTitle.shadowOffset = CGSizeMake( 0, -1);
@@ -442,7 +442,7 @@
             
             if( pageContent )
             {
-                UILabel* labelText = [[[UILabel alloc] initWithFrame:CGRectMake( 
+                UITextView* labelText = [[[UITextView alloc] initWithFrame:CGRectMake(
                                                                                 page * self.scrollViewPages.bounds.size.width + 5, 
                                                                                 0, 
                                                                                 self.scrollViewPages.bounds.size.width - 10, 
@@ -450,8 +450,8 @@
                                                                                 )
                                        ] autorelease];
                 
-                labelText.numberOfLines = 0;
-                labelText.textAlignment = UITextAlignmentCenter;
+//                labelText.numberOfLines = 0;
+                labelText.textAlignment = NSTextAlignmentLeft;
                 labelText.text = pageContent;
                 labelText.textColor = self.textColor;
                 labelText.backgroundColor = [UIColor clearColor];
