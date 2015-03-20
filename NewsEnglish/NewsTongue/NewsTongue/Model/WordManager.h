@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol WordQueryResult
+@protocol WordQueryResponse
 
 -(void)handleWordResponse:(NSDictionary*)result;// 异步回调
 
@@ -18,7 +18,7 @@
 
 +(id)sharedInstance;
 
--(BOOL)query:(NSString*)word from:(NSString*)fromLang to:(NSString*)toLang response:(id<WordQueryResult>)result;
+-(BOOL)query:(NSString*)word from:(NSString*)fromLang to:(NSString*)toLang response:(id<WordQueryResponse>)result;
 
 //utils
 +(NSString*)getReadableMeaning:(NSDictionary*)value;// 获取单词的意义

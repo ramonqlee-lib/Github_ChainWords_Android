@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol SentenceQueryResult
+@protocol SentenceQueryResponse
 
 -(void)handleSentenceResponse:(NSDictionary*)result;// 异步回调
 
@@ -18,7 +18,7 @@
 
 +(id)sharedInstance;
 
--(BOOL)query:(NSString*)sent from:(NSString*)fromLang to:(NSString*)toLang response:(id<SentenceQueryResult>)result;
+-(BOOL)query:(NSString*)sent from:(NSString*)fromLang to:(NSString*)toLang response:(id<SentenceQueryResponse>)result;
 
 +(NSString*)getTranslate:(NSDictionary*)val;
 @end

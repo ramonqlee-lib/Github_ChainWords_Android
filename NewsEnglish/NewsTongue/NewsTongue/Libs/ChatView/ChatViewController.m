@@ -18,7 +18,7 @@
 #import "SentenceManager.h"
 
 
-@interface ChatViewController ()<UITableViewDataSource,UITableViewDelegate,KeyBoardViewDelegate,ChartCellDelegate,AVAudioPlayerDelegate,SentenceQueryResult>
+@interface ChatViewController ()<UITableViewDataSource,UITableViewDelegate,KeyBoardViewDelegate,ChartCellDelegate,AVAudioPlayerDelegate,SentenceQueryResponse>
 {
     NSString* fromLang;
     NSString* toLang;

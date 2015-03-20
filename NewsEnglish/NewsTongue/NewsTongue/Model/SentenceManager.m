@@ -52,7 +52,7 @@ static SentenceManager* sSentenceManager;
 
 @interface SentenceManager()
 {
-    id<SentenceQueryResult> sentenceQueryCallback;
+    id<SentenceQueryResponse> sentenceQueryCallback;
 }
 @end
 
@@ -68,7 +68,7 @@ static SentenceManager* sSentenceManager;
     return sSentenceManager;
 }
 
--(BOOL)query:(NSString*)sent from:(NSString*)fromLang to:(NSString*)toLang response:(id<SentenceQueryResult>)callback
+-(BOOL)query:(NSString*)sent from:(NSString*)fromLang to:(NSString*)toLang response:(id<SentenceQueryResponse>)callback
 {
     // querying,just return
     if (nil != sentenceQueryCallback) {

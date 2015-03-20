@@ -94,7 +94,7 @@ static WordManager* sWordManager;
 
 @interface WordManager()
 {
-    id<WordQueryResult> wordQueryCallback;
+    id<WordQueryResponse> wordQueryCallback;
 }
 @end
 
@@ -110,7 +110,7 @@ static WordManager* sWordManager;
     return sWordManager;
 }
 
--(BOOL)query:(NSString*)word from:(NSString*)fromLang to:(NSString*)toLang response:(id<WordQueryResult>)callback
+-(BOOL)query:(NSString*)word from:(NSString*)fromLang to:(NSString*)toLang response:(id<WordQueryResponse>)callback
 {
     // querying,just return
     if (nil != wordQueryCallback) {

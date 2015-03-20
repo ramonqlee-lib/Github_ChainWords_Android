@@ -22,7 +22,7 @@ static const CGFloat kLineSpacing = 5.0f;// 行间距
 static const CGFloat kMinFontSize = 18.0f;// 字体缩放的最小值
 static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
-@interface SentenceModeController ()<UITextViewDelegate,SentenceQueryResult,UIAlertViewDelegate>
+@interface SentenceModeController ()<UITextViewDelegate,SentenceQueryResponse,UIAlertViewDelegate>
 {
     UITextGranularity mGranuality;
     NSString* mBodyText;
