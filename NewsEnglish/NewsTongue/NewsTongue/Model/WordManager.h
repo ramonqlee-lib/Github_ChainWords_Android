@@ -10,7 +10,7 @@
 
 @protocol WordQueryResult
 
--(void)handleResponse:(NSDictionary*)result;// 异步回调
+-(void)handleWordResponse:(NSDictionary*)result;// 异步回调
 
 @end
 

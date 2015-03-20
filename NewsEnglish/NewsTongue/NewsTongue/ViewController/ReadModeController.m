@@ -18,12 +18,13 @@
 #import "Toast+UIView.h"
 #import "DemoHintView.h"
 #import "WordManager.h"
+#import "SentenceManager.h"
 
 static const CGFloat kLineSpacing = 5.0f;// 行间距
 static const CGFloat kMinFontSize = 18.0f;// 字体缩放的最小值
 static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
-@interface ReadModeController ()<UITextViewDelegate,WordQueryResult>
+@interface ReadModeController ()<UITextViewDelegate,WordQueryResult,SentenceQueryResult>
 {
     UITextGranularity mGranuality;
     NSString* bodyText;
@@ -33,6 +34,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     BaiduMobAdView* sharedAdView;
     DemoHintView* hintView;
     
+    NSString* word;
     NSString* fromLang;
     NSString* toLang;
 }
@@ -364,14 +366,24 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 
 #pragma mark pop up window
 
--(IBAction) popupWordView:(NSString*)word
+-(IBAction) popupWordView:(NSString*)text
 {
+    word = text;
     // 联网查询单词，然后显示，中间可以加入进图提示
     [[WordManager sharedInstance]query:[word lowercaseString] from:fromLang to:toLang response:self];
 }
 #pragma mark WordQueryResult protocol
+-(void)handleSentenceResponse:(NSDictionary*)result// 异步回调
+{
+   NSString* detail = [SentenceManager getTranslate:result];
+    if (!detail || !detail.length) {
+        [self.view makeToast:NSLocalizedString(@"NO_WORD", nil)];
+        return;
+    }
+    [self showPopWindow:detail];
+}
 
--(void)handleResponse:(NSDictionary*)wordDict
+-(void)handleWordResponse:(NSDictionary*)wordDict
 {
     NSMutableString* detail = [[NSMutableString alloc]init];
     [detail appendString:[WordManager getReadableMeaning:wordDict]];
@@ -382,6 +394,8 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     NSArray* examples = [WordManager getExamples:wordDict];
     //empty
     if (detail.length == 0 && examples.count == 0) {
+        // 尝试另外一个方式
+        [[SentenceManager sharedInstance]query:word from:fromLang to:toLang response:self];
         return;
     }
     
@@ -393,6 +407,10 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
         [detail appendString:@"\n"];
     }
     
+    [self showPopWindow:detail];
+}
+-(void)showPopWindow:(NSString*)detail
+{
     // 显示
     if (hintView) {
         [hintView dismiss];
@@ -405,8 +423,8 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
     hintView.hintID = kHintID_Home;
     [hintView addPageWithTitle:@"Page1" text:detail];
     
-//    [hintView addPageWithTitle:@"Page 2" text:@"This is some demo text. Swipe this message to see the next hint!"];
-//    [hintView addPageWithTitle:@"Page 3" image:[UIImage imageNamed:@"touchbee_small.png"]];
+    //    [hintView addPageWithTitle:@"Page 2" text:@"This is some demo text. Swipe this message to see the next hint!"];
+    //    [hintView addPageWithTitle:@"Page 3" image:[UIImage imageNamed:@"touchbee_small.png"]];
     
     [hintView showInView:self.view orientation:kHintViewOrientationBottom presentation:kHintViewPresentationBounce];
 }

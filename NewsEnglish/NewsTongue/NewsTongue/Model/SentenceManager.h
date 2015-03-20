@@ -10,7 +10,7 @@
 
 @protocol SentenceQueryResult
 
--(void)handleResponse:(NSDictionary*)result;// 异步回调
+-(void)handleSentenceResponse:(NSDictionary*)result;// 异步回调
 
 @end
 

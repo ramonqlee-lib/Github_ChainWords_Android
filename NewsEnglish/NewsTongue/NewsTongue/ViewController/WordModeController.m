@@ -148,7 +148,7 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
 }
 #pragma mark WordQueryResult protocol
 
--(void)handleResponse:(NSDictionary*)result
+-(void)handleWordResponse:(NSDictionary*)result
 {
     [self hideProgress];
     wordDict = result;

@@ -83,7 +83,7 @@ static SentenceManager* sSentenceManager;
     NSDictionary* queriedResult = [self getFromLocal:[sent md5] from:fromLang to:toLang];
     
     if (nil != queriedResult && nil != sentenceQueryCallback) {
-        [sentenceQueryCallback handleResponse:queriedResult];
+        [sentenceQueryCallback handleSentenceResponse:queriedResult];
         sentenceQueryCallback = nil;
         NSLog(@"find cached result: %@",sent);
         return YES;
@@ -106,14 +106,14 @@ static SentenceManager* sSentenceManager;
         
         if (nil != sentenceQueryCallback) {
             // 在主线程中更新
-            [sentenceQueryCallback handleResponse:dict];
+            [sentenceQueryCallback handleSentenceResponse:dict];
             sentenceQueryCallback = nil;
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         if (nil != sentenceQueryCallback) {
             // 在主线程中更新
-            [sentenceQueryCallback handleResponse:nil];
+            [sentenceQueryCallback handleSentenceResponse:nil];
             sentenceQueryCallback = nil;
         }
         

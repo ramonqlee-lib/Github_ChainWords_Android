@@ -186,7 +186,7 @@ static NSString *const cellIdentifier=@"QQChart";
 
 #pragma mark WordQueryResult protocol
 
--(void)handleResponse:(NSDictionary*)result
+-(void)handleSentenceResponse:(NSDictionary*)result
 {
     // 关闭翻译中的进度提示
 //    [self hideProgress];

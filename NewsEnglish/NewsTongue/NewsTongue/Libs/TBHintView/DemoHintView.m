@@ -90,7 +90,7 @@
     __block DemoHintView* basicHintView = [[DemoHintView alloc] init];
     
     basicHintView.hintView.textColor = [UIColor whiteColor];
-    basicHintView.hintView.backgroundColor = [UIColor colorWithRed:189.0/255.0 green:10/255.0 blue:5/255.0 alpha:0.9];
+    basicHintView.hintView.backgroundColor = [UIColor colorWithRed:54/255.0 green:54/255.0 blue:54/255.0 alpha:0.9];;//[UIColor colorWithRed:189.0/255.0 green:10/255.0 blue:5/255.0 alpha:0.9];
     basicHintView.hintView.spanWidthWeight = 1.0f;//0.95f;
     basicHintView.hintView.presentationAnimation = kHintViewPresentationBounce;
     

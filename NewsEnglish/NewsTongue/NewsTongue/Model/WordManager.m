@@ -126,7 +126,7 @@ static WordManager* sWordManager;
     NSDictionary* queriedResult = [self getFromLocal:word from:fromLang to:toLang];
 
     if (nil != queriedResult && nil != wordQueryCallback) {
-        [wordQueryCallback handleResponse:queriedResult];
+        [wordQueryCallback handleWordResponse:queriedResult];
         wordQueryCallback = nil;
         NSLog(@"find cached word: %@",word);
         return YES;
@@ -151,7 +151,7 @@ static WordManager* sWordManager;
         
         if (nil != wordQueryCallback) {
             // 在主线程中更新
-            [wordQueryCallback handleResponse:dict];
+            [wordQueryCallback handleWordResponse:dict];
             wordQueryCallback = nil;
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
