@@ -22,6 +22,7 @@
 {
     NSString* fromLang;
     NSString* toLang;
+    BOOL _keyboardShowFlag;
 }
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) KeyBoardView *keyBordView;
@@ -31,7 +32,8 @@
 @property (nonatomic,strong) AVAudioRecorder *recorder;
 @property (nonatomic,strong) AVAudioPlayer *player;
 @end
-static NSString *const cellIdentifier=@"QQChart";
+static NSString *const cellIdentifier=@"SentenceChat";
+#define kChatBottomViewHeight 44
 
 @implementation ChatViewController
 
@@ -39,24 +41,33 @@ static NSString *const cellIdentifier=@"QQChart";
 {
     [super viewWillAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
 }
 
--(void)keyboardShow:(NSNotification *)note
+-(void)keyboardDidShow:(NSNotification *)notification
 {
-    CGRect keyBoardRect=[note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGRect keyBoardRect=[notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGFloat deltaY=keyBoardRect.size.height;
     
-    [UIView animateWithDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
-       
-        self.view.transform=CGAffineTransformMakeTranslation(0, -deltaY);
+    [UIView animateWithDuration:[notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
+        //  控件位置和大小调整
+        NSDictionary *info = [notification userInfo];
+        //kbsize.width为键盘宽度，kbsize.height为键盘高度
+        CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+        CGFloat t = self.view.frame.size.height-kbSize.height-kChatBottomViewHeight;
+        self.tableView.frame =CGRectMake(0, 0, self.view.frame.size.width, t);
+        self.keyBordView.frame = CGRectMake(0, t, self.view.frame.size.width, kChatBottomViewHeight);
     }];
 }
--(void)keyboardHide:(NSNotification *)note
+
+
+-(void)keyboardDidHide:(NSNotification *)note
 {
     [UIView animateWithDuration:[note.userInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
-        self.view.transform = CGAffineTransformIdentity;
+        // 控件恢复原来的位置和大小
+        self.tableView.frame =CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-kChatBottomViewHeight);
+        self.keyBordView.frame = CGRectMake(0, self.view.frame.size.height-kChatBottomViewHeight, self.view.frame.size.width, kChatBottomViewHeight);
     }];
 }
 
@@ -88,7 +99,6 @@ static NSString *const cellIdentifier=@"QQChart";
     [self.view addSubview:self.tableView];
     
     //add keyBorad
-    
     self.keyBordView=[[KeyBoardView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height-108, self.view.frame.size.width, 44)];
     self.keyBordView.delegate=self;
     [self.view addSubview:self.keyBordView];
