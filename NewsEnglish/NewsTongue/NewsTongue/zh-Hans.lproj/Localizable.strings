@@ -5,6 +5,8 @@
   Created by ramonqlee on 2/8/15.
   Copyright (c) 2015 iDreems. All rights reserved.
 */
+"OK"="确认";
+"CLOSE"="关闭";
 "RETURN" = "返回";
 "ShareMessage"="想快速提升英语水平，去Appstore,下载【读新闻学英语】，读纯正新闻，学地道英语！";
 
@@ -15,5 +17,5 @@
 // 翻译小助手界面
 "TRANSLATOR_TITLE" = "翻译小助手";
 
-"ADD2FAVORITE"="已添加到本地收藏";
+"ADD2FAVORITE"="收藏成功";
 "NO_WORD"="暂时未收录该单词";

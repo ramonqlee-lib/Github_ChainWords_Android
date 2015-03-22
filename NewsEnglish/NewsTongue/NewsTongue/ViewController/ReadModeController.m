@@ -251,7 +251,13 @@ static const CGFloat kMaxFontSize = 38.0f;// 字体缩放的最大值
            @"INSERT INTO '%@' ('%@', '%@', '%@', '%@', '%@', '%@') VALUES ('%@', '%@', '%@', '%@', '%@', '%@')",
            kNewsCacheTableName, kTitle,kSummary,kContent,kThumbnail,kUpdated,kCategory,[title base64EncodedString],[summary base64EncodedString],content,[thumbnail base64EncodedString],lastUpdated,[category base64EncodedString]];
     [cache save:sql];
-    [self.view makeToast:NSLocalizedString(@"ADD2FAVORITE", "")];
+//    [self.view makeToast:NSLocalizedString(@"ADD2FAVORITE", "")];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+                                                        message:NSLocalizedString(@"ADD2FAVORITE", "")
+                                                       delegate:self
+                                              cancelButtonTitle:NSLocalizedString(@"CLOSE", "")
+                                              otherButtonTitles:nil, nil];
+    [alertView show];
 }
 
 #pragma mark - Gesture Handling
