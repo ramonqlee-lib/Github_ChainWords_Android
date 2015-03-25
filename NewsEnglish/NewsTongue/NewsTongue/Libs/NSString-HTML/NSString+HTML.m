@@ -41,7 +41,8 @@
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
 	// Character sets
-	NSCharacterSet *stopCharacters = [NSCharacterSet characterSetWithCharactersInString:[NSString stringWithFormat:@"< \t\n\r%d%d%d%d", 0x0085, 0x000C, 0x2028, 0x2029]];
+//	NSCharacterSet *stopCharacters = [NSCharacterSet characterSetWithCharactersInString:[NSString stringWithFormat:@"< \t\n\r%d%d%d%d", 0x0085, 0x000C, 0x2028, 0x2029]];
+    NSCharacterSet *stopCharacters = [NSCharacterSet characterSetWithCharactersInString:@"<>"];
 	NSCharacterSet *newLineAndWhitespaceCharacters = [NSCharacterSet characterSetWithCharactersInString:[NSString stringWithFormat:@" \t\n\r%d%d%d%d", 0x0085, 0x000C, 0x2028, 0x2029]];
 	NSCharacterSet *tagNameCharacters = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"];
     NSString* newLineDup = @"\r\n";
@@ -57,7 +58,11 @@
         
 		// Scan up to the start of a tag or whitespace
 		if ([scanner scanUpToCharactersFromSet:stopCharacters intoString:&str]) {
-			[result appendString:str];
+            // 是否仅仅包含换行符
+            NSString* temp = [str stringByTrimmingCharactersInSet:newLineAndWhitespaceCharacters];
+            if ([temp length]) {
+                [result appendString:str];
+            }
 			str = nil; // reset
 		}
         
