@@ -11,15 +11,17 @@
 #import "Constants.h"
 #import "UMFeedback.h"
 #import "UMSocial.h"
-#import "BPush.h"
-#import "JSONKit.h"
-#import "OpenUDID.h"
+#import "UMessage.h"
 
 #import "CollectionViewController.h"
 #import "SliderViewController.h"
 #import "MainAppViewController.h"
 #import "LeftViewController.h"
 #import "RightViewController.h"
+
+#define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
+#define _IPHONE80_ 80000
 
 @interface AppDelegate ()
 
@@ -31,7 +33,7 @@
     // Override point for customization after application launch.
     [self initUmengAnalytics];
     [self initUmengFeedback];
-    [self initBaiduPush:application didFinishLaunchingWithOptions:launchOptions];
+    [self initPush:application didFinishLaunchingWithOptions:launchOptions];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -51,65 +53,20 @@
     
     return YES;
 }
-
-#if SUPPORT_IOS8
-- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
-{
-    //register to receive notifications
-    [application registerForRemoteNotifications];
-}
-#endif
-
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    NSLog(@"test:%@",deviceToken);
-    [BPush registerDeviceToken: deviceToken];
-    
-    [BPush bindChannel];
+    NSLog(@"%@",[deviceToken description]);
+    [UMessage registerDeviceToken:deviceToken];
 }
 
-- (void) onMethod:(NSString*)method response:(NSDictionary*)data {
-    NSLog(@"On method:%@", method);
-    NSLog(@"data:%@", [data description]);
-    /*
-    NSDictionary* res = [[[NSDictionary alloc] initWithDictionary:data] autorelease];
-    if ([BPushRequestMethod_Bind isEqualToString:method]) {
-        NSString *appid = [res valueForKey:BPushRequestAppIdKey];
-        NSString *userid = [res valueForKey:BPushRequestUserIdKey];
-        NSString *channelid = [res valueForKey:BPushRequestChannelIdKey];
-        //NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
-        int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
-        
-        if (returnCode == BPushErrorCode_Success) {
-            
-            // 在内存中备份，以便短时间内进入可以看到这些值，而不需要重新bind
-//            self.appId = appid;
-//            self.channelId = channelid;
-//            self.userId = userid;
-        }
-    } else if ([BPushRequestMethod_Unbind isEqualToString:method]) {
-        int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
-        if (returnCode == BPushErrorCode_Success) {
-        }
-    }
-     */
+// 当 DeviceToken 获取失败时,系统会回调此⽅方法
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:( NSError *)error
+{
+    NSLog(@"DeviceToken 获取失败,原因:%@",error);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    NSLog(@"Receive Notify: %@", [userInfo JSONString]);
-    NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
-    if (application.applicationState == UIApplicationStateActive) {
-        // Nothing to do if applicationState is Inactive, the iOS already displayed an alert view.
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"NewsLadder"
-                                                            message:[NSString stringWithFormat:@"%@", alert]
-                                                           delegate:self
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-        [alertView show];
-    }
-    [application setApplicationIconBadgeNumber:0];
-    
-    [BPush handleNotification:userInfo];
+    [UMessage didReceiveRemoteNotification:userInfo];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -153,22 +110,51 @@
     [UMSocialData setAppKey:UMENG_APP_KEY];
 }
 
--(void) initBaiduPush:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+-(void) initPush:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [BPush setupChannel:launchOptions];
-    [BPush setDelegate:self];
+    //set AppKey and LaunchOptions
+    [UMessage startWithAppkey:@"54d70fd8fd98c535da000661" launchOptions:launchOptions];
     
-    [application setApplicationIconBadgeNumber:0];
-#if SUPPORT_IOS8
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
-        UIUserNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:myTypes categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    }else
-#endif
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= _IPHONE80_
+    if(UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
     {
-        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound;
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
+        //register remoteNotification types
+        UIMutableUserNotificationAction *action1 = [[UIMutableUserNotificationAction alloc] init];
+        action1.identifier = @"action1_identifier";
+        action1.title=@"Accept";
+        action1.activationMode = UIUserNotificationActivationModeForeground;//当点击的时候启动程序
+        
+        UIMutableUserNotificationAction *action2 = [[UIMutableUserNotificationAction alloc] init];  //第二按钮
+        action2.identifier = @"action2_identifier";
+        action2.title=@"Reject";
+        action2.activationMode = UIUserNotificationActivationModeBackground;//当点击的时候不启动程序，在后台处理
+        action2.authenticationRequired = YES;//需要解锁才能处理，如果action.activationMode = UIUserNotificationActivationModeForeground;则这个属性被忽略；
+        action2.destructive = YES;
+        
+        UIMutableUserNotificationCategory *categorys = [[UIMutableUserNotificationCategory alloc] init];
+        categorys.identifier = @"category1";//这组动作的唯一标示
+        [categorys setActions:@[action1,action2] forContext:(UIUserNotificationActionContextDefault)];
+        
+        UIUserNotificationSettings *userSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert
+                                                                                     categories:[NSSet setWithObject:categorys]];
+        [UMessage registerRemoteNotificationAndUserNotificationSettings:userSettings];
+        
+    } else{
+        //register remoteNotification types
+        [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge
+         |UIRemoteNotificationTypeSound
+         |UIRemoteNotificationTypeAlert];
     }
+#else
+    
+    //register remoteNotification types
+    [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge
+     |UIRemoteNotificationTypeSound
+     |UIRemoteNotificationTypeAlert];
+    
+#endif
+    
+    //for log
+    [UMessage setLogEnabled:NO];
 }
 @end

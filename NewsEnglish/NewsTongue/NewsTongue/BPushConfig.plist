@@ -5,7 +5,7 @@
 	<key>BPUSH_CHANNEL</key>
 	<string>Appstore</string>
 	<key>PRODUCTION_MODE</key>
-	<true/>
+	<false/>
 	<key>DEBUG</key>
 	<false/>
 	<key>API_KEY</key>

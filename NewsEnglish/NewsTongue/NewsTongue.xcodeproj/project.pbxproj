@@ -202,13 +202,7 @@
 		30CE21051AB1010F00526075 /* ChartMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CE20E81AB1010F00526075 /* ChartMessage.m */; };
 		30CE21061AB1010F00526075 /* ChartContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CE20EB1AB1010F00526075 /* ChartContentView.m */; };
 		30CE21071AB1010F00526075 /* KeyBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CE20ED1AB1010F00526075 /* KeyBoardView.m */; };
-		30DAE6131AA7BA7200328CBE /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30DAE6041AA7BA7200328CBE /* libBPush.a */; };
-		30DAE6141AA7BA7200328CBE /* BPushClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DAE6071AA7BA7200328CBE /* BPushClass.m */; };
-		30DAE6151AA7BA7200328CBE /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DAE6091AA7BA7200328CBE /* Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		30DAE6161AA7BA7200328CBE /* GzipCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DAE60C1AA7BA7200328CBE /* GzipCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		30DAE6171AA7BA7200328CBE /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DAE60E1AA7BA7200328CBE /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		30DAE6191AA7BA7200328CBE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 30DAE6121AA7BA7200328CBE /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		30DAE61B1AA7BBAC00328CBE /* BPushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30DAE61A1AA7BBAC00328CBE /* BPushConfig.plist */; };
+		30E7AF2F1ACA079300A0D02E /* libUMessage_Sdk_1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E7AF2E1ACA079300A0D02E /* libUMessage_Sdk_1.1.0.a */; };
 		30EC871C1A7C474600BC7363 /* WordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EC871B1A7C474600BC7363 /* WordManager.m */; };
 		30F2F2241A88180E008420D4 /* Toast+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30F2F2231A88180E008420D4 /* Toast+UIView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
@@ -546,20 +540,8 @@
 		30CE20EB1AB1010F00526075 /* ChartContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartContentView.m; sourceTree = "<group>"; };
 		30CE20EC1AB1010F00526075 /* KeyBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyBoardView.h; sourceTree = "<group>"; };
 		30CE20ED1AB1010F00526075 /* KeyBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyBoardView.m; sourceTree = "<group>"; };
-		30DAE6031AA7BA7200328CBE /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
-		30DAE6041AA7BA7200328CBE /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
-		30DAE6061AA7BA7200328CBE /* BPushClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPushClass.h; sourceTree = "<group>"; };
-		30DAE6071AA7BA7200328CBE /* BPushClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPushClass.m; sourceTree = "<group>"; };
-		30DAE6081AA7BA7200328CBE /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
-		30DAE6091AA7BA7200328CBE /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
-		30DAE60A1AA7BA7200328CBE /* Base64Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Defines.h; sourceTree = "<group>"; };
-		30DAE60B1AA7BA7200328CBE /* GzipCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GzipCompressor.h; sourceTree = "<group>"; };
-		30DAE60C1AA7BA7200328CBE /* GzipCompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GzipCompressor.m; sourceTree = "<group>"; };
-		30DAE60D1AA7BA7200328CBE /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
-		30DAE60E1AA7BA7200328CBE /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
-		30DAE6111AA7BA7200328CBE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		30DAE6121AA7BA7200328CBE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		30DAE61A1AA7BBAC00328CBE /* BPushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BPushConfig.plist; sourceTree = "<group>"; };
+		30E7AF2D1ACA079300A0D02E /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
+		30E7AF2E1ACA079300A0D02E /* libUMessage_Sdk_1.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.1.0.a; sourceTree = "<group>"; };
 		30EC871A1A7C474600BC7363 /* WordManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordManager.h; sourceTree = "<group>"; };
 		30EC871B1A7C474600BC7363 /* WordManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordManager.m; sourceTree = "<group>"; };
 		30F2F2221A88180E008420D4 /* Toast+UIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Toast+UIView.h"; sourceTree = "<group>"; };
@@ -580,6 +562,7 @@
 				3033BB461A878C970080B3EB /* MessageUI.framework in Frameworks */,
 				3033BB441A878C8D0080B3EB /* MediaPlayer.framework in Frameworks */,
 				3033BB421A878C810080B3EB /* CoreMotion.framework in Frameworks */,
+				30E7AF2F1ACA079300A0D02E /* libUMessage_Sdk_1.1.0.a in Frameworks */,
 				30C8B6921A7E2FAD009CB114 /* AudioToolbox.framework in Frameworks */,
 				3033BB401A878C700080B3EB /* StoreKit.framework in Frameworks */,
 				3033BB3E1A878C630080B3EB /* AdSupport.framework in Frameworks */,
@@ -587,7 +570,6 @@
 				3033BB3A1A878C540080B3EB /* QuartzCore.framework in Frameworks */,
 				30803D171A875248000CA931 /* libWeChatSDK.a in Frameworks */,
 				30803C371A8748A3000CA931 /* libz.dylib in Frameworks */,
-				30DAE6131AA7BA7200328CBE /* libBPush.a in Frameworks */,
 				300D5DFA1A842BCD0054CFB7 /* ImageIO.framework in Frameworks */,
 				30803C611A874D22000CA931 /* libUMOpus.a in Frameworks */,
 				30803D161A875248000CA931 /* libSocialWechat.a in Frameworks */,
@@ -775,7 +757,6 @@
 		3010AF151A71B27B009CDECF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				30DAE61A1AA7BBAC00328CBE /* BPushConfig.plist */,
 				309ED22F1A8960520031695A /* NewsLadder-Prefix.pch */,
 				30803D451A875A83000CA931 /* Info.plist */,
 				3010AF171A71B27B009CDECF /* main.m */,
@@ -1151,11 +1132,11 @@
 		30ADC9D91A770E5700339771 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				30E7AF2C1ACA079300A0D02E /* UMessage_Sdk_1.1.0 */,
 				3000478D1ABB85F00073B0E6 /* TBHintView */,
 				30B9FC921AB8E41B007D1851 /* DBCache */,
 				30CE20C61AB1010F00526075 /* ChatView */,
 				30B9F4A01AAE588900163DF3 /* SliderViewController */,
-				30DAE6021AA7BA7200328CBE /* LibBPush */,
 				30F2F2211A88180E008420D4 /* Toast */,
 				3033BAEF1A878BE80080B3EB /* baiduAdSDK */,
 				30803CC51A875248000CA931 /* umeng_ios_social_sdk_4.2.1_arm64_custom */,
@@ -1348,32 +1329,13 @@
 			path = view;
 			sourceTree = "<group>";
 		};
-		30DAE6021AA7BA7200328CBE /* LibBPush */ = {
+		30E7AF2C1ACA079300A0D02E /* UMessage_Sdk_1.1.0 */ = {
 			isa = PBXGroup;
 			children = (
-				30DAE6031AA7BA7200328CBE /* BPush.h */,
-				30DAE6041AA7BA7200328CBE /* libBPush.a */,
-				30DAE6051AA7BA7200328CBE /* opensource */,
+				30E7AF2D1ACA079300A0D02E /* UMessage.h */,
+				30E7AF2E1ACA079300A0D02E /* libUMessage_Sdk_1.1.0.a */,
 			);
-			path = LibBPush;
-			sourceTree = "<group>";
-		};
-		30DAE6051AA7BA7200328CBE /* opensource */ = {
-			isa = PBXGroup;
-			children = (
-				30DAE6061AA7BA7200328CBE /* BPushClass.h */,
-				30DAE6071AA7BA7200328CBE /* BPushClass.m */,
-				30DAE6081AA7BA7200328CBE /* Base64.h */,
-				30DAE6091AA7BA7200328CBE /* Base64.m */,
-				30DAE60A1AA7BA7200328CBE /* Base64Defines.h */,
-				30DAE60B1AA7BA7200328CBE /* GzipCompressor.h */,
-				30DAE60C1AA7BA7200328CBE /* GzipCompressor.m */,
-				30DAE60D1AA7BA7200328CBE /* JSONKit.h */,
-				30DAE60E1AA7BA7200328CBE /* JSONKit.m */,
-				30DAE6111AA7BA7200328CBE /* Reachability.h */,
-				30DAE6121AA7BA7200328CBE /* Reachability.m */,
-			);
-			path = opensource;
+			path = UMessage_Sdk_1.1.0;
 			sourceTree = "<group>";
 		};
 		30F2F2211A88180E008420D4 /* Toast */ = {
@@ -1497,7 +1459,6 @@
 				30803C601A874D22000CA931 /* umeng_fb_audio_play_default@2x.png in Resources */,
 				30803D141A875248000CA931 /* UMSocialLocalizable.strings in Resources */,
 				30B9F49D1AAE587C00163DF3 /* head2.jpg in Resources */,
-				30DAE61B1AA7BBAC00328CBE /* BPushConfig.plist in Resources */,
 				300047A51ABB92C40073B0E6 /* burger@2x.png in Resources */,
 				3007921B1A870AB700D20875 /* speaker@2x.png in Resources */,
 				30803D0C1A875248000CA931 /* UMSCommentInputController.xib in Resources */,
@@ -1578,7 +1539,6 @@
 				30B9F4AF1AAE589300163DF3 /* RightViewController.m in Sources */,
 				30CE20EE1AB1010F00526075 /* ChatViewController.m in Sources */,
 				3090C96D1A858CC30094231B /* WordModeController.m in Sources */,
-				30DAE6191AA7BA7200328CBE /* Reachability.m in Sources */,
 				3033BB2C1A878BE80080B3EB /* CJSONSerializedData.m in Sources */,
 				303381C51A7C79FF0074604E /* UIButton+AFNetworking.m in Sources */,
 				303381C71A7C79FF0074604E /* UIProgressView+AFNetworking.m in Sources */,
@@ -1619,10 +1579,8 @@
 				300D5DEB1A8426950054CFB7 /* PSCollectionViewCell.m in Sources */,
 				303381C31A7C79FF0074604E /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				300D5DDF1A8426950054CFB7 /* PullTableView.m in Sources */,
-				30DAE6161AA7BA7200328CBE /* GzipCompressor.m in Sources */,
 				300D5DDB1A8426950054CFB7 /* EGORefreshTableHeaderView.m in Sources */,
 				300D5DF31A8426950054CFB7 /* UIImageView+WebCache.m in Sources */,
-				30DAE6171AA7BA7200328CBE /* JSONKit.m in Sources */,
 				3033BB301A878BE80080B3EB /* CJSONScanner.m in Sources */,
 				3068FD791A7EE24100E257A9 /* GTMNSString+HTML.m in Sources */,
 				303381C21A7C79FF0074604E /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -1642,11 +1600,9 @@
 				303381BC1A7C79FF0074604E /* AFNetworkReachabilityManager.m in Sources */,
 				3033BB291A878BE80080B3EB /* CFilteringJSONSerializer.m in Sources */,
 				300D5DF11A8426950054CFB7 /* SDWebImagePrefetcher.m in Sources */,
-				30DAE6141AA7BA7200328CBE /* BPushClass.m in Sources */,
 				300D5DEF1A8426950054CFB7 /* SDWebImageDownloader.m in Sources */,
 				30C8B68D1A7E2E75009CB114 /* AFAudioRouter.m in Sources */,
 				3068FD7D1A7EEAA400E257A9 /* SentenceManager.m in Sources */,
-				30DAE6151AA7BA7200328CBE /* Base64.m in Sources */,
 				3033BB361A878BE80080B3EB /* zip.c in Sources */,
 				303381C91A7C79FF0074604E /* UIWebView+AFNetworking.m in Sources */,
 				300D5DDE1A8426950054CFB7 /* PullPsCollectionView.m in Sources */,
@@ -1848,6 +1804,7 @@
 					"$(PROJECT_DIR)/NewsTongue/Libs/umeng_ios_social_sdk_4.2.1_custom/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/NewsTongue/Libs/baiduAdSDK",
 					"$(PROJECT_DIR)/NewsTongue/Libs/LibBPush",
+					"$(PROJECT_DIR)/NewsTongue/Libs/UMessage_Sdk_1.1.0",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1884,6 +1841,7 @@
 					"$(PROJECT_DIR)/NewsTongue/Libs/umeng_ios_social_sdk_4.2.1_custom/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/NewsTongue/Libs/baiduAdSDK",
 					"$(PROJECT_DIR)/NewsTongue/Libs/LibBPush",
+					"$(PROJECT_DIR)/NewsTongue/Libs/UMessage_Sdk_1.1.0",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
