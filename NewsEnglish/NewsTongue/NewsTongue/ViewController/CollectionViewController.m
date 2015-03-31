@@ -124,11 +124,25 @@
         collectionView.pullTableIsRefreshing = YES;
         [self performSelector:@selector(refreshTable) withObject:nil afterDelay:0];
     }
-    
 }
-- (void)viewWillAppear:(BOOL)animated
+
+#pragma mark application become active
+-(void)applicationDidBecomeActive
 {
-    [super viewWillAppear:animated];
+    if(!collectionView.pullTableIsRefreshing) {
+        collectionView.pullTableIsRefreshing = YES;
+        [self performSelector:@selector(refreshTable) withObject:nil afterDelay:0];
+    }
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(applicationDidBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void) refreshTable

@@ -456,6 +456,7 @@
                 labelText.textColor = self.textColor;
                 labelText.backgroundColor = [UIColor clearColor];
                 labelText.font = [UIFont systemFontOfSize:15.0f];
+                [labelText setEditable:NO];
                 
                 [self.scrollViewPages addSubview:labelText];
                 

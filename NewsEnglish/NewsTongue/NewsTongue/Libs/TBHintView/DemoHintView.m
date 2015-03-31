@@ -365,7 +365,8 @@
     labelText.font = [UIFont systemFontOfSize:15.0f];
     labelText.text = customHintViewInfo.text;
     labelText.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    labelText.textAlignment = UITextAlignmentCenter;
+    labelText.textAlignment = NSTextAlignmentCenter;
+    [labelText setEnabled:NO];
 
     UIButton* buttonAction = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     buttonAction.frame = CGRectMake(13, 66, 173, 34);
